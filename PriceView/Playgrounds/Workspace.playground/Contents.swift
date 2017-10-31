@@ -5,7 +5,7 @@ import PlaygroundSupport
 
 final class UIPriceView: UIView {
     
-    public var price: Float = 0.0 {
+    public var price: Double = 0.0 {
         didSet {
             bind()
         }
@@ -13,23 +13,24 @@ final class UIPriceView: UIView {
     public var locale: Locale = NSLocale.current
     
     private var currencyLabel: UILabel = {
-//        let label = UILabel()
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        let label = UILabel()
         return label
     }()
     
     private var integerLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 24)
         return label
     }()
 
     private var decimalSeparatorLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 20, y: 0, width: 5, height: 20))
+        let label = UILabel()
         return label
     }()
     
     private var decimalLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 25, y: 0, width: 40, height: 20))
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 11)
         return label
     }()
     
@@ -52,13 +53,10 @@ final class UIPriceView: UIView {
     // MARK: -
     
     private func setup() {
-        [integerLabel, decimalSeparatorLabel, decimalLabel].forEach { addSubview($0) }
-        setupConstraints()
+        [integerLabel, decimalSeparatorLabel, decimalLabel].forEach {
+            addSubview($0)
+        }
         bind()
-    }
-    
-    private func setupConstraints() {
-        
     }
     
     private func bind() {
@@ -67,23 +65,43 @@ final class UIPriceView: UIView {
         decimalLabel.text = "\(priceData.decimalPart)"
         decimalSeparatorLabel.text = "\(priceData.decimalSeparator)"
         print("BIND")
+        layout()
+    }
+    
+    private func layout() {
+        let integerLabelSize = size(of: integerLabel)
+        let decimalSeparatorLabelSize = size(of: decimalSeparatorLabel)
+        let decimalLabelSize = size(of: decimalLabel)
+
+        integerLabel.frame = CGRect(origin: .zero, size: integerLabelSize)
+        decimalSeparatorLabel.frame = CGRect(origin: CGPoint(x: integerLabel.frame.maxX, y: 0), size: decimalSeparatorLabelSize)
+        decimalLabel.frame = CGRect(origin: CGPoint(x: decimalSeparatorLabel.frame.maxX, y: 10), size: decimalLabelSize)
+    }
+    
+    private func size(of label: UILabel) -> CGSize {
+        guard let text = label.text else {
+            return .zero
+        }
+        
+        return text.size(withAttributes: [.font: label.font])
     }
 }
 
 struct PriceData {
     let currencySymbol: String
     let decimalSeparator: String
-    let integerPart: Int
-    let decimalPart: Int
+    let integerPart: Int64
+    let decimalPart: Int64
 }
 
 struct PriceTransformer {
-    func transformedData(price: Float, locale: Locale = NSLocale.current) -> PriceData {
+    func transformedData(price: Double, locale: Locale = NSLocale.current) -> PriceData {
         // error handling
+        print(price)
         let decimalSeparator = locale.decimalSeparator!
         let splittedPrice = String(price).split(separator: Character(decimalSeparator))
-        let integerPart = Int(splittedPrice[0])!
-        let decimalPart = Int(splittedPrice[1])!
+        let integerPart = Int64(splittedPrice[0])!
+        let decimalPart = Int64(splittedPrice[1])!
         
         return PriceData(currencySymbol: locale.currencySymbol!, decimalSeparator: decimalSeparator, integerPart: integerPart, decimalPart: decimalPart)
     }
@@ -91,7 +109,7 @@ struct PriceTransformer {
 
 let ptransf = PriceTransformer()
 let data = ptransf.transformedData(price: 12.12)
-let data2 = ptransf.transformedData(price: 12.1221231)
+let data2 = ptransf.transformedData(price: 151212456465447.49)
 print(data)
 print(data2)
 
@@ -102,7 +120,7 @@ final class MyViewController : UIViewController {
 
         let priceView = UIPriceView()
         priceView.frame = CGRect(x: 150, y: 200, width: 200, height: 50)
-        priceView.price = 17.49
+        priceView.price = 1512124564657.49
         view.addSubview(priceView)
         
         
