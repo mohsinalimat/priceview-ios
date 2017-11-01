@@ -14,22 +14,30 @@ final class UIPriceView: UIView {
     
     private var currencyLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 1
+        label.baselineAdjustment = .alignCenters
         return label
     }()
     
     private var integerLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 24)
+        label.numberOfLines = 1
+        label.baselineAdjustment = .none
+        label.font = UIFont.boldSystemFont(ofSize: 44)
         return label
     }()
 
     private var decimalSeparatorLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 1
+        label.baselineAdjustment = .alignCenters
         return label
     }()
     
     private var decimalLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 1
+        label.baselineAdjustment = .none
         label.font = UIFont.systemFont(ofSize: 11)
         return label
     }()
@@ -54,9 +62,12 @@ final class UIPriceView: UIView {
     
     private func setup() {
         [integerLabel, decimalSeparatorLabel, decimalLabel].forEach {
+            //$0.layer.borderWidth = 1.0
+            //$0.layer.borderColor = UIColor.red.cgColor
             addSubview($0)
         }
         bind()
+        setupConstraints()
     }
     
     private func bind() {
@@ -64,26 +75,27 @@ final class UIPriceView: UIView {
         integerLabel.text = "\(priceData.integerPart)"
         decimalLabel.text = "\(priceData.decimalPart)"
         decimalSeparatorLabel.text = "\(priceData.decimalSeparator)"
-        print("BIND")
-        layout()
     }
     
-    private func layout() {
-        let integerLabelSize = size(of: integerLabel)
-        let decimalSeparatorLabelSize = size(of: decimalSeparatorLabel)
-        let decimalLabelSize = size(of: decimalLabel)
-
-        integerLabel.frame = CGRect(origin: .zero, size: integerLabelSize)
-        decimalSeparatorLabel.frame = CGRect(origin: CGPoint(x: integerLabel.frame.maxX, y: 0), size: decimalSeparatorLabelSize)
-        decimalLabel.frame = CGRect(origin: CGPoint(x: decimalSeparatorLabel.frame.maxX, y: 10), size: decimalLabelSize)
-    }
-    
-    private func size(of label: UILabel) -> CGSize {
-        guard let text = label.text else {
-            return .zero
-        }
+    private func setupConstraints() {
         
-        return text.size(withAttributes: [.font: label.font])
+        integerLabel.translatesAutoresizingMaskIntoConstraints = false
+        decimalSeparatorLabel.translatesAutoresizingMaskIntoConstraints = false
+        decimalLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        let viewMargins = self.layoutMarginsGuide
+        let integerLabelMargins = integerLabel.layoutMarginsGuide
+        let decimalSeparatorLabelMargins = decimalSeparatorLabel.layoutMarginsGuide
+        let decimalLabelMargins = decimalLabel.layoutMarginsGuide
+        
+        integerLabel.leadingAnchor.constraint(equalTo: viewMargins.leadingAnchor, constant: 0).isActive = true
+        integerLabel.topAnchor.constraint(equalTo: viewMargins.topAnchor, constant: 0).isActive = true
+        integerLabel.bottomAnchor.constraint(equalTo: viewMargins.bottomAnchor, constant: 0).isActive = true
+        decimalSeparatorLabel.leadingAnchor.constraint(equalTo: integerLabelMargins.trailingAnchor, constant: 8).isActive = true
+        decimalSeparatorLabel.lastBaselineAnchor.constraint(equalTo: integerLabel.lastBaselineAnchor).isActive = true
+        decimalLabel.leadingAnchor.constraint(equalTo: decimalSeparatorLabelMargins.trailingAnchor, constant: 8).isActive = true
+        decimalLabel.lastBaselineAnchor.constraint(equalTo: integerLabel.lastBaselineAnchor).isActive = true
+        decimalLabel.trailingAnchor.constraint(equalTo: viewMargins.trailingAnchor, constant: 0).isActive = true
     }
 }
 
@@ -119,17 +131,18 @@ final class MyViewController : UIViewController {
         view.backgroundColor = .white
 
         let priceView = UIPriceView()
-        priceView.frame = CGRect(x: 150, y: 200, width: 200, height: 50)
-        priceView.price = 1512124564657.49
         view.addSubview(priceView)
         
+        priceView.translatesAutoresizingMaskIntoConstraints = false
+
+        let margin = view.layoutMarginsGuide
         
-        let label = UILabel()
-        label.frame = CGRect(x: 150, y: 250, width: 200, height: 20)
-        label.text = "Hello World!"
-        label.textColor = .black
+        priceView.centerXAnchor.constraint(equalTo: margin.centerXAnchor).isActive = true
+        priceView.centerYAnchor.constraint(equalTo: margin.centerYAnchor).isActive = true
+
+        priceView.price = 1512.49
+
         
-        view.addSubview(label)
         self.view = view
     }
 }
