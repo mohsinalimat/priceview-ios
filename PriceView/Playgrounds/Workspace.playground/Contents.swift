@@ -29,11 +29,26 @@ struct TextStyle {
 }
 
 struct PriceViewStyle {
+    
+    enum SymbolPosition {
+        case beforeCurrency
+        case afterCurrency
+    }
+    
     var integerTextStyle: TextStyle
     var decimalTextStyle: TextStyle
     var decimalSeparatorTextStyle: TextStyle
     var currencyTextStyle: TextStyle
     var locale: Locale
+    
+    var symbolPosition: SymbolPosition {
+        print(locale.regionCode)
+        if locale.regionCode == "US" {
+            return .beforeCurrency
+        } else {
+            return .afterCurrency
+        }
+    }
     
     init(integerTextStyle: TextStyle,
          decimalTextStyle: TextStyle,
@@ -94,7 +109,7 @@ final class UIPriceView: UIView {
             addSubview($0)
         }
         bind()
-        setupConstraints()
+        setupConstraints(with: style)
     }
     
     private func bind() {
@@ -108,14 +123,13 @@ final class UIPriceView: UIView {
         currencyLabel.text = priceData.currencySymbol
     }
     
-    private func setupConstraints() {
-        // inject style
+    private func setupConstraints(with style: PriceViewStyle) {
         [integerLabel, decimalSeparatorLabel, decimalLabel, currencyLabel].forEach { $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
         let viewMargins = self.layoutMarginsGuide
         
-        let currencyBefore = true
+        let currencyBefore = style.symbolPosition == .beforeCurrency
         let currencyAfter = !currencyBefore
 
         currencyLabel.lastBaselineAnchor.constraint(equalTo: integerLabel.lastBaselineAnchor, constant: style.currencyTextStyle.baselineOffset).isActive = true
