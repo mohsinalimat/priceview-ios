@@ -7,17 +7,24 @@ struct TextStyle {
     var size: CGFloat
     var color: UIColor
     var kern: CGFloat
+    
     var baselineOffset: CGFloat
+    var leadingOffset: CGFloat
+    var trailingOffset: CGFloat
     
     init(size: CGFloat,
          color: UIColor,
          kern: CGFloat = 0.0,
-         baselineOffset: CGFloat = 0
+         baselineOffset: CGFloat = 0,
+         leadingOffset: CGFloat = 0,
+         trailingOffset: CGFloat = 0
     ) {
         self.size = size
         self.color = color
         self.kern = kern
         self.baselineOffset = baselineOffset
+        self.leadingOffset = leadingOffset
+        self.trailingOffset = trailingOffset
     }
 }
 
@@ -53,8 +60,8 @@ final class UIPriceView: UIView {
     public var style: PriceViewStyle = PriceViewStyle(
         integerTextStyle: TextStyle(size: 64, color: .black),
         decimalTextStyle: TextStyle(size: 16, color: .darkGray, baselineOffset: -20),
-        decimalSeparatorTextStyle: TextStyle(size: 32, color: .darkGray, baselineOffset: -20),
-        currencyTextStyle: TextStyle(size: 20, color: .black, baselineOffset: -25)
+        decimalSeparatorTextStyle: TextStyle(size: 32, color: .darkGray, baselineOffset: -20, leadingOffset: 10),
+        currencyTextStyle: TextStyle(size: 20, color: .black, baselineOffset: -25, trailingOffset: -10)
     )
     
     private lazy var currencyLabel = makeCurrencyLabel()
@@ -82,8 +89,8 @@ final class UIPriceView: UIView {
     
     private func setup() {
         [integerLabel, decimalSeparatorLabel, decimalLabel, currencyLabel].forEach {
-            //$0.layer.borderWidth = 1.0
-            //$0.layer.borderColor = UIColor.red.cgColor
+            $0.layer.borderWidth = 1.0
+            $0.layer.borderColor = UIColor.red.cgColor
             addSubview($0)
         }
         bind()
@@ -102,32 +109,34 @@ final class UIPriceView: UIView {
     }
     
     private func setupConstraints() {
+        // inject style
         [integerLabel, decimalSeparatorLabel, decimalLabel, currencyLabel].forEach { $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
         let viewMargins = self.layoutMarginsGuide
         
-        let currencyBefore = false
+        let currencyBefore = true
         let currencyAfter = !currencyBefore
 
         currencyLabel.lastBaselineAnchor.constraint(equalTo: integerLabel.lastBaselineAnchor, constant: style.currencyTextStyle.baselineOffset).isActive = true
 
         // before
-        currencyLabel.leadingAnchor.constraint(equalTo: viewMargins.leadingAnchor, constant: 0).isActive = currencyBefore
-        currencyLabel.trailingAnchor.constraint(equalTo: integerLabel.leadingAnchor, constant: 0).isActive = currencyBefore
-        decimalLabel.trailingAnchor.constraint(equalTo: viewMargins.trailingAnchor, constant: 0).isActive = currencyBefore
+        currencyLabel.leadingAnchor.constraint(equalTo: viewMargins.leadingAnchor, constant: style.currencyTextStyle.leadingOffset).isActive = currencyBefore
+        currencyLabel.trailingAnchor.constraint(equalTo: integerLabel.leadingAnchor, constant: style.currencyTextStyle.trailingOffset).isActive = currencyBefore
+        decimalLabel.trailingAnchor.constraint(equalTo: viewMargins.trailingAnchor, constant: style.decimalTextStyle.trailingOffset).isActive = currencyBefore
         
         //after
-        currencyLabel.trailingAnchor.constraint(equalTo: viewMargins.trailingAnchor, constant: 0).isActive = currencyAfter
-        currencyLabel.leadingAnchor.constraint(equalTo: decimalLabel.trailingAnchor, constant: 0).isActive = currencyAfter
-        integerLabel.leadingAnchor.constraint(equalTo: viewMargins.leadingAnchor, constant: 0).isActive = currencyAfter
+        currencyLabel.trailingAnchor.constraint(equalTo: viewMargins.trailingAnchor, constant: style.currencyTextStyle.trailingOffset).isActive = currencyAfter
+        currencyLabel.leadingAnchor.constraint(equalTo: decimalLabel.trailingAnchor, constant: style.currencyTextStyle.leadingOffset).isActive = currencyAfter
+        integerLabel.leadingAnchor.constraint(equalTo: viewMargins.leadingAnchor, constant: style.integerTextStyle.leadingOffset).isActive = currencyAfter
         
+        decimalSeparatorLabel.leadingAnchor.constraint(equalTo: integerLabel.trailingAnchor, constant: style.decimalSeparatorTextStyle.leadingOffset).isActive = true
         
-        integerLabel.topAnchor.constraint(equalTo: viewMargins.topAnchor, constant: 0).isActive = true
-        integerLabel.bottomAnchor.constraint(equalTo: viewMargins.bottomAnchor, constant: 0).isActive = true
-        decimalSeparatorLabel.leadingAnchor.constraint(equalTo: integerLabel.trailingAnchor, constant: 0).isActive = true
+        decimalLabel.leadingAnchor.constraint(equalTo: decimalSeparatorLabel.trailingAnchor, constant: style.decimalTextStyle.leadingOffset).isActive = true
+        
+        integerLabel.topAnchor.constraint(equalTo: viewMargins.topAnchor).isActive = true
+        integerLabel.bottomAnchor.constraint(equalTo: viewMargins.bottomAnchor).isActive = true
         decimalSeparatorLabel.lastBaselineAnchor.constraint(equalTo: integerLabel.lastBaselineAnchor, constant: style.decimalSeparatorTextStyle.baselineOffset).isActive = true
-        decimalLabel.leadingAnchor.constraint(equalTo: decimalSeparatorLabel.trailingAnchor, constant: 0).isActive = true
         decimalLabel.lastBaselineAnchor.constraint(equalTo: integerLabel.lastBaselineAnchor, constant: style.decimalTextStyle.baselineOffset).isActive = true
     }
     
@@ -206,7 +215,6 @@ final class MyViewController : UIViewController {
         priceView.centerYAnchor.constraint(equalTo: margin.centerYAnchor).isActive = true
 
         priceView.price = 1512.49
-
         
         self.view = view
     }
