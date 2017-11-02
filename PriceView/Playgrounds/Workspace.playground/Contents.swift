@@ -3,6 +3,45 @@
 import UIKit
 import PlaygroundSupport
 
+struct TextStyle {
+    var size: CGFloat
+    var color: UIColor
+    var kern: CGFloat
+    var baselineOffset: CGFloat
+    
+    init(size: CGFloat,
+         color: UIColor,
+         kern: CGFloat = 0.0,
+         baselineOffset: CGFloat = 0
+    ) {
+        self.size = size
+        self.color = color
+        self.kern = kern
+        self.baselineOffset = baselineOffset
+    }
+}
+
+struct PriceViewStyle {
+    var integerTextStyle: TextStyle
+    var decimalTextStyle: TextStyle
+    var decimalSeparatorTextStyle: TextStyle
+    var currencyTextStyle: TextStyle
+    var locale: Locale
+    
+    init(integerTextStyle: TextStyle,
+         decimalTextStyle: TextStyle,
+         decimalSeparatorTextStyle: TextStyle,
+         currencyTextStyle: TextStyle,
+         locale: Locale = NSLocale.current
+    ) {
+        self.integerTextStyle = integerTextStyle
+        self.decimalTextStyle = decimalTextStyle
+        self.decimalSeparatorTextStyle = decimalSeparatorTextStyle
+        self.currencyTextStyle = currencyTextStyle
+        self.locale = locale
+    }
+}
+
 final class UIPriceView: UIView {
     
     public var price: Double = 0.0 {
@@ -10,41 +49,22 @@ final class UIPriceView: UIView {
             bind()
         }
     }
-    public var locale: Locale = NSLocale.current
     
-    private var currencyLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 1
-        label.baselineAdjustment = .alignCenters
-        return label
-    }()
+    public var style: PriceViewStyle = PriceViewStyle(
+        integerTextStyle: TextStyle(size: 64, color: .black),
+        decimalTextStyle: TextStyle(size: 16, color: .darkGray, baselineOffset: -20),
+        decimalSeparatorTextStyle: TextStyle(size: 32, color: .darkGray, baselineOffset: -20),
+        currencyTextStyle: TextStyle(size: 18, color: .black)
+    )
     
-    private var integerLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 1
-        label.baselineAdjustment = .none
-        label.font = UIFont.boldSystemFont(ofSize: 44)
-        return label
-    }()
-
-    private var decimalSeparatorLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 1
-        label.baselineAdjustment = .alignCenters
-        return label
-    }()
-    
-    private var decimalLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 1
-        label.baselineAdjustment = .none
-        label.font = UIFont.systemFont(ofSize: 11)
-        return label
-    }()
+    private lazy var currencyLabel = makeCurrencyLabel()
+    private lazy var integerLabel = makeIntegerLabel()
+    private lazy var decimalSeparatorLabel = makeDecimalLabel()
+    private lazy var decimalLabel = makeDecimalLabel()
     
     private var priceData: PriceData {
         // Inject transformer? cake pattern?
-        return PriceTransformer().transformedData(price: price, locale: locale)
+        return PriceTransformer().transformedData(price: price, locale: style.locale)
     }
     
     // MARK: - Initializers
@@ -73,10 +93,7 @@ final class UIPriceView: UIView {
     private func bind() {
         // computed property didSet?
         
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currencyAccounting
-        formatter.locale = NSLocale.current
-        
+        let formatter = PriceFormatter()
         
         integerLabel.text = formatter.string(from: NSNumber(value: priceData.integerPart))
         decimalLabel.text = "\(priceData.decimalPart)"
@@ -93,10 +110,36 @@ final class UIPriceView: UIView {
         integerLabel.topAnchor.constraint(equalTo: viewMargins.topAnchor, constant: 0).isActive = true
         integerLabel.bottomAnchor.constraint(equalTo: viewMargins.bottomAnchor, constant: 0).isActive = true
         decimalSeparatorLabel.leadingAnchor.constraint(equalTo: integerLabel.trailingAnchor, constant: 0).isActive = true
-        decimalSeparatorLabel.lastBaselineAnchor.constraint(equalTo: integerLabel.lastBaselineAnchor).isActive = true
+        decimalSeparatorLabel.lastBaselineAnchor.constraint(equalTo: integerLabel.lastBaselineAnchor, constant: style.decimalSeparatorTextStyle.baselineOffset).isActive = true
         decimalLabel.leadingAnchor.constraint(equalTo: decimalSeparatorLabel.trailingAnchor, constant: 0).isActive = true
-        decimalLabel.lastBaselineAnchor.constraint(equalTo: integerLabel.lastBaselineAnchor).isActive = true
+        decimalLabel.lastBaselineAnchor.constraint(equalTo: integerLabel.lastBaselineAnchor, constant: style.decimalTextStyle.baselineOffset).isActive = true
         decimalLabel.trailingAnchor.constraint(equalTo: viewMargins.trailingAnchor, constant: 0).isActive = true
+    }
+    
+    // MARK: - UI
+    
+    private func makeIntegerLabel() -> UILabel {
+        return makeLabel(with: style.integerTextStyle)
+    }
+
+    private func makeDecimalLabel() -> UILabel {
+        return makeLabel(with: style.decimalTextStyle)
+    }
+    
+    private func makeDecimalSeparatorLabel() -> UILabel {
+        return makeLabel(with: style.decimalSeparatorTextStyle)
+    }
+    
+    private func makeCurrencyLabel() -> UILabel {
+        return makeLabel(with: style.currencyTextStyle)
+    }
+    
+    private func makeLabel(with style: TextStyle) -> UILabel {
+        let label = UILabel()
+        label.numberOfLines = 1
+        label.font = UIFont.boldSystemFont(ofSize: style.size)
+        label.textColor = style.color
+        return label
     }
 }
 
@@ -105,6 +148,7 @@ struct PriceData {
     let decimalSeparator: String
     let integerPart: Int64
     let decimalPart: Int64
+    let locale: Locale
 }
 
 struct PriceTransformer {
@@ -116,15 +160,21 @@ struct PriceTransformer {
         let integerPart = Int64(splittedPrice[0])!
         let decimalPart = Int64(splittedPrice[1])!
         
-        return PriceData(currencySymbol: locale.currencySymbol!, decimalSeparator: decimalSeparator, integerPart: integerPart, decimalPart: decimalPart)
+        return PriceData(currencySymbol: locale.currencySymbol!, decimalSeparator: decimalSeparator, integerPart: integerPart, decimalPart: decimalPart, locale: locale)
     }
 }
 
-let ptransf = PriceTransformer()
-let data = ptransf.transformedData(price: 12.12)
-let data2 = ptransf.transformedData(price: 151212456465447.49)
-print(data)
-print(data2)
+final class PriceFormatter: NumberFormatter {
+    override init() {
+        super.init()
+        groupingSeparator = ","
+        numberStyle = .decimal
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("--")
+    }
+}
 
 final class MyViewController : UIViewController {
     override func loadView() {
