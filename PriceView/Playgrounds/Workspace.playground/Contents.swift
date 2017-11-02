@@ -73,7 +73,7 @@ final class UIPriceView: UIView {
     }
     
     public var style: PriceViewStyle = PriceViewStyle(
-        integerTextStyle: TextStyle(size: 64, color: .black),
+        integerTextStyle: TextStyle(size: 64, color: .black, kern: 1.2),
         decimalTextStyle: TextStyle(size: 16, color: .darkGray, baselineOffset: -20),
         decimalSeparatorTextStyle: TextStyle(size: 32, color: .darkGray, baselineOffset: -20, leadingOffset: 10),
         currencyTextStyle: TextStyle(size: 20, color: .black, baselineOffset: -25, trailingOffset: -10)
@@ -116,11 +116,14 @@ final class UIPriceView: UIView {
         // computed property didSet?
         
         let formatter = PriceFormatter()
-        
-        integerLabel.text = formatter.string(from: NSNumber(value: priceData.integerPart))
-        decimalLabel.text = "\(priceData.decimalPart)"
+
         decimalSeparatorLabel.text = "\(priceData.decimalSeparator)"
         currencyLabel.text = priceData.currencySymbol
+        
+        //apply kerning
+        integerLabel.attributedText = NSAttributedString(string: formatter.string(from: NSNumber(value: priceData.integerPart))!, attributes: [.kern: style.integerTextStyle.kern])
+        
+        decimalLabel.attributedText = NSAttributedString(string: "\(priceData.decimalPart)", attributes: [.kern: style.decimalTextStyle.kern])
     }
     
     private func setupConstraints(with style: PriceViewStyle) {
