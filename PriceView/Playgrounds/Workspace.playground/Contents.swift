@@ -72,28 +72,29 @@ final class UIPriceView: UIView {
     
     private func bind() {
         // computed property didSet?
-        integerLabel.text = "\(priceData.integerPart)"
+        
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currencyAccounting
+        formatter.locale = NSLocale.current
+        
+        
+        integerLabel.text = formatter.string(from: NSNumber(value: priceData.integerPart))
         decimalLabel.text = "\(priceData.decimalPart)"
         decimalSeparatorLabel.text = "\(priceData.decimalSeparator)"
     }
     
     private func setupConstraints() {
-        
-        integerLabel.translatesAutoresizingMaskIntoConstraints = false
-        decimalSeparatorLabel.translatesAutoresizingMaskIntoConstraints = false
-        decimalLabel.translatesAutoresizingMaskIntoConstraints = false
+        [integerLabel, decimalSeparatorLabel, decimalLabel].forEach { $0.translatesAutoresizingMaskIntoConstraints = false
+        }
         
         let viewMargins = self.layoutMarginsGuide
-        let integerLabelMargins = integerLabel.layoutMarginsGuide
-        let decimalSeparatorLabelMargins = decimalSeparatorLabel.layoutMarginsGuide
-        let decimalLabelMargins = decimalLabel.layoutMarginsGuide
         
         integerLabel.leadingAnchor.constraint(equalTo: viewMargins.leadingAnchor, constant: 0).isActive = true
         integerLabel.topAnchor.constraint(equalTo: viewMargins.topAnchor, constant: 0).isActive = true
         integerLabel.bottomAnchor.constraint(equalTo: viewMargins.bottomAnchor, constant: 0).isActive = true
-        decimalSeparatorLabel.leadingAnchor.constraint(equalTo: integerLabelMargins.trailingAnchor, constant: 8).isActive = true
+        decimalSeparatorLabel.leadingAnchor.constraint(equalTo: integerLabel.trailingAnchor, constant: 0).isActive = true
         decimalSeparatorLabel.lastBaselineAnchor.constraint(equalTo: integerLabel.lastBaselineAnchor).isActive = true
-        decimalLabel.leadingAnchor.constraint(equalTo: decimalSeparatorLabelMargins.trailingAnchor, constant: 8).isActive = true
+        decimalLabel.leadingAnchor.constraint(equalTo: decimalSeparatorLabel.trailingAnchor, constant: 0).isActive = true
         decimalLabel.lastBaselineAnchor.constraint(equalTo: integerLabel.lastBaselineAnchor).isActive = true
         decimalLabel.trailingAnchor.constraint(equalTo: viewMargins.trailingAnchor, constant: 0).isActive = true
     }
