@@ -54,7 +54,7 @@ final class UIPriceView: UIView {
         integerTextStyle: TextStyle(size: 64, color: .black),
         decimalTextStyle: TextStyle(size: 16, color: .darkGray, baselineOffset: -20),
         decimalSeparatorTextStyle: TextStyle(size: 32, color: .darkGray, baselineOffset: -20),
-        currencyTextStyle: TextStyle(size: 18, color: .black)
+        currencyTextStyle: TextStyle(size: 20, color: .black, baselineOffset: -25)
     )
     
     private lazy var currencyLabel = makeCurrencyLabel()
@@ -81,7 +81,7 @@ final class UIPriceView: UIView {
     // MARK: -
     
     private func setup() {
-        [integerLabel, decimalSeparatorLabel, decimalLabel].forEach {
+        [integerLabel, decimalSeparatorLabel, decimalLabel, currencyLabel].forEach {
             //$0.layer.borderWidth = 1.0
             //$0.layer.borderColor = UIColor.red.cgColor
             addSubview($0)
@@ -98,22 +98,37 @@ final class UIPriceView: UIView {
         integerLabel.text = formatter.string(from: NSNumber(value: priceData.integerPart))
         decimalLabel.text = "\(priceData.decimalPart)"
         decimalSeparatorLabel.text = "\(priceData.decimalSeparator)"
+        currencyLabel.text = priceData.currencySymbol
     }
     
     private func setupConstraints() {
-        [integerLabel, decimalSeparatorLabel, decimalLabel].forEach { $0.translatesAutoresizingMaskIntoConstraints = false
+        [integerLabel, decimalSeparatorLabel, decimalLabel, currencyLabel].forEach { $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
         let viewMargins = self.layoutMarginsGuide
         
-        integerLabel.leadingAnchor.constraint(equalTo: viewMargins.leadingAnchor, constant: 0).isActive = true
+        let currencyBefore = false
+        let currencyAfter = !currencyBefore
+
+        currencyLabel.lastBaselineAnchor.constraint(equalTo: integerLabel.lastBaselineAnchor, constant: style.currencyTextStyle.baselineOffset).isActive = true
+
+        // before
+        currencyLabel.leadingAnchor.constraint(equalTo: viewMargins.leadingAnchor, constant: 0).isActive = currencyBefore
+        currencyLabel.trailingAnchor.constraint(equalTo: integerLabel.leadingAnchor, constant: 0).isActive = currencyBefore
+        decimalLabel.trailingAnchor.constraint(equalTo: viewMargins.trailingAnchor, constant: 0).isActive = currencyBefore
+        
+        //after
+        currencyLabel.trailingAnchor.constraint(equalTo: viewMargins.trailingAnchor, constant: 0).isActive = currencyAfter
+        currencyLabel.leadingAnchor.constraint(equalTo: decimalLabel.trailingAnchor, constant: 0).isActive = currencyAfter
+        integerLabel.leadingAnchor.constraint(equalTo: viewMargins.leadingAnchor, constant: 0).isActive = currencyAfter
+        
+        
         integerLabel.topAnchor.constraint(equalTo: viewMargins.topAnchor, constant: 0).isActive = true
         integerLabel.bottomAnchor.constraint(equalTo: viewMargins.bottomAnchor, constant: 0).isActive = true
         decimalSeparatorLabel.leadingAnchor.constraint(equalTo: integerLabel.trailingAnchor, constant: 0).isActive = true
         decimalSeparatorLabel.lastBaselineAnchor.constraint(equalTo: integerLabel.lastBaselineAnchor, constant: style.decimalSeparatorTextStyle.baselineOffset).isActive = true
         decimalLabel.leadingAnchor.constraint(equalTo: decimalSeparatorLabel.trailingAnchor, constant: 0).isActive = true
         decimalLabel.lastBaselineAnchor.constraint(equalTo: integerLabel.lastBaselineAnchor, constant: style.decimalTextStyle.baselineOffset).isActive = true
-        decimalLabel.trailingAnchor.constraint(equalTo: viewMargins.trailingAnchor, constant: 0).isActive = true
     }
     
     // MARK: - UI
@@ -154,7 +169,6 @@ struct PriceData {
 struct PriceTransformer {
     func transformedData(price: Double, locale: Locale = NSLocale.current) -> PriceData {
         // error handling
-        print(price)
         let decimalSeparator = locale.decimalSeparator!
         let splittedPrice = String(price).split(separator: Character(decimalSeparator))
         let integerPart = Int64(splittedPrice[0])!
