@@ -19,9 +19,10 @@ public final class UIPriceView: UIView {
     var style: PriceViewStyle = PriceViewStyle(
         integerTextStyle: TextStyle(size: 64, color: .black, kern: 1.2),
         decimalTextStyle: TextStyle(size: 36, color: .darkGray),
-        decimalSeparatorTextStyle: TextStyle(size: 32, color: .darkGray, leadingOffset: 0),
-        currencyTextStyle: TextStyle(size: 20, color: .black, trailingOffset: 0)
-    )
+        decimalSeparatorTextStyle: TextStyle(size: 32, color: .darkGray),
+        currencyTextStyle: TextStyle(size: 20, color: .black),
+        decimalSeparatorSpacing: (0,0),
+        currencySpacing: 0)
     
     private lazy var currencyLabel = makeCurrencyLabel()
     private lazy var integerLabel = makeIntegerLabel()
@@ -104,22 +105,22 @@ public final class UIPriceView: UIView {
         setUpConstraints(between: currencyLabel, and: integerLabel, with: style.currencyTextStyle)
         
         // before
-        currencyLabel.leadingAnchor.constraint(equalTo: viewMargins.leadingAnchor, constant: style.currencyTextStyle.leadingOffset).isActive = currencyBefore
-        currencyLabel.trailingAnchor.constraint(equalTo: integerLabel.leadingAnchor, constant: style.currencyTextStyle.trailingOffset).isActive = currencyBefore
-        decimalLabel.trailingAnchor.constraint(equalTo: viewMargins.trailingAnchor, constant: style.decimalTextStyle.trailingOffset).isActive = currencyBefore
+        currencyLabel.leadingAnchor.constraint(equalTo: viewMargins.leadingAnchor).isActive = currencyBefore
+        currencyLabel.trailingAnchor.constraint(equalTo: integerLabel.leadingAnchor, constant: -style.currencySpacing).isActive = currencyBefore
+        decimalLabel.trailingAnchor.constraint(equalTo: viewMargins.trailingAnchor).isActive = currencyBefore
         
         //after
-        currencyLabel.trailingAnchor.constraint(equalTo: viewMargins.trailingAnchor, constant: style.currencyTextStyle.trailingOffset).isActive = currencyAfter
-        currencyLabel.leadingAnchor.constraint(equalTo: decimalLabel.trailingAnchor, constant: style.currencyTextStyle.leadingOffset).isActive = currencyAfter
-        integerLabel.leadingAnchor.constraint(equalTo: viewMargins.leadingAnchor, constant: style.integerTextStyle.leadingOffset).isActive = currencyAfter
+        currencyLabel.trailingAnchor.constraint(equalTo: viewMargins.trailingAnchor).isActive = currencyAfter
+        currencyLabel.leadingAnchor.constraint(equalTo: decimalLabel.trailingAnchor, constant: style.currencySpacing).isActive = currencyAfter
+        integerLabel.leadingAnchor.constraint(equalTo: viewMargins.leadingAnchor).isActive = currencyAfter
         
-        decimalSeparatorLabel.leadingAnchor.constraint(equalTo: integerLabel.trailingAnchor, constant: style.decimalSeparatorTextStyle.leadingOffset).isActive = true
+        decimalSeparatorLabel.leadingAnchor.constraint(equalTo: integerLabel.trailingAnchor, constant: style.decimalSeparatorSpacing.leading).isActive = true
         
-        decimalLabel.leadingAnchor.constraint(equalTo: decimalSeparatorLabel.trailingAnchor, constant: style.decimalTextStyle.leadingOffset).isActive = true
+        decimalLabel.leadingAnchor.constraint(equalTo: decimalSeparatorLabel.trailingAnchor, constant: style.decimalSeparatorSpacing.trailing).isActive = true
         
         integerLabel.topAnchor.constraint(equalTo: viewMargins.topAnchor).isActive = true
         integerLabel.bottomAnchor.constraint(equalTo: viewMargins.bottomAnchor).isActive = true
-
+        
         // V
         setUpConstraints(between: decimalSeparatorLabel, and: integerLabel, with: style.decimalSeparatorTextStyle)
         setUpConstraints(between: decimalLabel, and: integerLabel, with: style.decimalTextStyle)

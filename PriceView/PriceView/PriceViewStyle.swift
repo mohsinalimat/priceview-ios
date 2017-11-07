@@ -15,11 +15,15 @@ public struct PriceViewStyle {
         case afterCurrency
     }
     
-    var integerTextStyle: TextStyle
-    var decimalTextStyle: TextStyle
-    var decimalSeparatorTextStyle: TextStyle
-    var currencyTextStyle: TextStyle
-    var locale: Locale
+    let integerTextStyle: TextStyle
+    let decimalTextStyle: TextStyle
+    let decimalSeparatorTextStyle: TextStyle
+    let currencyTextStyle: TextStyle
+    
+    let decimalSeparatorSpacing: (leading: CGFloat, trailing: CGFloat)
+    let currencySpacing: CGFloat
+
+    let locale: Locale
     
     var symbolPosition: SymbolPosition {
         if locale.regionCode == "US" {
@@ -33,12 +37,16 @@ public struct PriceViewStyle {
                 decimalTextStyle: TextStyle,
                 decimalSeparatorTextStyle: TextStyle,
                 currencyTextStyle: TextStyle,
+                decimalSeparatorSpacing: (CGFloat, CGFloat),
+                currencySpacing: CGFloat,
                 locale: Locale = NSLocale.current
     ) {
         self.integerTextStyle = integerTextStyle
         self.decimalTextStyle = decimalTextStyle
         self.decimalSeparatorTextStyle = decimalSeparatorTextStyle
         self.currencyTextStyle = currencyTextStyle
+        self.decimalSeparatorSpacing = decimalSeparatorSpacing
+        self.currencySpacing = currencySpacing
         self.locale = locale
     }
 }

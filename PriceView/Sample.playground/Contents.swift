@@ -9,13 +9,12 @@ final class MyViewController : UIViewController {
         let view = UIView()
         view.backgroundColor = .white
         
-        let integerTextStyle = TextStyle(size: 32, color: .black, kern: 0.0, verticalAlignment: .middle(0), leadingOffset: 0, trailingOffset: 0)
-        let decimalTextStyle = TextStyle(size: 12, color: .black, kern: 0.0, verticalAlignment: .baseline(0), leadingOffset: 0, trailingOffset: 0)
-        let currencyTextStyle = TextStyle(size: 12, color: .black, kern: 0.0, verticalAlignment: .middle(0), leadingOffset: 0, trailingOffset: 0)
-        let separatorTextStyle = TextStyle(size: 32, color: .black, kern: 0.0, verticalAlignment: .middle(0), leadingOffset: 0, trailingOffset: 0)
-
+        let integerTextStyle = TextStyle(size: 32, color: .black, kern: 0.0, verticalAlignment: .middle(0))
+        let decimalTextStyle = TextStyle(size: 12, color: .black, kern: 0.0, verticalAlignment: .baseline(0))
+        let currencyTextStyle = TextStyle(size: 12, color: .black, kern: 0.0, verticalAlignment: .middle(0))
+        let separatorTextStyle = TextStyle(size: 32, color: .black, kern: 0.0, verticalAlignment: .middle(0))
         
-        let style = PriceViewStyle(integerTextStyle: integerTextStyle, decimalTextStyle: decimalTextStyle, decimalSeparatorTextStyle: separatorTextStyle, currencyTextStyle: currencyTextStyle)
+        let style = PriceViewStyle(integerTextStyle: integerTextStyle, decimalTextStyle: decimalTextStyle, decimalSeparatorTextStyle: separatorTextStyle, currencyTextStyle: currencyTextStyle, decimalSeparatorSpacing: (0,0), currencySpacing: 10)
         let priceView = UIPriceView(style: style)
         view.addSubview(priceView)
 
