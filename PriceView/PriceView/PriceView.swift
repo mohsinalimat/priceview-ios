@@ -90,6 +90,19 @@ public final class UIPriceView: UIView {
             labelA.centerYAnchor.constraint(equalTo: labelB.centerYAnchor, constant: offset).isActive = true
         }
     }
+
+    private func setUpConstraints(between labelA: UILabel, and layoutGuide: UILayoutGuide, with alignment: TextVerticalAlignment) {
+        switch alignment {
+        case .baseline(let offset):
+            labelA.lastBaselineAnchor.constraint(equalTo: layoutGuide.bottomAnchor, constant: offset).isActive = true
+        case .bottom(let offset):
+            labelA.bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor, constant: offset).isActive = true
+        case .top(let offset):
+            labelA.topAnchor.constraint(equalTo: layoutGuide.topAnchor, constant: offset).isActive = true
+        case .middle(let offset):
+            labelA.centerYAnchor.constraint(equalTo: layoutGuide.centerYAnchor, constant: offset).isActive = true
+        }
+    }
     
     private func setupConstraints(with style: PriceViewStyle) {
         [integerLabel, decimalSeparatorLabel, decimalLabel, currencyLabel].forEach {
@@ -118,12 +131,18 @@ public final class UIPriceView: UIView {
         
         decimalLabel.leadingAnchor.constraint(equalTo: decimalSeparatorLabel.trailingAnchor, constant: style.decimalSeparatorSpacing.trailing).isActive = true
         
-        integerLabel.topAnchor.constraint(equalTo: viewMargins.topAnchor).isActive = true
-        integerLabel.bottomAnchor.constraint(equalTo: viewMargins.bottomAnchor).isActive = true
-        
         // V
         setUpConstraints(between: decimalSeparatorLabel, and: integerLabel, with: style.decimalSeparatorTextStyle)
         setUpConstraints(between: decimalLabel, and: integerLabel, with: style.decimalTextStyle)
+        
+        // V
+        if let alignment = style.alignment {
+            // CHECK IF HEIGHT IS SET?
+            setUpConstraints(between: integerLabel, and: viewMargins, with: alignment)
+        } else {
+            integerLabel.topAnchor.constraint(equalTo: viewMargins.topAnchor).isActive = true
+            integerLabel.bottomAnchor.constraint(equalTo: viewMargins.bottomAnchor).isActive = true
+        }
     }
     
     // MARK: - UI
