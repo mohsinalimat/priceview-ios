@@ -9,7 +9,14 @@ final class MyViewController : UIViewController {
         let view = UIView()
         view.backgroundColor = .white
         
-        let priceView = UIPriceView()
+        let integerTextStyle = TextStyle(size: 32, color: .black, kern: 0.0, verticalAlignment: .middle(0), leadingOffset: 0, trailingOffset: 0)
+        let decimalTextStyle = TextStyle(size: 12, color: .black, kern: 0.0, verticalAlignment: .baseline(0), leadingOffset: 0, trailingOffset: 0)
+        let currencyTextStyle = TextStyle(size: 12, color: .black, kern: 0.0, verticalAlignment: .middle(0), leadingOffset: 0, trailingOffset: 0)
+        let separatorTextStyle = TextStyle(size: 32, color: .black, kern: 0.0, verticalAlignment: .middle(0), leadingOffset: 0, trailingOffset: 0)
+
+        
+        let style = PriceViewStyle(integerTextStyle: integerTextStyle, decimalTextStyle: decimalTextStyle, decimalSeparatorTextStyle: separatorTextStyle, currencyTextStyle: currencyTextStyle)
+        let priceView = UIPriceView(style: style)
         view.addSubview(priceView)
 
         let margin = view.layoutMarginsGuide
@@ -17,6 +24,8 @@ final class MyViewController : UIViewController {
         priceView.translatesAutoresizingMaskIntoConstraints = false
         priceView.centerXAnchor.constraint(equalTo: margin.centerXAnchor).isActive = true
         priceView.centerYAnchor.constraint(equalTo: margin.centerYAnchor).isActive = true
+//        priceView.heightAnchor.constraint(equalToConstant: 230).isActive = true
+        priceView.layoutMargins = .init(top: 30, left: 30, bottom: 30, right: 30)
         priceView.layer.borderColor = UIColor.green.cgColor
         priceView.layer.borderWidth = 1.0
         

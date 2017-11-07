@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct PriceData {
+struct PriceData {
     let currencySymbol: String
     let decimalSeparator: String
     let integerPart: Int64

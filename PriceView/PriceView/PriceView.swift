@@ -16,11 +16,11 @@ public final class UIPriceView: UIView {
         }
     }
     
-    public var style: PriceViewStyle = PriceViewStyle(
+    var style: PriceViewStyle = PriceViewStyle(
         integerTextStyle: TextStyle(size: 64, color: .black, kern: 1.2),
-        decimalTextStyle: TextStyle(size: 16, color: .darkGray, baselineOffset: -20),
-        decimalSeparatorTextStyle: TextStyle(size: 32, color: .darkGray, baselineOffset: -20, leadingOffset: 0),
-        currencyTextStyle: TextStyle(size: 20, color: .black, baselineOffset: -25, trailingOffset: 0)
+        decimalTextStyle: TextStyle(size: 36, color: .darkGray),
+        decimalSeparatorTextStyle: TextStyle(size: 32, color: .darkGray, leadingOffset: 0),
+        currencyTextStyle: TextStyle(size: 20, color: .black, trailingOffset: 0)
     )
     
     private lazy var currencyLabel = makeCurrencyLabel()
@@ -37,6 +37,12 @@ public final class UIPriceView: UIView {
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
+        setup()
+    }
+    
+    public init(style: PriceViewStyle) {
+        self.style = style
+        super.init(frame: .zero)
         setup()
     }
     
@@ -71,16 +77,31 @@ public final class UIPriceView: UIView {
         decimalLabel.attributedText = NSAttributedString(string: "\(priceData.decimalPart)", attributes: [.kern: style.decimalTextStyle.kern])
     }
     
+    private func setUpConstraints(between labelA: UILabel, and labelB: UILabel, with labelATextStyle: TextStyle) {
+        switch labelATextStyle.verticalAlignment {
+        case .baseline(let offset):
+            labelA.lastBaselineAnchor.constraint(equalTo: labelB.lastBaselineAnchor, constant: offset).isActive = true
+        case .bottom(let offset):
+            labelA.bottomAnchor.constraint(equalTo: labelB.bottomAnchor, constant: offset).isActive = true
+        case .top(let offset):
+            labelA.topAnchor.constraint(equalTo: labelB.topAnchor, constant: offset).isActive = true
+        case .middle(let offset):
+            labelA.centerYAnchor.constraint(equalTo: labelB.centerYAnchor, constant: offset).isActive = true
+        }
+    }
+    
     private func setupConstraints(with style: PriceViewStyle) {
-        [integerLabel, decimalSeparatorLabel, decimalLabel, currencyLabel].forEach { $0.translatesAutoresizingMaskIntoConstraints = false
+        [integerLabel, decimalSeparatorLabel, decimalLabel, currencyLabel].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
-        let viewMargins = self.layoutMarginsGuide
+        let viewMargins = layoutMarginsGuide
         
         let currencyBefore = style.symbolPosition == .beforeCurrency
         let currencyAfter = !currencyBefore
         
-        currencyLabel.lastBaselineAnchor.constraint(equalTo: integerLabel.lastBaselineAnchor, constant: style.currencyTextStyle.baselineOffset).isActive = true
+        // currency V
+        setUpConstraints(between: currencyLabel, and: integerLabel, with: style.currencyTextStyle)
         
         // before
         currencyLabel.leadingAnchor.constraint(equalTo: viewMargins.leadingAnchor, constant: style.currencyTextStyle.leadingOffset).isActive = currencyBefore
@@ -98,8 +119,10 @@ public final class UIPriceView: UIView {
         
         integerLabel.topAnchor.constraint(equalTo: viewMargins.topAnchor).isActive = true
         integerLabel.bottomAnchor.constraint(equalTo: viewMargins.bottomAnchor).isActive = true
-        decimalSeparatorLabel.lastBaselineAnchor.constraint(equalTo: integerLabel.lastBaselineAnchor, constant: style.decimalSeparatorTextStyle.baselineOffset).isActive = true
-        decimalLabel.lastBaselineAnchor.constraint(equalTo: integerLabel.lastBaselineAnchor, constant: style.decimalTextStyle.baselineOffset).isActive = true
+
+        // V
+        setUpConstraints(between: decimalSeparatorLabel, and: integerLabel, with: style.decimalSeparatorTextStyle)
+        setUpConstraints(between: decimalLabel, and: integerLabel, with: style.decimalTextStyle)
     }
     
     // MARK: - UI
