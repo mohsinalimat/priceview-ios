@@ -1,70 +1,14 @@
-//: A UIKit based Playground for presenting user interface
-  
-import UIKit
-import PlaygroundSupport
+//
+//  PriceView.swift
+//  PriceView
+//
+//  Created by Thomas Sivilay on 11/7/17.
+//  Copyright © 2017 Thomas Sivilay. All rights reserved.
+//
 
-struct TextStyle {
-    var size: CGFloat
-    var color: UIColor
-    var kern: CGFloat
-    
-    var baselineOffset: CGFloat
-    var leadingOffset: CGFloat
-    var trailingOffset: CGFloat
-    
-    init(size: CGFloat,
-         color: UIColor,
-         kern: CGFloat = 0.0,
-         baselineOffset: CGFloat = 0,
-         leadingOffset: CGFloat = 0,
-         trailingOffset: CGFloat = 0
-    ) {
-        self.size = size
-        self.color = color
-        self.kern = kern
-        self.baselineOffset = baselineOffset
-        self.leadingOffset = leadingOffset
-        self.trailingOffset = trailingOffset
-    }
-}
+import Foundation
 
-struct PriceViewStyle {
-    
-    enum SymbolPosition {
-        case beforeCurrency
-        case afterCurrency
-    }
-    
-    var integerTextStyle: TextStyle
-    var decimalTextStyle: TextStyle
-    var decimalSeparatorTextStyle: TextStyle
-    var currencyTextStyle: TextStyle
-    var locale: Locale
-    
-    var symbolPosition: SymbolPosition {
-        print(locale.regionCode)
-        if locale.regionCode == "US" {
-            return .beforeCurrency
-        } else {
-            return .afterCurrency
-        }
-    }
-    
-    init(integerTextStyle: TextStyle,
-         decimalTextStyle: TextStyle,
-         decimalSeparatorTextStyle: TextStyle,
-         currencyTextStyle: TextStyle,
-         locale: Locale = NSLocale.current
-    ) {
-        self.integerTextStyle = integerTextStyle
-        self.decimalTextStyle = decimalTextStyle
-        self.decimalSeparatorTextStyle = decimalSeparatorTextStyle
-        self.currencyTextStyle = currencyTextStyle
-        self.locale = locale
-    }
-}
-
-final class UIPriceView: UIView {
+public final class UIPriceView: UIView {
     
     public var price: Double = 0.0 {
         didSet {
@@ -75,8 +19,8 @@ final class UIPriceView: UIView {
     public var style: PriceViewStyle = PriceViewStyle(
         integerTextStyle: TextStyle(size: 64, color: .black, kern: 1.2),
         decimalTextStyle: TextStyle(size: 16, color: .darkGray, baselineOffset: -20),
-        decimalSeparatorTextStyle: TextStyle(size: 32, color: .darkGray, baselineOffset: -20, leadingOffset: 10),
-        currencyTextStyle: TextStyle(size: 20, color: .black, baselineOffset: -25, trailingOffset: -10)
+        decimalSeparatorTextStyle: TextStyle(size: 32, color: .darkGray, baselineOffset: -20, leadingOffset: 0),
+        currencyTextStyle: TextStyle(size: 20, color: .black, baselineOffset: -25, trailingOffset: 0)
     )
     
     private lazy var currencyLabel = makeCurrencyLabel()
@@ -91,12 +35,12 @@ final class UIPriceView: UIView {
     
     // MARK: - Initializers
     
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         setup()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -108,6 +52,7 @@ final class UIPriceView: UIView {
             $0.layer.borderColor = UIColor.red.cgColor
             addSubview($0)
         }
+        
         bind()
         setupConstraints(with: style)
     }
@@ -116,7 +61,7 @@ final class UIPriceView: UIView {
         // computed property didSet?
         
         let formatter = PriceFormatter()
-
+        
         decimalSeparatorLabel.text = "\(priceData.decimalSeparator)"
         currencyLabel.text = priceData.currencySymbol
         
@@ -134,9 +79,9 @@ final class UIPriceView: UIView {
         
         let currencyBefore = style.symbolPosition == .beforeCurrency
         let currencyAfter = !currencyBefore
-
+        
         currencyLabel.lastBaselineAnchor.constraint(equalTo: integerLabel.lastBaselineAnchor, constant: style.currencyTextStyle.baselineOffset).isActive = true
-
+        
         // before
         currencyLabel.leadingAnchor.constraint(equalTo: viewMargins.leadingAnchor, constant: style.currencyTextStyle.leadingOffset).isActive = currencyBefore
         currencyLabel.trailingAnchor.constraint(equalTo: integerLabel.leadingAnchor, constant: style.currencyTextStyle.trailingOffset).isActive = currencyBefore
@@ -162,7 +107,7 @@ final class UIPriceView: UIView {
     private func makeIntegerLabel() -> UILabel {
         return makeLabel(with: style.integerTextStyle)
     }
-
+    
     private func makeDecimalLabel() -> UILabel {
         return makeLabel(with: style.decimalTextStyle)
     }
@@ -183,58 +128,3 @@ final class UIPriceView: UIView {
         return label
     }
 }
-
-struct PriceData {
-    let currencySymbol: String
-    let decimalSeparator: String
-    let integerPart: Int64
-    let decimalPart: Int64
-    let locale: Locale
-}
-
-struct PriceTransformer {
-    func transformedData(price: Double, locale: Locale = NSLocale.current) -> PriceData {
-        // error handling
-        let decimalSeparator = locale.decimalSeparator!
-        let splittedPrice = String(price).split(separator: Character(decimalSeparator))
-        let integerPart = Int64(splittedPrice[0])!
-        let decimalPart = Int64(splittedPrice[1])!
-        
-        return PriceData(currencySymbol: locale.currencySymbol!, decimalSeparator: decimalSeparator, integerPart: integerPart, decimalPart: decimalPart, locale: locale)
-    }
-}
-
-final class PriceFormatter: NumberFormatter {
-    override init() {
-        super.init()
-        groupingSeparator = ","
-        numberStyle = .decimal
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("--")
-    }
-}
-
-final class MyViewController : UIViewController {
-    override func loadView() {
-        let view = UIView()
-        view.backgroundColor = .white
-
-        let priceView = UIPriceView()
-        view.addSubview(priceView)
-        
-        priceView.translatesAutoresizingMaskIntoConstraints = false
-
-        let margin = view.layoutMarginsGuide
-        
-        priceView.centerXAnchor.constraint(equalTo: margin.centerXAnchor).isActive = true
-        priceView.centerYAnchor.constraint(equalTo: margin.centerYAnchor).isActive = true
-
-        priceView.price = 1512.49
-        
-        self.view = view
-    }
-}
-// Present the view controller in the Live View window
-PlaygroundPage.current.liveView = MyViewController()

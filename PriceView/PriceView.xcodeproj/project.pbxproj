@@ -7,134 +7,135 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C82FF7711FA88110001455B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82FF7701FA88110001455B5 /* AppDelegate.swift */; };
-		C82FF7731FA88110001455B5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82FF7721FA88110001455B5 /* ViewController.swift */; };
-		C82FF7761FA88110001455B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C82FF7741FA88110001455B5 /* Main.storyboard */; };
-		C82FF7781FA88110001455B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C82FF7771FA88110001455B5 /* Assets.xcassets */; };
-		C82FF77B1FA88110001455B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C82FF7791FA88110001455B5 /* LaunchScreen.storyboard */; };
-		C82FF7861FA88110001455B5 /* PriceViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82FF7851FA88110001455B5 /* PriceViewTests.swift */; };
-		C82FF7911FA88110001455B5 /* PriceViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82FF7901FA88110001455B5 /* PriceViewUITests.swift */; };
+		C88AEC9C1FB1BC38004AEE39 /* PriceView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C88AEC921FB1BC38004AEE39 /* PriceView.framework */; };
+		C88AECA11FB1BC38004AEE39 /* PriceViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88AECA01FB1BC38004AEE39 /* PriceViewTests.swift */; };
+		C88AECA31FB1BC38004AEE39 /* PriceView.h in Headers */ = {isa = PBXBuildFile; fileRef = C88AEC951FB1BC38004AEE39 /* PriceView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C88AECAD1FB1BC4B004AEE39 /* PriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88AECAC1FB1BC4B004AEE39 /* PriceView.swift */; };
+		C88AECAF1FB1BC5E004AEE39 /* PriceViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88AECAE1FB1BC5E004AEE39 /* PriceViewStyle.swift */; };
+		C88AECB11FB1BC84004AEE39 /* PriceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88AECB01FB1BC84004AEE39 /* PriceData.swift */; };
+		C88AECB31FB1BCA5004AEE39 /* PriceTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88AECB21FB1BCA5004AEE39 /* PriceTransformer.swift */; };
+		C88AECB51FB1BCBD004AEE39 /* PriceFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88AECB41FB1BCBD004AEE39 /* PriceFormatter.swift */; };
+		C88AECB71FB1BCE7004AEE39 /* TextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88AECB61FB1BCE7004AEE39 /* TextStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		C82FF7821FA88110001455B5 /* PBXContainerItemProxy */ = {
+		C88AEC9D1FB1BC38004AEE39 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = C82FF7651FA88110001455B5 /* Project object */;
+			containerPortal = C88AEC891FB1BC37004AEE39 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = C82FF76C1FA88110001455B5;
-			remoteInfo = PriceView;
-		};
-		C82FF78D1FA88110001455B5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C82FF7651FA88110001455B5 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C82FF76C1FA88110001455B5;
+			remoteGlobalIDString = C88AEC911FB1BC37004AEE39;
 			remoteInfo = PriceView;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		C82FF76D1FA88110001455B5 /* PriceView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PriceView.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C82FF7701FA88110001455B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C82FF7721FA88110001455B5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		C82FF7751FA88110001455B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		C82FF7771FA88110001455B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		C82FF77A1FA88110001455B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		C82FF77C1FA88110001455B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C82FF7811FA88110001455B5 /* PriceViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PriceViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C82FF7851FA88110001455B5 /* PriceViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceViewTests.swift; sourceTree = "<group>"; };
-		C82FF7871FA88110001455B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C82FF78C1FA88110001455B5 /* PriceViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PriceViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C82FF7901FA88110001455B5 /* PriceViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceViewUITests.swift; sourceTree = "<group>"; };
-		C82FF7921FA88110001455B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C816D9A51FB1EB7700787CD5 /* Sample.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Sample.playground; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		C88AEC921FB1BC38004AEE39 /* PriceView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PriceView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C88AEC951FB1BC38004AEE39 /* PriceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceView.h; sourceTree = "<group>"; };
+		C88AEC961FB1BC38004AEE39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C88AEC9B1FB1BC38004AEE39 /* PriceViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PriceViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C88AECA01FB1BC38004AEE39 /* PriceViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceViewTests.swift; sourceTree = "<group>"; };
+		C88AECA21FB1BC38004AEE39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C88AECAC1FB1BC4B004AEE39 /* PriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceView.swift; sourceTree = "<group>"; };
+		C88AECAE1FB1BC5E004AEE39 /* PriceViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceViewStyle.swift; sourceTree = "<group>"; };
+		C88AECB01FB1BC84004AEE39 /* PriceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceData.swift; sourceTree = "<group>"; };
+		C88AECB21FB1BCA5004AEE39 /* PriceTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceTransformer.swift; sourceTree = "<group>"; };
+		C88AECB41FB1BCBD004AEE39 /* PriceFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceFormatter.swift; sourceTree = "<group>"; };
+		C88AECB61FB1BCE7004AEE39 /* TextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		C82FF76A1FA88110001455B5 /* Frameworks */ = {
+		C88AEC8E1FB1BC37004AEE39 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C82FF77E1FA88110001455B5 /* Frameworks */ = {
+		C88AEC981FB1BC38004AEE39 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C82FF7891FA88110001455B5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				C88AEC9C1FB1BC38004AEE39 /* PriceView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C82FF7641FA88110001455B5 = {
+		C88AEC881FB1BC37004AEE39 = {
 			isa = PBXGroup;
 			children = (
-				C82FF76F1FA88110001455B5 /* PriceView */,
-				C82FF7841FA88110001455B5 /* PriceViewTests */,
-				C82FF78F1FA88110001455B5 /* PriceViewUITests */,
-				C82FF76E1FA88110001455B5 /* Products */,
+				C88AECB81FB1EADD004AEE39 /* Playgrounds */,
+				C88AEC941FB1BC38004AEE39 /* PriceView */,
+				C88AEC9F1FB1BC38004AEE39 /* PriceViewTests */,
+				C88AEC931FB1BC38004AEE39 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		C82FF76E1FA88110001455B5 /* Products */ = {
+		C88AEC931FB1BC38004AEE39 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C82FF76D1FA88110001455B5 /* PriceView.app */,
-				C82FF7811FA88110001455B5 /* PriceViewTests.xctest */,
-				C82FF78C1FA88110001455B5 /* PriceViewUITests.xctest */,
+				C88AEC921FB1BC38004AEE39 /* PriceView.framework */,
+				C88AEC9B1FB1BC38004AEE39 /* PriceViewTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C82FF76F1FA88110001455B5 /* PriceView */ = {
+		C88AEC941FB1BC38004AEE39 /* PriceView */ = {
 			isa = PBXGroup;
 			children = (
-				C82FF7701FA88110001455B5 /* AppDelegate.swift */,
-				C82FF7721FA88110001455B5 /* ViewController.swift */,
-				C82FF7741FA88110001455B5 /* Main.storyboard */,
-				C82FF7771FA88110001455B5 /* Assets.xcassets */,
-				C82FF7791FA88110001455B5 /* LaunchScreen.storyboard */,
-				C82FF77C1FA88110001455B5 /* Info.plist */,
+				C88AEC951FB1BC38004AEE39 /* PriceView.h */,
+				C88AEC961FB1BC38004AEE39 /* Info.plist */,
+				C88AECAC1FB1BC4B004AEE39 /* PriceView.swift */,
+				C88AECAE1FB1BC5E004AEE39 /* PriceViewStyle.swift */,
+				C88AECB01FB1BC84004AEE39 /* PriceData.swift */,
+				C88AECB21FB1BCA5004AEE39 /* PriceTransformer.swift */,
+				C88AECB41FB1BCBD004AEE39 /* PriceFormatter.swift */,
+				C88AECB61FB1BCE7004AEE39 /* TextStyle.swift */,
 			);
 			path = PriceView;
 			sourceTree = "<group>";
 		};
-		C82FF7841FA88110001455B5 /* PriceViewTests */ = {
+		C88AEC9F1FB1BC38004AEE39 /* PriceViewTests */ = {
 			isa = PBXGroup;
 			children = (
-				C82FF7851FA88110001455B5 /* PriceViewTests.swift */,
-				C82FF7871FA88110001455B5 /* Info.plist */,
+				C88AECA01FB1BC38004AEE39 /* PriceViewTests.swift */,
+				C88AECA21FB1BC38004AEE39 /* Info.plist */,
 			);
 			path = PriceViewTests;
 			sourceTree = "<group>";
 		};
-		C82FF78F1FA88110001455B5 /* PriceViewUITests */ = {
+		C88AECB81FB1EADD004AEE39 /* Playgrounds */ = {
 			isa = PBXGroup;
 			children = (
-				C82FF7901FA88110001455B5 /* PriceViewUITests.swift */,
-				C82FF7921FA88110001455B5 /* Info.plist */,
+				C816D9A51FB1EB7700787CD5 /* Sample.playground */,
 			);
-			path = PriceViewUITests;
+			path = Playgrounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		C88AEC8F1FB1BC37004AEE39 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C88AECA31FB1BC38004AEE39 /* PriceView.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		C82FF76C1FA88110001455B5 /* PriceView */ = {
+		C88AEC911FB1BC37004AEE39 /* PriceView */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C82FF7951FA88110001455B5 /* Build configuration list for PBXNativeTarget "PriceView" */;
+			buildConfigurationList = C88AECA61FB1BC38004AEE39 /* Build configuration list for PBXNativeTarget "PriceView" */;
 			buildPhases = (
-				C82FF7691FA88110001455B5 /* Sources */,
-				C82FF76A1FA88110001455B5 /* Frameworks */,
-				C82FF76B1FA88110001455B5 /* Resources */,
+				C88AEC8D1FB1BC37004AEE39 /* Sources */,
+				C88AEC8E1FB1BC37004AEE39 /* Frameworks */,
+				C88AEC8F1FB1BC37004AEE39 /* Headers */,
+				C88AEC901FB1BC37004AEE39 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -142,110 +143,75 @@
 			);
 			name = PriceView;
 			productName = PriceView;
-			productReference = C82FF76D1FA88110001455B5 /* PriceView.app */;
-			productType = "com.apple.product-type.application";
+			productReference = C88AEC921FB1BC38004AEE39 /* PriceView.framework */;
+			productType = "com.apple.product-type.framework";
 		};
-		C82FF7801FA88110001455B5 /* PriceViewTests */ = {
+		C88AEC9A1FB1BC38004AEE39 /* PriceViewTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C82FF7981FA88110001455B5 /* Build configuration list for PBXNativeTarget "PriceViewTests" */;
+			buildConfigurationList = C88AECA91FB1BC38004AEE39 /* Build configuration list for PBXNativeTarget "PriceViewTests" */;
 			buildPhases = (
-				C82FF77D1FA88110001455B5 /* Sources */,
-				C82FF77E1FA88110001455B5 /* Frameworks */,
-				C82FF77F1FA88110001455B5 /* Resources */,
+				C88AEC971FB1BC38004AEE39 /* Sources */,
+				C88AEC981FB1BC38004AEE39 /* Frameworks */,
+				C88AEC991FB1BC38004AEE39 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				C82FF7831FA88110001455B5 /* PBXTargetDependency */,
+				C88AEC9E1FB1BC38004AEE39 /* PBXTargetDependency */,
 			);
 			name = PriceViewTests;
 			productName = PriceViewTests;
-			productReference = C82FF7811FA88110001455B5 /* PriceViewTests.xctest */;
+			productReference = C88AEC9B1FB1BC38004AEE39 /* PriceViewTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		C82FF78B1FA88110001455B5 /* PriceViewUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C82FF79B1FA88110001455B5 /* Build configuration list for PBXNativeTarget "PriceViewUITests" */;
-			buildPhases = (
-				C82FF7881FA88110001455B5 /* Sources */,
-				C82FF7891FA88110001455B5 /* Frameworks */,
-				C82FF78A1FA88110001455B5 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				C82FF78E1FA88110001455B5 /* PBXTargetDependency */,
-			);
-			name = PriceViewUITests;
-			productName = PriceViewUITests;
-			productReference = C82FF78C1FA88110001455B5 /* PriceViewUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		C82FF7651FA88110001455B5 /* Project object */ = {
+		C88AEC891FB1BC37004AEE39 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Thomas Sivilay";
 				TargetAttributes = {
-					C82FF76C1FA88110001455B5 = {
+					C88AEC911FB1BC37004AEE39 = {
 						CreatedOnToolsVersion = 9.0.1;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
-					C82FF7801FA88110001455B5 = {
+					C88AEC9A1FB1BC38004AEE39 = {
 						CreatedOnToolsVersion = 9.0.1;
 						ProvisioningStyle = Automatic;
-						TestTargetID = C82FF76C1FA88110001455B5;
-					};
-					C82FF78B1FA88110001455B5 = {
-						CreatedOnToolsVersion = 9.0.1;
-						ProvisioningStyle = Automatic;
-						TestTargetID = C82FF76C1FA88110001455B5;
 					};
 				};
 			};
-			buildConfigurationList = C82FF7681FA88110001455B5 /* Build configuration list for PBXProject "PriceView" */;
+			buildConfigurationList = C88AEC8C1FB1BC37004AEE39 /* Build configuration list for PBXProject "PriceView" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 			);
-			mainGroup = C82FF7641FA88110001455B5;
-			productRefGroup = C82FF76E1FA88110001455B5 /* Products */;
+			mainGroup = C88AEC881FB1BC37004AEE39;
+			productRefGroup = C88AEC931FB1BC38004AEE39 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C82FF76C1FA88110001455B5 /* PriceView */,
-				C82FF7801FA88110001455B5 /* PriceViewTests */,
-				C82FF78B1FA88110001455B5 /* PriceViewUITests */,
+				C88AEC911FB1BC37004AEE39 /* PriceView */,
+				C88AEC9A1FB1BC38004AEE39 /* PriceViewTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		C82FF76B1FA88110001455B5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C82FF77B1FA88110001455B5 /* LaunchScreen.storyboard in Resources */,
-				C82FF7781FA88110001455B5 /* Assets.xcassets in Resources */,
-				C82FF7761FA88110001455B5 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C82FF77F1FA88110001455B5 /* Resources */ = {
+		C88AEC901FB1BC37004AEE39 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C82FF78A1FA88110001455B5 /* Resources */ = {
+		C88AEC991FB1BC38004AEE39 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -255,67 +221,39 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		C82FF7691FA88110001455B5 /* Sources */ = {
+		C88AEC8D1FB1BC37004AEE39 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C82FF7731FA88110001455B5 /* ViewController.swift in Sources */,
-				C82FF7711FA88110001455B5 /* AppDelegate.swift in Sources */,
+				C88AECB71FB1BCE7004AEE39 /* TextStyle.swift in Sources */,
+				C88AECAF1FB1BC5E004AEE39 /* PriceViewStyle.swift in Sources */,
+				C88AECB11FB1BC84004AEE39 /* PriceData.swift in Sources */,
+				C88AECB51FB1BCBD004AEE39 /* PriceFormatter.swift in Sources */,
+				C88AECAD1FB1BC4B004AEE39 /* PriceView.swift in Sources */,
+				C88AECB31FB1BCA5004AEE39 /* PriceTransformer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C82FF77D1FA88110001455B5 /* Sources */ = {
+		C88AEC971FB1BC38004AEE39 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C82FF7861FA88110001455B5 /* PriceViewTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C82FF7881FA88110001455B5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C82FF7911FA88110001455B5 /* PriceViewUITests.swift in Sources */,
+				C88AECA11FB1BC38004AEE39 /* PriceViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		C82FF7831FA88110001455B5 /* PBXTargetDependency */ = {
+		C88AEC9E1FB1BC38004AEE39 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C82FF76C1FA88110001455B5 /* PriceView */;
-			targetProxy = C82FF7821FA88110001455B5 /* PBXContainerItemProxy */;
-		};
-		C82FF78E1FA88110001455B5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C82FF76C1FA88110001455B5 /* PriceView */;
-			targetProxy = C82FF78D1FA88110001455B5 /* PBXContainerItemProxy */;
+			target = C88AEC911FB1BC37004AEE39 /* PriceView */;
+			targetProxy = C88AEC9D1FB1BC38004AEE39 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		C82FF7741FA88110001455B5 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C82FF7751FA88110001455B5 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		C82FF7791FA88110001455B5 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C82FF77A1FA88110001455B5 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
-		C82FF7931FA88110001455B5 /* Debug */ = {
+		C88AECA41FB1BC38004AEE39 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -346,6 +284,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -369,10 +308,12 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		C82FF7941FA88110001455B5 /* Release */ = {
+		C88AECA51FB1BC38004AEE39 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -403,6 +344,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -419,44 +361,60 @@
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		C82FF7961FA88110001455B5 /* Debug */ = {
+		C88AECA71FB1BC38004AEE39 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 4DHLLS39V8;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = PriceView/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = TS.PriceView;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		C82FF7971FA88110001455B5 /* Release */ = {
+		C88AECA81FB1BC38004AEE39 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 4DHLLS39V8;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = PriceView/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = TS.PriceView;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
-		C82FF7991FA88110001455B5 /* Debug */ = {
+		C88AECAA1FB1BC38004AEE39 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4DHLLS39V8;
 				INFOPLIST_FILE = PriceViewTests/Info.plist;
@@ -465,15 +423,13 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PriceView.app/PriceView";
 			};
 			name = Debug;
 		};
-		C82FF79A1FA88110001455B5 /* Release */ = {
+		C88AECAB1FB1BC38004AEE39 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4DHLLS39V8;
 				INFOPLIST_FILE = PriceViewTests/Info.plist;
@@ -482,82 +438,40 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PriceView.app/PriceView";
-			};
-			name = Release;
-		};
-		C82FF79C1FA88110001455B5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4DHLLS39V8;
-				INFOPLIST_FILE = PriceViewUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = TS.PriceViewUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = PriceView;
-			};
-			name = Debug;
-		};
-		C82FF79D1FA88110001455B5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4DHLLS39V8;
-				INFOPLIST_FILE = PriceViewUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = TS.PriceViewUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = PriceView;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C82FF7681FA88110001455B5 /* Build configuration list for PBXProject "PriceView" */ = {
+		C88AEC8C1FB1BC37004AEE39 /* Build configuration list for PBXProject "PriceView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C82FF7931FA88110001455B5 /* Debug */,
-				C82FF7941FA88110001455B5 /* Release */,
+				C88AECA41FB1BC38004AEE39 /* Debug */,
+				C88AECA51FB1BC38004AEE39 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C82FF7951FA88110001455B5 /* Build configuration list for PBXNativeTarget "PriceView" */ = {
+		C88AECA61FB1BC38004AEE39 /* Build configuration list for PBXNativeTarget "PriceView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C82FF7961FA88110001455B5 /* Debug */,
-				C82FF7971FA88110001455B5 /* Release */,
+				C88AECA71FB1BC38004AEE39 /* Debug */,
+				C88AECA81FB1BC38004AEE39 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C82FF7981FA88110001455B5 /* Build configuration list for PBXNativeTarget "PriceViewTests" */ = {
+		C88AECA91FB1BC38004AEE39 /* Build configuration list for PBXNativeTarget "PriceViewTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C82FF7991FA88110001455B5 /* Debug */,
-				C82FF79A1FA88110001455B5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C82FF79B1FA88110001455B5 /* Build configuration list for PBXNativeTarget "PriceViewUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C82FF79C1FA88110001455B5 /* Debug */,
-				C82FF79D1FA88110001455B5 /* Release */,
+				C88AECAA1FB1BC38004AEE39 /* Debug */,
+				C88AECAB1FB1BC38004AEE39 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = C82FF7651FA88110001455B5 /* Project object */;
+	rootObject = C88AEC891FB1BC37004AEE39 /* Project object */;
 }
