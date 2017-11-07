@@ -26,8 +26,9 @@ public final class UIPriceView: UIView {
     
     private lazy var currencyLabel = makeCurrencyLabel()
     private lazy var integerLabel = makeIntegerLabel()
-    private lazy var decimalSeparatorLabel = makeDecimalLabel()
+    private lazy var decimalSeparatorLabel = makeDecimalSeparatorLabel()
     private lazy var decimalLabel = makeDecimalLabel()
+    private let showBordersForDebugOnly = false
     
     private var priceData: PriceData {
         // Inject transformer? cake pattern?
@@ -55,8 +56,10 @@ public final class UIPriceView: UIView {
     
     private func setup() {
         [integerLabel, decimalSeparatorLabel, decimalLabel, currencyLabel].forEach {
-            $0.layer.borderWidth = 1.0
-            $0.layer.borderColor = UIColor.red.cgColor
+            if showBordersForDebugOnly {
+                $0.layer.borderWidth = 1.0
+                $0.layer.borderColor = UIColor.red.cgColor
+            }
             addSubview($0)
         }
         
