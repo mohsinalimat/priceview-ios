@@ -17,19 +17,16 @@ public final class UIPriceView: UIView {
     }
     
     var style: PriceViewStyle = PriceViewStyle(
-        integerTextStyle: TextStyle(size: 64, color: .black, kern: 1.2),
-        decimalTextStyle: TextStyle(size: 36, color: .darkGray),
-        decimalSeparatorTextStyle: TextStyle(size: 32, color: .darkGray),
-        currencyTextStyle: TextStyle(size: 20, color: .black),
-        decimalSeparatorSpacing: (0,0),
-        currencySpacing: 0)
+        integerTextStyle: TextStyle(size: 20, color: .black, kern: 1.2),
+        decimalTextStyle: TextStyle(size: 10, color: .darkGray),
+        decimalSeparatorTextStyle: TextStyle(size: 10, color: .darkGray),
+        currencyTextStyle: TextStyle(size: 12, color: .black) )
     
     private lazy var currencyLabel = makeCurrencyLabel()
     private lazy var integerLabel = makeIntegerLabel()
     private lazy var decimalSeparatorLabel = makeDecimalSeparatorLabel()
     private lazy var decimalLabel = makeDecimalLabel()
-    private let showBordersForDebugOnly = false
-    
+ 
     private var priceData: PriceData {
         // Inject transformer? cake pattern?
         return PriceTransformer().transformedData(price: price, locale: style.locale)
@@ -56,10 +53,6 @@ public final class UIPriceView: UIView {
     
     private func setup() {
         [integerLabel, decimalSeparatorLabel, decimalLabel, currencyLabel].forEach {
-            if showBordersForDebugOnly {
-                $0.layer.borderWidth = 1.0
-                $0.layer.borderColor = UIColor.red.cgColor
-            }
             addSubview($0)
         }
         
@@ -171,6 +164,7 @@ public final class UIPriceView: UIView {
         label.numberOfLines = 1
         label.font = UIFont.boldSystemFont(ofSize: style.size)
         label.textColor = style.color
+        label.minimumScaleFactor = 0.5
         return label
     }
 }
