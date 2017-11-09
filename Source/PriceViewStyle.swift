@@ -29,6 +29,8 @@ public struct PriceViewStyle {
     let decimalSeparatorSpacing: (leading: CGFloat, trailing: CGFloat)
     let currencySpacing: CGFloat
     
+    let numberFraction: Int
+    
     let verticalAlignment: PriceVerticalAlignment
     let textAlignment: NSTextAlignment
     
@@ -48,6 +50,7 @@ public struct PriceViewStyle {
                 currencyTextStyle: TextStyle,
                 decimalSeparatorSpacing: (CGFloat, CGFloat) = (0, 0),
                 currencySpacing: CGFloat = 0,
+                numberFraction: Int = 2,
                 verticalAlignment: PriceVerticalAlignment = .middle,
                 textAlignment: NSTextAlignment = .center,
                 locale: Locale = NSLocale.current
@@ -58,6 +61,7 @@ public struct PriceViewStyle {
         self.currencyTextStyle = currencyTextStyle
         self.decimalSeparatorSpacing = decimalSeparatorSpacing
         self.currencySpacing = currencySpacing
+        self.numberFraction = numberFraction
         self.verticalAlignment = verticalAlignment
         self.textAlignment = textAlignment
         self.locale = locale

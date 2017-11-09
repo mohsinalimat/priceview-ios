@@ -13,6 +13,7 @@ final class MyViewController : UIViewController {
         let decimalTextStyle = TextStyle(size: 10, color: .gray, kern: 0.0, verticalAlignment: .top(2))
         let currencyTextStyle = TextStyle(size: 12, color: .black, kern: 0.0, verticalAlignment: .middle(0))
         let separatorTextStyle = TextStyle(size: 10, color: .gray, kern: 0.0, verticalAlignment: .top(2))
+    let locale = Locale(identifier: "fr_FR")
         
         let style = PriceViewStyle(integerTextStyle: integerTextStyle,
                                    decimalTextStyle: decimalTextStyle,
@@ -20,7 +21,8 @@ final class MyViewController : UIViewController {
                                    currencyTextStyle: currencyTextStyle,
                                    decimalSeparatorSpacing: (0,0),
                                    currencySpacing: 10,
-                                   verticalAlignment: .middle)
+                                   verticalAlignment: .middle,
+                                    locale: locale)
         let priceView = UIPriceView(style: style)
         view.addSubview(priceView)
 
@@ -32,7 +34,7 @@ final class MyViewController : UIViewController {
 //        priceView.heightAnchor.constraint(equalToConstant: 230).isActive = true
         priceView.layoutMargins = .init(top: 0, left: 10, bottom: 0, right: 10)
         
-        priceView.price = 12.84
+        priceView.price = 16516512.00955
         
         self.view = view
     }

@@ -27,10 +27,9 @@ public final class UIPriceView: UIView {
     private lazy var integerLabel = makeIntegerLabel()
     private lazy var decimalSeparatorLabel = makeDecimalSeparatorLabel()
     private lazy var decimalLabel = makeDecimalLabel()
- 
-    private var priceData: PriceData {
-        // Inject transformer? cake pattern?
-        return PriceTransformer().transformedData(price: price, locale: style.locale)
+    
+    private var formatter: PriceFormatter {
+        return PriceFormatter(with: style)
     }
     
     // MARK: - Initializers
@@ -63,18 +62,19 @@ public final class UIPriceView: UIView {
     }
     
     private func bind() {
-        // computed property didSet?
+        decimalSeparatorLabel.text = formatter.decimalSeparator
+        currencyLabel.text = formatter.currencySymbol
         
-        let formatter = PriceFormatter()
-        
-        decimalSeparatorLabel.text = "\(priceData.decimalSeparator)"
-        currencyLabel.text = priceData.currencySymbol
+        let formattedInteger = formatter.formattedInteger(price: price)
+        let formattedDecimal = formatter.formattedDecimal(price: price)
         
         //apply kerning
-        integerLabel.attributedText = NSAttributedString(string: formatter.string(from: NSNumber(value: priceData.integerPart))!, attributes: [.kern: style.integerTextStyle.kern])
+        integerLabel.attributedText = NSAttributedString(string: formattedInteger, attributes: [.kern: style.integerTextStyle.kern])
         
-        decimalLabel.attributedText = NSAttributedString(string: "\(priceData.decimalPart)", attributes: [.kern: style.decimalTextStyle.kern])
+        decimalLabel.attributedText = NSAttributedString(string: formattedDecimal, attributes: [.kern: style.decimalTextStyle.kern])
     }
+    
+    // MARK: - Constraints
     
     private func setUpConstraints(between labelA: UILabel, and labelB: UILabel, with labelATextStyle: TextStyle) {
         switch labelATextStyle.verticalAlignment {

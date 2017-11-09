@@ -8,14 +8,57 @@
 
 import Foundation
 
-final class PriceFormatter: NumberFormatter {
-    override init() {
-        super.init()
-        groupingSeparator = ","
-        numberStyle = .decimal
+final class PriceFormatter {
+    
+    private let style: PriceViewStyle
+    
+    init(with style: PriceViewStyle) {
+        self.style = style
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("--")
+    var currencySymbol: String {
+        return style.locale.currencySymbol ?? ""
+    }
+    
+    var decimalSeparator: String {
+        return style.locale.decimalSeparator ?? ""
+    }
+    
+    func formattedInteger(price: Double) -> String {
+        let formatter = NumberFormatter()
+        formatter.locale = style.locale
+        formatter.groupingSeparator = style.locale.groupingSeparator
+        if style.numberFraction < 2 {
+            formatter.minimumFractionDigits = style.numberFraction
+        } else {
+            formatter.numberStyle = .decimal
+        }
+
+        let formattedPrice = formatter.string(from: NSNumber(value: price)) ?? "\(price)"
+        let splittedPrice = formattedPrice.split(separator: Character(decimalSeparator))
+        
+        return String(splittedPrice[0])
+    }
+    
+    func formattedDecimal(price: Double) -> String {
+        let formatter = NumberFormatter()
+        formatter.locale = style.locale
+        formatter.minimumFractionDigits = style.numberFraction
+        let formattedPrice = formatter.string(from: NSNumber(value: price)) ?? "\(price)"
+        
+        if formattedPrice.contains(Character(decimalSeparator)) {
+            let splittedPrice = formattedPrice.split(separator: Character(decimalSeparator), maxSplits: 2)
+            if let last = splittedPrice.last {
+                return String(last)
+            } else {
+                return "oops"
+            }
+        } else {
+            var res = ""
+            for _ in 0..<style.numberFraction {
+                res += "0"
+            }
+            return res
+        }
     }
 }

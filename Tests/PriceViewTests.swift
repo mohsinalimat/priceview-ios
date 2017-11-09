@@ -33,7 +33,7 @@ class PriceViewTests: FBSnapshotTestCase {
     
     override func setUp() {
         super.setUp()
-        recordMode = false
+        recordMode = true
     }
     
     // MARK: - Tests
