@@ -10,6 +10,12 @@ import Foundation
 
 public struct PriceViewStyle {
     
+    public enum PriceVerticalAlignment {
+        case top
+        case bottom
+        case middle
+    }
+    
     enum SymbolPosition {
         case beforeCurrency
         case afterCurrency
@@ -23,7 +29,8 @@ public struct PriceViewStyle {
     let decimalSeparatorSpacing: (leading: CGFloat, trailing: CGFloat)
     let currencySpacing: CGFloat
     
-    private(set) var alignment: TextVerticalAlignment?
+    let verticalAlignment: PriceVerticalAlignment
+    let textAlignment: NSTextAlignment
     
     let locale: Locale
     
@@ -41,7 +48,8 @@ public struct PriceViewStyle {
                 currencyTextStyle: TextStyle,
                 decimalSeparatorSpacing: (CGFloat, CGFloat) = (0, 0),
                 currencySpacing: CGFloat = 0,
-                alignment: TextVerticalAlignment = .middle(0),
+                verticalAlignment: PriceVerticalAlignment = .middle,
+                textAlignment: NSTextAlignment = .center,
                 locale: Locale = NSLocale.current
     ) {
         self.integerTextStyle = integerTextStyle
@@ -50,7 +58,8 @@ public struct PriceViewStyle {
         self.currencyTextStyle = currencyTextStyle
         self.decimalSeparatorSpacing = decimalSeparatorSpacing
         self.currencySpacing = currencySpacing
+        self.verticalAlignment = verticalAlignment
+        self.textAlignment = textAlignment
         self.locale = locale
-        self.alignment = alignment
     }
 }

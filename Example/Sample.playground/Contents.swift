@@ -20,7 +20,7 @@ final class MyViewController : UIViewController {
                                    currencyTextStyle: currencyTextStyle,
                                    decimalSeparatorSpacing: (0,0),
                                    currencySpacing: 10,
-                                   alignment: .middle(0))
+                                   verticalAlignment: .middle)
         let priceView = UIPriceView(style: style)
         view.addSubview(priceView)
 
@@ -31,8 +31,6 @@ final class MyViewController : UIViewController {
         priceView.centerYAnchor.constraint(equalTo: margin.centerYAnchor).isActive = true
 //        priceView.heightAnchor.constraint(equalToConstant: 230).isActive = true
         priceView.layoutMargins = .init(top: 0, left: 10, bottom: 0, right: 10)
-        priceView.layer.borderColor = UIColor.green.cgColor
-        priceView.layer.borderWidth = 1.0
         
         priceView.price = 12.84
         

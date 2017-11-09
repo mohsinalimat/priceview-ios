@@ -40,9 +40,7 @@ class PriceViewTests: FBSnapshotTestCase {
     
     func testDefaultStyle() {
         for value in testValues {
-            let identifier = "WithValue_\(value)"
-            let sut = buildAutoLayoutView(with: value)
-            FBSnapshotVerifyView(sut, identifier: identifier)
+            verifySnap(with: value)
         }
     }
     
@@ -71,9 +69,7 @@ class PriceViewTests: FBSnapshotTestCase {
         )
         
         for value in testValues {
-            let identifier = "\(value)"
-            let sut = buildAutoLayoutView(with: value, style: style)
-            FBSnapshotVerifyView(sut, identifier: identifier)
+            verifySnap(with: value, style: style)
         }
     }
     
@@ -102,9 +98,7 @@ class PriceViewTests: FBSnapshotTestCase {
         )
         
         for value in testValues {
-            let identifier = "\(value)"
-            let sut = buildAutoLayoutView(with: value, style: style)
-            FBSnapshotVerifyView(sut, identifier: identifier)
+            verifySnap(with: value, style: style)
         }
     }
     
@@ -133,9 +127,7 @@ class PriceViewTests: FBSnapshotTestCase {
         )
         
         for value in testValues {
-            let identifier = "\(value)"
-            let sut = buildAutoLayoutView(with: value, style: style)
-            FBSnapshotVerifyView(sut, identifier: identifier)
+            verifySnap(with: value, style: style)
         }
     }
     
@@ -153,9 +145,7 @@ class PriceViewTests: FBSnapshotTestCase {
         )
         
         for value in testValues {
-            let identifier = "\(value)"
-            let sut = buildAutoLayoutView(with: value, style: style)
-            FBSnapshotVerifyView(sut, identifier: identifier)
+            verifySnap(with: value, style: style)
         }
     }
     
@@ -175,9 +165,7 @@ class PriceViewTests: FBSnapshotTestCase {
         )
         
         for value in testValues {
-            let identifier = "\(value)"
-            let sut = buildAutoLayoutView(with: value, style: style)
-            FBSnapshotVerifyView(sut, identifier: identifier)
+            verifySnap(with: value, style: style)
         }
     }
     
@@ -197,9 +185,7 @@ class PriceViewTests: FBSnapshotTestCase {
         )
         
         for value in testValues {
-            let identifier = "\(value)"
-            let sut = buildAutoLayoutView(with: value, style: style)
-            FBSnapshotVerifyView(sut, identifier: identifier)
+            verifySnap(with: value, style: style)
         }
     }
     
@@ -219,9 +205,7 @@ class PriceViewTests: FBSnapshotTestCase {
         )
         
         for value in testValues {
-            let identifier = "\(value)"
-            let sut = buildAutoLayoutView(with: value, style: style)
-            FBSnapshotVerifyView(sut, identifier: identifier)
+            verifySnap(with: value, style: style)
         }
     }
     
@@ -241,9 +225,7 @@ class PriceViewTests: FBSnapshotTestCase {
         )
         
         for value in testValues {
-            let identifier = "\(value)"
-            let sut = buildAutoLayoutView(with: value, style: style)
-            FBSnapshotVerifyView(sut, identifier: identifier)
+            verifySnap(with: value, style: style)
         }
     }
     
@@ -263,40 +245,150 @@ class PriceViewTests: FBSnapshotTestCase {
         )
         
         for value in testValues {
-            let identifier = "\(value)"
-            let sut = buildAutoLayoutView(with: value, style: style)
-            FBSnapshotVerifyView(sut, identifier: identifier)
+            verifySnap(with: value, style: style)
+        }
+    }
+    
+    func testPriceTopAlignment() {
+        let secondaryTextStyle = TextStyle(size: 14,
+                                           color: .darkGray,
+                                           verticalAlignment: .top(0))
+        let style = PriceViewStyle(
+            integerTextStyle:
+            TextStyle(size: 20,
+                      color: .black,
+                      verticalAlignment: .top(0)),
+            decimalTextStyle: secondaryTextStyle,
+            decimalSeparatorTextStyle: secondaryTextStyle,
+            currencyTextStyle: secondaryTextStyle,
+            currencySpacing: 3,
+            verticalAlignment: .top
+        )
+        
+        for value in testValues {
+            verifySnap(with: value, style: style, center: false)
+        }
+    }
+    
+    func testPriceBottomLeftAlignment() {
+        let secondaryTextStyle = TextStyle(size: 14,
+                                           color: .darkGray,
+                                           verticalAlignment: .middle(0))
+        let style = PriceViewStyle(
+            integerTextStyle:
+            TextStyle(size: 20,
+                      color: .black,
+                      verticalAlignment: .top(0)),
+            decimalTextStyle: secondaryTextStyle,
+            decimalSeparatorTextStyle: secondaryTextStyle,
+            currencyTextStyle: secondaryTextStyle,
+            currencySpacing: 3,
+            verticalAlignment: .bottom,
+            textAlignment: .left
+        )
+        
+        for value in testValues {
+            verifySnap(with: value, style: style, center: false)
+        }
+    }
+    
+    func testPriceMiddleRightAlignment() {
+        let secondaryTextStyle = TextStyle(size: 14,
+                                           color: .darkGray,
+                                           verticalAlignment: .baseline(0))
+        let style = PriceViewStyle(
+            integerTextStyle:
+            TextStyle(size: 20,
+                      color: .black,
+                      verticalAlignment: .top(0)),
+            decimalTextStyle: secondaryTextStyle,
+            decimalSeparatorTextStyle: secondaryTextStyle,
+            currencyTextStyle: secondaryTextStyle,
+            currencySpacing: 3,
+            verticalAlignment: .middle,
+            textAlignment: .right
+        )
+        
+        for value in testValues {
+            verifySnap(with: value, style: style, center: false)
+        }
+    }
+
+    func testPriceMiddleAlignment() {
+        let secondaryTextStyle = TextStyle(size: 14,
+                                           color: .darkGray,
+                                           verticalAlignment: .baseline(0))
+        let style = PriceViewStyle(
+            integerTextStyle:
+            TextStyle(size: 20,
+                      color: .black,
+                      verticalAlignment: .top(0)),
+            decimalTextStyle: secondaryTextStyle,
+            decimalSeparatorTextStyle: secondaryTextStyle,
+            currencyTextStyle: secondaryTextStyle,
+            currencySpacing: 3,
+            verticalAlignment: .middle
+        )
+        
+        for value in testValues {
+            verifySnap(with: value, style: style, center: false)
+        }
+    }
+
+    func testPriceTopRightAlignment() {
+        let secondaryTextStyle = TextStyle(size: 14,
+                                           color: .darkGray,
+                                           verticalAlignment: .baseline(0))
+        let style = PriceViewStyle(
+            integerTextStyle:
+            TextStyle(size: 20,
+                      color: .black,
+                      verticalAlignment: .top(0)),
+            decimalTextStyle: secondaryTextStyle,
+            decimalSeparatorTextStyle: secondaryTextStyle,
+            currencyTextStyle: secondaryTextStyle,
+            currencySpacing: 3,
+            verticalAlignment: .top,
+            textAlignment: .right
+            )
+        
+        for value in testValues {
+            verifySnap(with: value, style: style, center: false)
         }
     }
     
     // Symbol position with given locale
     // Thousand separator given locale
-    // Text vertical alignement???
-    // Text horizontal alignment??? -> Play with constraint constant.
     
     // MARK: - Private
     
-    private func buildAutoLayoutView(with price: Double, style: PriceViewStyle? = nil) -> UIView {
-        let rect = CGRect(origin: .zero, size: CGSize(width: 300, height: 150))
-        let view = UIView(frame: rect)
-        var priceView = UIPriceView()
-        
-        if let style = style {
-            priceView = UIPriceView(style: style)
-        }
-        view.addSubview(priceView)
+    private func verifySnap(with price: Double,
+                           style: PriceViewStyle = UIPriceView().style,
+                           size: CGSize = CGSize(width: 200, height: 120),
+                           center: Bool = true) {
+        let view = UIView()
+        let testView = UIView(frame: CGRect(origin: .zero, size: size))
+        let priceView = UIPriceView(style: style)
+        view.addSubview(testView)
+        testView.addSubview(priceView)
         priceView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            priceView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            priceView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-//            priceView.topAnchor.constraint(equalTo: view.topAnchor),
-//            priceView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-//            priceView.leftAnchor.constraint(equalTo: view.leftAnchor),
-//            priceView.rightAnchor.constraint(equalTo: view.rightAnchor)
+        
+        if center {
+            NSLayoutConstraint.activate([
+                priceView.centerXAnchor.constraint(equalTo: testView.centerXAnchor),
+                priceView.centerYAnchor.constraint(equalTo: testView.centerYAnchor)
             ])
+        } else {
+            NSLayoutConstraint.activate([
+                priceView.topAnchor.constraint(equalTo: testView.topAnchor),
+                priceView.leftAnchor.constraint(equalTo: testView.leftAnchor),
+                priceView.rightAnchor.constraint(equalTo: testView.rightAnchor),
+                priceView.bottomAnchor.constraint(equalTo: testView.bottomAnchor)
+            ])
+        }
         
         priceView.price = price
         
-        return view
+        FBSnapshotVerifyView(testView, identifier: "\(price)")
     }
 }
