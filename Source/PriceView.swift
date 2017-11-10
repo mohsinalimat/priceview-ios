@@ -16,7 +16,7 @@ public final class UIPriceView: UIView {
         }
     }
     
-    var style: PriceViewStyle = PriceViewStyle(
+    var style = PriceViewStyle(
         integerTextStyle: TextStyle(size: 20, color: .black, kern: 1.2),
         decimalTextStyle: TextStyle(size: 10, color: .darkGray),
         decimalSeparatorTextStyle: TextStyle(size: 10, color: .darkGray),
@@ -69,9 +69,9 @@ public final class UIPriceView: UIView {
         let formattedDecimal = formatter.formattedDecimal(price: price)
         
         //apply kerning
-        integerLabel.attributedText = NSAttributedString(string: formattedInteger, attributes: [.kern: style.integerTextStyle.kern])
+        integerLabel.attributedText = NSAttributedString(string: formattedInteger, attributes: [.kern: style.textStyles.integer.kern])
         
-        decimalLabel.attributedText = NSAttributedString(string: formattedDecimal, attributes: [.kern: style.decimalTextStyle.kern])
+        decimalLabel.attributedText = NSAttributedString(string: formattedDecimal, attributes: [.kern: style.textStyles.decimal.kern])
     }
     
     // MARK: - Constraints
@@ -89,7 +89,7 @@ public final class UIPriceView: UIView {
         }
     }
 
-    private func setUpVerticalConstraints(for view: UIView, with layoutGuide: UILayoutGuide, and alignment: PriceViewStyle.PriceVerticalAlignment) {
+    private func setUpVerticalConstraints(for view: UIView, with layoutGuide: UILayoutGuide, and alignment: PriceViewStyle.VerticalAlignment) {
         let top = view.topAnchor.constraint(equalTo: layoutGuide.topAnchor)
         let bottom = view.bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor)
         let centerY = view.centerYAnchor.constraint(equalTo: layoutGuide.centerYAnchor)
@@ -179,27 +179,27 @@ public final class UIPriceView: UIView {
         decimalLabel.leadingAnchor.constraint(equalTo: decimalSeparatorLabel.trailingAnchor, constant: style.decimalSeparatorSpacing.trailing).isActive = true
         
         // V
-        setUpConstraints(between: currencyLabel, and: integerLabel, with: style.currencyTextStyle)
-        setUpConstraints(between: decimalSeparatorLabel, and: integerLabel, with: style.decimalSeparatorTextStyle)
-        setUpConstraints(between: decimalLabel, and: integerLabel, with: style.decimalTextStyle)
+        setUpConstraints(between: currencyLabel, and: integerLabel, with: style.textStyles.currency)
+        setUpConstraints(between: decimalSeparatorLabel, and: integerLabel, with: style.textStyles.decimalSeparator)
+        setUpConstraints(between: decimalLabel, and: integerLabel, with: style.textStyles.decimal)
     }
     
     // MARK: - UI
     
     private func makeIntegerLabel() -> UILabel {
-        return makeLabel(with: style.integerTextStyle)
+        return makeLabel(with: style.textStyles.integer)
     }
     
     private func makeDecimalLabel() -> UILabel {
-        return makeLabel(with: style.decimalTextStyle)
+        return makeLabel(with: style.textStyles.decimal)
     }
     
     private func makeDecimalSeparatorLabel() -> UILabel {
-        return makeLabel(with: style.decimalSeparatorTextStyle)
+        return makeLabel(with: style.textStyles.decimalSeparator)
     }
     
     private func makeCurrencyLabel() -> UILabel {
-        return makeLabel(with: style.currencyTextStyle)
+        return makeLabel(with: style.textStyles.currency)
     }
     
     private func makeLabel(with style: TextStyle) -> UILabel {
