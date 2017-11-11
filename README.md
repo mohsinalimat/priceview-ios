@@ -29,7 +29,7 @@ I plan to make PriceView available on Carthage soon as well.
 ### Quick start
 
 #### Default
-```
+```swift
 import PriceView
 
 final class ViewController: UIViewController {
@@ -73,7 +73,7 @@ This is the list of things available for customization:
 ##### Examples
 
 *Style with variadic text styles*
-```
+```swift
 let style = Style(
             defaultTextStyle: TextStyle(size: 15, color: .gray, verticalAlignment: .bottom(0)),
             textStyles: .integer(TextStyle(size: 32, color: .black, verticalAlignment: .bottom(0)))
@@ -81,7 +81,7 @@ let style = Style(
 ```
 
 *Style*
-```
+```swift
 let style = Style(
             integerTextStyle: 
             TextStyle(size: 32, color: .black, verticalAlignment: .bottom(0)),
