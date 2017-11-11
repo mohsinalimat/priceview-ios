@@ -91,7 +91,7 @@ public final class UIPriceView: UIView {
 
     private func setUpVerticalConstraints(for view: UIView,
                                           with layoutGuide: UILayoutGuide,
-                                          and alignment: Style.VerticalAlignment) {
+                                          and alignment: Layout.VerticalAlignment) {
         let top = view.topAnchor.constraint(equalTo: layoutGuide.topAnchor)
         let bottom = view.bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor)
         let centerY = view.centerYAnchor.constraint(equalTo: layoutGuide.centerYAnchor)
@@ -159,8 +159,8 @@ public final class UIPriceView: UIView {
         
         let viewMargins = layoutMarginsGuide
         
-        setUpVerticalConstraints(for: containerView, with: viewMargins, and: style.verticalAlignment)
-        setUpHorizontalConstraints(for: containerView, with: viewMargins, and: style.textAlignment)
+        setUpVerticalConstraints(for: containerView, with: viewMargins, and: style.layout.verticalAlignment)
+        setUpHorizontalConstraints(for: containerView, with: viewMargins, and: style.layout.horizontalAlignment)
         
         let currencyBefore = style.symbolPosition == .beforeCurrency
         let currencyAfter = !currencyBefore
@@ -170,17 +170,17 @@ public final class UIPriceView: UIView {
         
         // before
         currencyLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = currencyBefore
-        currencyLabel.trailingAnchor.constraint(equalTo: integerLabel.leadingAnchor, constant: -style.currencySpacing).isActive = currencyBefore
+        currencyLabel.trailingAnchor.constraint(equalTo: integerLabel.leadingAnchor, constant: -style.layout.currencySpacing).isActive = currencyBefore
         decimalLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = currencyBefore
         
         //after
         currencyLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = currencyAfter
-        currencyLabel.leadingAnchor.constraint(equalTo: decimalLabel.trailingAnchor, constant: style.currencySpacing).isActive = currencyAfter
+        currencyLabel.leadingAnchor.constraint(equalTo: decimalLabel.trailingAnchor, constant: style.layout.currencySpacing).isActive = currencyAfter
         integerLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = currencyAfter
         
-        decimalSeparatorLabel.leadingAnchor.constraint(equalTo: integerLabel.trailingAnchor, constant: style.decimalSeparatorSpacing.leading).isActive = true
+        decimalSeparatorLabel.leadingAnchor.constraint(equalTo: integerLabel.trailingAnchor, constant: style.layout.decimalSeparatorSpacing.leading).isActive = true
         
-        decimalLabel.leadingAnchor.constraint(equalTo: decimalSeparatorLabel.trailingAnchor, constant: style.decimalSeparatorSpacing.trailing).isActive = true
+        decimalLabel.leadingAnchor.constraint(equalTo: decimalSeparatorLabel.trailingAnchor, constant: style.layout.decimalSeparatorSpacing.trailing).isActive = true
         
         // V
         setUpConstraints(between: currencyLabel, and: integerLabel, with: style.textStyles.currency)

@@ -84,46 +84,46 @@ final class FormatterTests: XCTestCase {
     }
     
     func testWithManyDecimalsWithCustomFractionNumber() {
-        test(price: 01.0000009, expectedIntegerPart: "1", expectedDecimalPart: "0000", fractionNumber: 4)
+        test(price: 01.0000009, expectedIntegerPart: "1", expectedDecimalPart: "0000", fractionDigits: 4)
     }
     
     func testRoundUpWithManyDecimalsWithCustomFractionNumber() {
-        test(price: 01.00000090123, expectedIntegerPart: "1", expectedDecimalPart: "000001", fractionNumber: 6)
+        test(price: 01.00000090123, expectedIntegerPart: "1", expectedDecimalPart: "000001", fractionDigits: 6)
     }
 
     func testRoundUp99centsWithoutDecimal() {
-        test(price: 16.99, expectedIntegerPart: "17", expectedDecimalPart: "", fractionNumber: 0)
+        test(price: 16.99, expectedIntegerPart: "17", expectedDecimalPart: "", fractionDigits: 0)
     }
     
     func testRoundUp99centsWithOneDecimal() {
-        test(price: 16.99, expectedIntegerPart: "17", expectedDecimalPart: "0", fractionNumber: 1)
+        test(price: 16.99, expectedIntegerPart: "17", expectedDecimalPart: "0", fractionDigits: 1)
     }
 
     func testRoundUp99centsWithTwoDecimals() {
-        test(price: 16.99, expectedIntegerPart: "16", expectedDecimalPart: "99", fractionNumber: 2)
+        test(price: 16.99, expectedIntegerPart: "16", expectedDecimalPart: "99", fractionDigits: 2)
     }
     
     func testRoundUp99centsWithThreeDecimals() {
-        test(price: 16.999, expectedIntegerPart: "16", expectedDecimalPart: "999", fractionNumber: 3)
+        test(price: 16.999, expectedIntegerPart: "16", expectedDecimalPart: "999", fractionDigits: 3)
     }
     
     func testNoRoundUp49centsWithoutDecimal() {
-        test(price: 16.49, expectedIntegerPart: "16", expectedDecimalPart: "", fractionNumber: 0)
+        test(price: 16.49, expectedIntegerPart: "16", expectedDecimalPart: "", fractionDigits: 0)
     }
     
     func testNoRoundUp49centsWithOneDecimal() {
-        test(price: 16.49, expectedIntegerPart: "16", expectedDecimalPart: "5", fractionNumber: 1)
+        test(price: 16.49, expectedIntegerPart: "16", expectedDecimalPart: "5", fractionDigits: 1)
     }
     
     func test(price: Double,
               expectedIntegerPart: String,
               expectedDecimalPart: String,
               localeIdentifier: String = "en_US",
-              fractionNumber: Int? = nil,
+              fractionDigits: Int? = nil,
               file: StaticString = #file,
               line: UInt = #line) {
         let locale = Locale(identifier: localeIdentifier)
-        let style = makeStyle(with: locale, fractionNumber: fractionNumber)
+        let style = makeStyle(with: locale, fractionDigits: fractionDigits)
         let formatter = Formatter(with: style)
         let formattedInt = formatter.formattedInteger(price: price)
         let formattedDecimal = formatter.formattedDecimal(price: price)
@@ -132,12 +132,12 @@ final class FormatterTests: XCTestCase {
         XCTAssertEqual(formattedDecimal, expectedDecimalPart, "decimal part", file: file, line: line)
     }
     
-    private func makeStyle(with locale: Locale, fractionNumber: Int? = nil) -> Style {
+    private func makeStyle(with locale: Locale, fractionDigits: Int? = nil) -> Style {
         let aTextStyle = TextStyle(size: 12, color: .black)
-        if let fractionNumber = fractionNumber {
-            return Style(defaultTextStyle: aTextStyle, numberFraction: fractionNumber, locale: locale)
+        if let fractionDigits = fractionDigits {
+            return Style(defaultTextStyle: aTextStyle, options: Options(locale: locale, fractionDigits: fractionDigits))
         } else {
-            return Style(defaultTextStyle: aTextStyle, locale: locale)
+            return Style(defaultTextStyle: aTextStyle, options: Options(locale: locale))
         }
     }
 }

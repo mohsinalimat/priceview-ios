@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		B0FACE671197A6BAD12545C8 /* Pods_PriceViewTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3014AFABDAFA8E1AD5361F4 /* Pods_PriceViewTests.framework */; };
+		C8101A311FB74F74001EDFE7 /* TextStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8101A301FB74F74001EDFE7 /* TextStyles.swift */; };
+		C8101A331FB750D9001EDFE7 /* TextStyleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8101A321FB750D9001EDFE7 /* TextStyleType.swift */; };
+		C856147A1FB74EC100A8C110 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85614791FB74EC100A8C110 /* Layout.swift */; };
+		C856147C1FB74F2F00A8C110 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = C856147B1FB74F2F00A8C110 /* Options.swift */; };
 		C8730D7F1FB4B6940071AA99 /* FormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8730D7E1FB4B6940071AA99 /* FormatterTests.swift */; };
 		C88AEC9C1FB1BC38004AEE39 /* PriceView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C88AEC921FB1BC38004AEE39 /* PriceView.framework */; };
 		C88AECA11FB1BC38004AEE39 /* PriceViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88AECA01FB1BC38004AEE39 /* PriceViewTests.swift */; };
@@ -35,7 +39,11 @@
 		4CD61F3C004078E7D27ED0D7 /* Pods_PriceView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PriceView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F61870C85893A2BC697AD80 /* Pods-PriceViewTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PriceViewTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PriceViewTests/Pods-PriceViewTests.release.xcconfig"; sourceTree = "<group>"; };
 		818E62E31927C4E999A4FFB9 /* Pods-PriceView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PriceView.release.xcconfig"; path = "Pods/Target Support Files/Pods-PriceView/Pods-PriceView.release.xcconfig"; sourceTree = "<group>"; };
+		C8101A301FB74F74001EDFE7 /* TextStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyles.swift; sourceTree = "<group>"; };
+		C8101A321FB750D9001EDFE7 /* TextStyleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyleType.swift; sourceTree = "<group>"; };
 		C81680721FB341F200C8FDEC /* Sample.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = Sample.playground; path = Example/Sample.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		C85614791FB74EC100A8C110 /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
+		C856147B1FB74F2F00A8C110 /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		C8730D7E1FB4B6940071AA99 /* FormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatterTests.swift; sourceTree = "<group>"; };
 		C88AEC921FB1BC38004AEE39 /* PriceView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PriceView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C88AEC951FB1BC38004AEE39 /* PriceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceView.h; sourceTree = "<group>"; };
@@ -82,6 +90,44 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		C8101A341FB7519F001EDFE7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C85614791FB74EC100A8C110 /* Layout.swift */,
+				C856147B1FB74F2F00A8C110 /* Options.swift */,
+				C88AECAE1FB1BC5E004AEE39 /* Style.swift */,
+				C88AECB61FB1BCE7004AEE39 /* TextStyle.swift */,
+				C8101A321FB750D9001EDFE7 /* TextStyleType.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C8101A351FB751AA001EDFE7 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				C88AECAC1FB1BC4B004AEE39 /* PriceView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		C8101A361FB751D3001EDFE7 /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				C88AECB41FB1BCBD004AEE39 /* Formatter.swift */,
+				C8101A301FB74F74001EDFE7 /* TextStyles.swift */,
+			);
+			path = Internal;
+			sourceTree = "<group>";
+		};
+		C8101A371FB751FC001EDFE7 /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				C8101A341FB7519F001EDFE7 /* Models */,
+				C8101A351FB751AA001EDFE7 /* UI */,
+			);
+			path = Public;
+			sourceTree = "<group>";
+		};
 		C88AEC881FB1BC37004AEE39 = {
 			isa = PBXGroup;
 			children = (
@@ -108,10 +154,8 @@
 			children = (
 				C88AEC951FB1BC38004AEE39 /* PriceView.h */,
 				C88AEC961FB1BC38004AEE39 /* Info.plist */,
-				C88AECAC1FB1BC4B004AEE39 /* PriceView.swift */,
-				C88AECAE1FB1BC5E004AEE39 /* Style.swift */,
-				C88AECB41FB1BCBD004AEE39 /* Formatter.swift */,
-				C88AECB61FB1BCE7004AEE39 /* TextStyle.swift */,
+				C8101A371FB751FC001EDFE7 /* Public */,
+				C8101A361FB751D3001EDFE7 /* Internal */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -340,7 +384,11 @@
 			files = (
 				C88AECB71FB1BCE7004AEE39 /* TextStyle.swift in Sources */,
 				C88AECAF1FB1BC5E004AEE39 /* Style.swift in Sources */,
+				C856147A1FB74EC100A8C110 /* Layout.swift in Sources */,
+				C8101A311FB74F74001EDFE7 /* TextStyles.swift in Sources */,
 				C88AECB51FB1BCBD004AEE39 /* Formatter.swift in Sources */,
+				C856147C1FB74F2F00A8C110 /* Options.swift in Sources */,
+				C8101A331FB750D9001EDFE7 /* TextStyleType.swift in Sources */,
 				C88AECAD1FB1BC4B004AEE39 /* PriceView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

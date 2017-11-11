@@ -17,19 +17,19 @@ final class Formatter {
     }
     
     var currencySymbol: String {
-        return style.locale.currencySymbol ?? ""
+        return style.options.locale.currencySymbol ?? ""
     }
     
     var decimalSeparator: String {
-        return style.locale.decimalSeparator ?? ""
+        return style.options.locale.decimalSeparator ?? ""
     }
     
     func formattedInteger(price: Double) -> String {
         let formatter = NumberFormatter()
-        formatter.locale = style.locale
-        formatter.groupingSeparator = style.locale.groupingSeparator
-        if style.numberFraction < 2 {
-            formatter.minimumFractionDigits = style.numberFraction
+        formatter.locale = style.options.locale
+        formatter.groupingSeparator = style.options.locale.groupingSeparator
+        if style.options.fractionDigits < 2 {
+            formatter.minimumFractionDigits = style.options.fractionDigits
         } else {
             formatter.numberStyle = .decimal
         }
@@ -42,8 +42,8 @@ final class Formatter {
     
     func formattedDecimal(price: Double) -> String {
         let formatter = NumberFormatter()
-        formatter.locale = style.locale
-        formatter.minimumFractionDigits = style.numberFraction
+        formatter.locale = style.options.locale
+        formatter.minimumFractionDigits = style.options.fractionDigits
         let formattedPrice = formatter.string(from: NSNumber(value: price)) ?? "\(price)"
         
         if formattedPrice.contains(Character(decimalSeparator)) {
@@ -55,7 +55,7 @@ final class Formatter {
             }
         } else {
             var res = ""
-            for _ in 0..<style.numberFraction {
+            for _ in 0..<style.options.fractionDigits {
                 res += "0"
             }
             return res

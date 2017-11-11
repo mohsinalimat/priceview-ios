@@ -167,7 +167,7 @@ class PriceViewTests: FBSnapshotTestCase {
     func testSeparatorSpacing() {
         let style = Style(
             defaultTextStyle: TextStyle(size: 14, color: .darkGray, verticalAlignment: .baseline(0)),
-            decimalSeparatorSpacing: (12, 3),
+            layout: Layout(decimalSeparatorSpacing: (leading: 12, trailing: 3)),
             textStyles: .integer(TextStyle(size: 20, color: .black, verticalAlignment: .baseline(0)))
         )
 
@@ -179,7 +179,7 @@ class PriceViewTests: FBSnapshotTestCase {
     func testSeparatorNegativeSpacing() {
         let style = Style(
             defaultTextStyle: TextStyle(size: 14, color: .darkGray, verticalAlignment: .baseline(0)),
-            decimalSeparatorSpacing: (2, -1),
+            layout: Layout(decimalSeparatorSpacing: (leading: 2, trailing: -1)),
             textStyles: .integer(TextStyle(size: 20, color: .black, verticalAlignment: .baseline(0)))
         )
         for value in testValues {
@@ -190,7 +190,7 @@ class PriceViewTests: FBSnapshotTestCase {
     func testCurrencySpacing() {
         let style = Style(
             defaultTextStyle: TextStyle(size: 14, color: .darkGray, verticalAlignment: .middle(0)),
-            currencySpacing: 6,
+            layout: Layout(currencySpacing: 6),
             textStyles: .integer(TextStyle(size: 20, color: .black, verticalAlignment: .middle(0)))
         )
         for value in testValues {
@@ -201,8 +201,7 @@ class PriceViewTests: FBSnapshotTestCase {
     func testPriceTopAlignment() {
         let style = Style(
             defaultTextStyle: TextStyle(size: 14, color: .darkGray, verticalAlignment: .top(0)),
-            currencySpacing: 3,
-            verticalAlignment: .top,
+            layout: Layout(verticalAlignment: .top, currencySpacing: 3),
             textStyles: .integer(TextStyle(size: 20, color: .black, verticalAlignment: .top(0)))
         )
         for value in testValues {
@@ -213,9 +212,7 @@ class PriceViewTests: FBSnapshotTestCase {
     func testPriceBottomLeftAlignment() {
         let style = Style(
             defaultTextStyle: TextStyle(size: 14, color: .darkGray, verticalAlignment: .middle(0)),
-            currencySpacing: 3,
-            verticalAlignment: .bottom,
-            textAlignment: .left,
+            layout: Layout(verticalAlignment: .bottom, horizontalAlignment: .left, currencySpacing: 3),
             textStyles:
             .integer(TextStyle(size: 20, color: .black, verticalAlignment: .top(0)))
         )
@@ -227,9 +224,7 @@ class PriceViewTests: FBSnapshotTestCase {
     func testPriceMiddleRightAlignment() {
         let style = Style(
             defaultTextStyle: TextStyle(size: 14, color: .darkGray, verticalAlignment: .baseline(0)),
-            currencySpacing: 3,
-            verticalAlignment: .middle,
-            textAlignment: .right,
+            layout: Layout(verticalAlignment: .middle, horizontalAlignment: .right, currencySpacing: 3),
             textStyles:
                 .integer(TextStyle(size: 20, color: .black, verticalAlignment: .top(0)))
         )
@@ -241,8 +236,7 @@ class PriceViewTests: FBSnapshotTestCase {
     func testPriceMiddleAlignment() {
         let style = Style(
             defaultTextStyle: TextStyle(size: 14, color: .darkGray, verticalAlignment: .baseline(0)),
-            currencySpacing: 3,
-            verticalAlignment: .middle,
+            layout: Layout(verticalAlignment: .middle, currencySpacing: 3),
             textStyles: .integer(TextStyle(size: 20, color: .black))
         )
         for value in testValues {
@@ -253,9 +247,7 @@ class PriceViewTests: FBSnapshotTestCase {
     func testPriceTopRightAlignment() {
         let style = Style(
             defaultTextStyle: TextStyle(size: 14, color: .darkGray, verticalAlignment: .baseline(0)),
-            currencySpacing: 3,
-            verticalAlignment: .top,
-            textAlignment: .right,
+            layout: Layout(verticalAlignment: .top, horizontalAlignment: .right, currencySpacing: 3),
             textStyles: .integer(TextStyle(size: 20, color: .black))
         )
         for value in testValues {
