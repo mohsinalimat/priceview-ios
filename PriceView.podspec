@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.social_media_url   = "https://twitter.com/thomassivilay"
   s.platform     = :ios, "9.0"
   s.source       = { :git => "https://github.com/thomas-sivilay/priceview-ios.git", :tag => "#{s.version}" }
-  s.source_files  = 'Source/*.{swift}'
+  s.source_files  = 'Source/**/*.{swift}'
   s.exclude_files = "Classes/Exclude"
   s.framework  = "UIKit"
 
