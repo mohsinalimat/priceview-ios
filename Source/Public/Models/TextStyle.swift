@@ -15,19 +15,37 @@ public enum TextVerticalAlignment {
     case baseline(CGFloat)
 }
 
+enum FontSize {
+    case font(UIFont)
+    case size(CGFloat, UIFont.Weight)
+}
+
 public struct TextStyle {
-    let size: CGFloat
+    let fontSize: FontSize
     let color: UIColor
     let kern: CGFloat
-    
     let verticalAlignment: TextVerticalAlignment
     
+    // MARK: - Initializers
+    
     public init(size: CGFloat,
+                weight: UIFont.Weight = .semibold,
          color: UIColor,
          kern: CGFloat = 0.0,
          verticalAlignment: TextVerticalAlignment = .baseline(0)
     ) {
-        self.size = size
+        self.fontSize = .size(size, weight)
+        self.color = color
+        self.kern = kern
+        self.verticalAlignment = verticalAlignment
+    }
+    
+    public init(font: UIFont,
+                color: UIColor,
+                kern: CGFloat = 0.0,
+                verticalAlignment: TextVerticalAlignment = .baseline(0)
+        ) {
+        self.fontSize = .font(font)
         self.color = color
         self.kern = kern
         self.verticalAlignment = verticalAlignment

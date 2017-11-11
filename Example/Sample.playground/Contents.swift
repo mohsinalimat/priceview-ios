@@ -9,18 +9,18 @@ final class MyViewController : UIViewController {
         let view = UIView()
         view.backgroundColor = .white
         
-        let integerTextStyle = TextStyle(size: 20, color: .black, kern: 0.0, verticalAlignment: .middle(0))
-        let decimalTextStyle = TextStyle(size: 10, color: .gray, kern: 0.0, verticalAlignment: .top(2))
-        let currencyTextStyle = TextStyle(size: 12, color: .black, kern: 0.0, verticalAlignment: .middle(0))
-        let separatorTextStyle = TextStyle(size: 10, color: .gray, kern: 0.0, verticalAlignment: .top(2))
+        let integerTextStyle = TextStyle(size: 22, weight: .semibold, color: .black, verticalAlignment: .middle(0))
+        let decimalTextStyle = TextStyle(size: 13, weight: .light, color: .darkGray,  verticalAlignment: .top(2))
+        let currencyTextStyle = TextStyle(size: 13, color: .black, verticalAlignment: .middle(0))
+        let separatorTextStyle = TextStyle(size: 13, weight: .light, color: .darkGray, verticalAlignment: .top(2))
     let locale = Locale(identifier: "fr_FR")
         
-        let style = PriceViewStyle(integerTextStyle: integerTextStyle,
+        let style = Style(integerTextStyle: integerTextStyle,
                                    decimalTextStyle: decimalTextStyle,
                                    decimalSeparatorTextStyle: separatorTextStyle,
                                    currencyTextStyle: currencyTextStyle,
                                    decimalSeparatorSpacing: (0,0),
-                                   currencySpacing: 10,
+                                   currencySpacing: 4,
                                    verticalAlignment: .middle,
                                     locale: locale)
         let priceView = UIPriceView(style: style)
@@ -34,7 +34,7 @@ final class MyViewController : UIViewController {
 //        priceView.heightAnchor.constraint(equalToConstant: 230).isActive = true
         priceView.layoutMargins = .init(top: 0, left: 10, bottom: 0, right: 10)
         
-        priceView.price = 16516512.00955
+        priceView.price = 1612.00955
         
         self.view = view
     }

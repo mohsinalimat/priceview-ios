@@ -209,9 +209,16 @@ public final class UIPriceView: UIView {
     private func makeLabel(with style: TextStyle) -> UILabel {
         let label = UILabel()
         label.numberOfLines = 1
-        label.font = UIFont.boldSystemFont(ofSize: style.size)
         label.textColor = style.color
         label.minimumScaleFactor = 0.5
+
+        switch style.fontSize {
+        case .font(let font):
+            label.font = font
+        case let .size(size, weight):
+            label.font = UIFont.monospacedDigitSystemFont(ofSize: size, weight: weight)
+        }
+        
         return label
     }
 }

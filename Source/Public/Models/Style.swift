@@ -35,7 +35,7 @@ public struct Style {
     // MARK: - Initializers
     
     public init(
-        defaultTextStyle: TextStyle = TextStyle(size: 12, color: .black),
+        defaultTextStyle: TextStyle = TextStyle(size: 12, weight: .semibold, color: .black),
         layout: Layout = Layout(),
         options: Options = Options(),
         textStyles: TextStyleType...
