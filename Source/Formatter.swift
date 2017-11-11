@@ -1,5 +1,5 @@
 //
-//  PriceFormatter.swift
+//  Formatter.swift
 //  PriceView
 //
 //  Created by Thomas Sivilay on 11/7/17.
@@ -8,11 +8,11 @@
 
 import Foundation
 
-final class PriceFormatter {
+final class Formatter {
     
-    private let style: PriceViewStyle
+    private let style: Style
     
-    init(with style: PriceViewStyle) {
+    init(with style: Style) {
         self.style = style
     }
     

@@ -1,5 +1,5 @@
 //
-//  PriceViewStyle.swift
+//  Style.swift
 //  PriceView
 //
 //  Created by Thomas Sivilay on 11/7/17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct PriceViewStyle {
+public struct Style {
     
     // MARK: - Nested
     
@@ -36,7 +36,7 @@ public struct PriceViewStyle {
         var decimalSeparator: TextStyle
         var currency: TextStyle
         
-        init(defaultTextStyle: TextStyle = TextStyle(size: 12, color: .black)) {
+        init(defaultTextStyle: TextStyle) {
             self.integer = defaultTextStyle
             self.decimal = defaultTextStyle
             self.decimalSeparator = defaultTextStyle
@@ -77,14 +77,14 @@ public struct PriceViewStyle {
     // MARK: - Initializers
     
     public init(
-        textStyles: TextStyleType...,
-        defaultTextStyle: TextStyle,
+        defaultTextStyle: TextStyle = TextStyle(size: 12, color: .black),
         decimalSeparatorSpacing: (CGFloat, CGFloat) = (0, 0),
         currencySpacing: CGFloat = 0,
         numberFraction: Int = 2,
         verticalAlignment: VerticalAlignment = .middle,
         textAlignment: NSTextAlignment = .center,
-        locale: Locale = .current
+        locale: Locale = .current,
+        textStyles: TextStyleType...
     ) {
         var tmp = TextStyles(defaultTextStyle: defaultTextStyle)
         

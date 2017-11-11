@@ -1,5 +1,5 @@
 //
-//  PriceView.swift
+//  UIPriceView.swift
 //  PriceView
 //
 //  Created by Thomas Sivilay on 11/7/17.
@@ -16,7 +16,7 @@ public final class UIPriceView: UIView {
         }
     }
     
-    var style = PriceViewStyle(
+    var style = Style(
         integerTextStyle: TextStyle(size: 20, color: .black, kern: 1.2),
         decimalTextStyle: TextStyle(size: 10, color: .darkGray),
         decimalSeparatorTextStyle: TextStyle(size: 10, color: .darkGray),
@@ -28,8 +28,8 @@ public final class UIPriceView: UIView {
     private lazy var decimalSeparatorLabel = makeDecimalSeparatorLabel()
     private lazy var decimalLabel = makeDecimalLabel()
     
-    private var formatter: PriceFormatter {
-        return PriceFormatter(with: style)
+    private var formatter: Formatter {
+        return Formatter(with: style)
     }
     
     // MARK: - Initializers
@@ -39,7 +39,7 @@ public final class UIPriceView: UIView {
         setup()
     }
     
-    public init(style: PriceViewStyle) {
+    public init(style: Style) {
         self.style = style
         super.init(frame: .zero)
         setup()
@@ -89,7 +89,9 @@ public final class UIPriceView: UIView {
         }
     }
 
-    private func setUpVerticalConstraints(for view: UIView, with layoutGuide: UILayoutGuide, and alignment: PriceViewStyle.VerticalAlignment) {
+    private func setUpVerticalConstraints(for view: UIView,
+                                          with layoutGuide: UILayoutGuide,
+                                          and alignment: Style.VerticalAlignment) {
         let top = view.topAnchor.constraint(equalTo: layoutGuide.topAnchor)
         let bottom = view.bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor)
         let centerY = view.centerYAnchor.constraint(equalTo: layoutGuide.centerYAnchor)
@@ -115,7 +117,9 @@ public final class UIPriceView: UIView {
         }
     }
     
-    private func setUpHorizontalConstraints(for view: UIView, with layoutGuide: UILayoutGuide, and alignment: NSTextAlignment) {
+    private func setUpHorizontalConstraints(for view: UIView,
+                                            with layoutGuide: UILayoutGuide,
+                                            and alignment: NSTextAlignment) {
         let left = view.leftAnchor.constraint(equalTo: layoutGuide.leftAnchor)
         let right = view.rightAnchor.constraint(equalTo: layoutGuide.rightAnchor)
         let leading = view.leadingAnchor.constraint(equalTo: layoutGuide.leadingAnchor)
@@ -148,7 +152,7 @@ public final class UIPriceView: UIView {
         }
     }
     
-    private func setupConstraints(with style: PriceViewStyle) {
+    private func setupConstraints(with style: Style) {
         [containerView, integerLabel, decimalSeparatorLabel, decimalLabel, currencyLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }

@@ -1,5 +1,5 @@
 //
-//  PriceFormatterTests.swift
+//  FormatterTests.swift
 //  PriceViewTests
 //
 //  Created by Thomas Sivilay on 11/9/17.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import PriceView
 
-final class PriceFormatterTests: XCTestCase {
+final class FormatterTests: XCTestCase {
     
     func testZeroWithNoDecimal() {
         test(price: 0, expectedIntegerPart: "0", expectedDecimalPart: "00")
@@ -124,7 +124,7 @@ final class PriceFormatterTests: XCTestCase {
               line: UInt = #line) {
         let locale = Locale(identifier: localeIdentifier)
         let style = makeStyle(with: locale, fractionNumber: fractionNumber)
-        let formatter = PriceFormatter(with: style)
+        let formatter = Formatter(with: style)
         let formattedInt = formatter.formattedInteger(price: price)
         let formattedDecimal = formatter.formattedDecimal(price: price)
 
@@ -132,12 +132,12 @@ final class PriceFormatterTests: XCTestCase {
         XCTAssertEqual(formattedDecimal, expectedDecimalPart, "decimal part", file: file, line: line)
     }
     
-    private func makeStyle(with locale: Locale, fractionNumber: Int? = nil) -> PriceViewStyle {
+    private func makeStyle(with locale: Locale, fractionNumber: Int? = nil) -> Style {
         let aTextStyle = TextStyle(size: 12, color: .black)
         if let fractionNumber = fractionNumber {
-            return PriceViewStyle(integerTextStyle: aTextStyle, decimalTextStyle: aTextStyle, decimalSeparatorTextStyle: aTextStyle, currencyTextStyle: aTextStyle, numberFraction: fractionNumber, locale: locale)
+            return Style(defaultTextStyle: aTextStyle, numberFraction: fractionNumber, locale: locale)
         } else {
-            return PriceViewStyle(integerTextStyle: aTextStyle, decimalTextStyle: aTextStyle, decimalSeparatorTextStyle: aTextStyle, currencyTextStyle: aTextStyle, locale: locale)
+            return Style(defaultTextStyle: aTextStyle, locale: locale)
         }
     }
 }

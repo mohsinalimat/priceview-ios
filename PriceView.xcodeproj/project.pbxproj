@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		B0FACE671197A6BAD12545C8 /* Pods_PriceViewTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3014AFABDAFA8E1AD5361F4 /* Pods_PriceViewTests.framework */; };
-		C8730D7F1FB4B6940071AA99 /* PriceFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8730D7E1FB4B6940071AA99 /* PriceFormatterTests.swift */; };
+		C8730D7F1FB4B6940071AA99 /* FormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8730D7E1FB4B6940071AA99 /* FormatterTests.swift */; };
 		C88AEC9C1FB1BC38004AEE39 /* PriceView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C88AEC921FB1BC38004AEE39 /* PriceView.framework */; };
 		C88AECA11FB1BC38004AEE39 /* PriceViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88AECA01FB1BC38004AEE39 /* PriceViewTests.swift */; };
 		C88AECA31FB1BC38004AEE39 /* PriceView.h in Headers */ = {isa = PBXBuildFile; fileRef = C88AEC951FB1BC38004AEE39 /* PriceView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C88AECAD1FB1BC4B004AEE39 /* PriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88AECAC1FB1BC4B004AEE39 /* PriceView.swift */; };
-		C88AECAF1FB1BC5E004AEE39 /* PriceViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88AECAE1FB1BC5E004AEE39 /* PriceViewStyle.swift */; };
-		C88AECB51FB1BCBD004AEE39 /* PriceFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88AECB41FB1BCBD004AEE39 /* PriceFormatter.swift */; };
+		C88AECAF1FB1BC5E004AEE39 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88AECAE1FB1BC5E004AEE39 /* Style.swift */; };
+		C88AECB51FB1BCBD004AEE39 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88AECB41FB1BCBD004AEE39 /* Formatter.swift */; };
 		C88AECB71FB1BCE7004AEE39 /* TextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88AECB61FB1BCE7004AEE39 /* TextStyle.swift */; };
 		EAF878BD5C627F53B65A768F /* Pods_PriceView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD61F3C004078E7D27ED0D7 /* Pods_PriceView.framework */; };
 /* End PBXBuildFile section */
@@ -36,7 +36,7 @@
 		4F61870C85893A2BC697AD80 /* Pods-PriceViewTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PriceViewTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PriceViewTests/Pods-PriceViewTests.release.xcconfig"; sourceTree = "<group>"; };
 		818E62E31927C4E999A4FFB9 /* Pods-PriceView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PriceView.release.xcconfig"; path = "Pods/Target Support Files/Pods-PriceView/Pods-PriceView.release.xcconfig"; sourceTree = "<group>"; };
 		C81680721FB341F200C8FDEC /* Sample.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = Sample.playground; path = Example/Sample.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		C8730D7E1FB4B6940071AA99 /* PriceFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceFormatterTests.swift; sourceTree = "<group>"; };
+		C8730D7E1FB4B6940071AA99 /* FormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatterTests.swift; sourceTree = "<group>"; };
 		C88AEC921FB1BC38004AEE39 /* PriceView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PriceView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C88AEC951FB1BC38004AEE39 /* PriceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceView.h; sourceTree = "<group>"; };
 		C88AEC961FB1BC38004AEE39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -44,8 +44,8 @@
 		C88AECA01FB1BC38004AEE39 /* PriceViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceViewTests.swift; sourceTree = "<group>"; };
 		C88AECA21FB1BC38004AEE39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C88AECAC1FB1BC4B004AEE39 /* PriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceView.swift; sourceTree = "<group>"; };
-		C88AECAE1FB1BC5E004AEE39 /* PriceViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceViewStyle.swift; sourceTree = "<group>"; };
-		C88AECB41FB1BCBD004AEE39 /* PriceFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceFormatter.swift; sourceTree = "<group>"; };
+		C88AECAE1FB1BC5E004AEE39 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
+		C88AECB41FB1BCBD004AEE39 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		C88AECB61FB1BCE7004AEE39 /* TextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyle.swift; sourceTree = "<group>"; };
 		E3014AFABDAFA8E1AD5361F4 /* Pods_PriceViewTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PriceViewTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -109,8 +109,8 @@
 				C88AEC951FB1BC38004AEE39 /* PriceView.h */,
 				C88AEC961FB1BC38004AEE39 /* Info.plist */,
 				C88AECAC1FB1BC4B004AEE39 /* PriceView.swift */,
-				C88AECAE1FB1BC5E004AEE39 /* PriceViewStyle.swift */,
-				C88AECB41FB1BCBD004AEE39 /* PriceFormatter.swift */,
+				C88AECAE1FB1BC5E004AEE39 /* Style.swift */,
+				C88AECB41FB1BCBD004AEE39 /* Formatter.swift */,
 				C88AECB61FB1BCE7004AEE39 /* TextStyle.swift */,
 			);
 			path = Source;
@@ -120,7 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				C88AECA01FB1BC38004AEE39 /* PriceViewTests.swift */,
-				C8730D7E1FB4B6940071AA99 /* PriceFormatterTests.swift */,
+				C8730D7E1FB4B6940071AA99 /* FormatterTests.swift */,
 				C88AECA21FB1BC38004AEE39 /* Info.plist */,
 			);
 			path = Tests;
@@ -339,8 +339,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C88AECB71FB1BCE7004AEE39 /* TextStyle.swift in Sources */,
-				C88AECAF1FB1BC5E004AEE39 /* PriceViewStyle.swift in Sources */,
-				C88AECB51FB1BCBD004AEE39 /* PriceFormatter.swift in Sources */,
+				C88AECAF1FB1BC5E004AEE39 /* Style.swift in Sources */,
+				C88AECB51FB1BCBD004AEE39 /* Formatter.swift in Sources */,
 				C88AECAD1FB1BC4B004AEE39 /* PriceView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -350,7 +350,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C88AECA11FB1BC38004AEE39 /* PriceViewTests.swift in Sources */,
-				C8730D7F1FB4B6940071AA99 /* PriceFormatterTests.swift in Sources */,
+				C8730D7F1FB4B6940071AA99 /* FormatterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
