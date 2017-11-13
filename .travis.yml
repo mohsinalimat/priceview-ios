@@ -1,0 +1,7 @@
+language: swift
+osx_image: xcode9
+xcode_workspace: PriceView.xcworkspace
+xcode_scheme: PriceView
+branches:
+  only:
+    - master
