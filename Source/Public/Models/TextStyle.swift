@@ -8,16 +8,26 @@
 
 import UIKit
 
-public enum TextVerticalAlignment {
+public enum TextVerticalAlignment: Equatable {
     case top(CGFloat)
     case middle(CGFloat)
     case bottom(CGFloat)
     case baseline(CGFloat)
-}
-
-enum FontSize {
-    case font(UIFont)
-    case size(CGFloat, UIFont.Weight)
+    
+    public static func ==(lhs: TextVerticalAlignment, rhs: TextVerticalAlignment) -> Bool {
+        switch (lhs, rhs) {
+        case let (.top(a), .top(b)):
+            return a == b
+        case let (.middle(a), .middle(b)):
+            return a == b
+        case let (.bottom(a), .bottom(b)):
+            return a == b
+        case let (.baseline(a), .baseline(b)):
+            return a == b
+        default:
+            return false
+        }
+    }
 }
 
 public struct TextStyle {
@@ -51,3 +61,24 @@ public struct TextStyle {
         self.verticalAlignment = verticalAlignment
     }
 }
+
+enum FontSize: Equatable {
+    case font(UIFont)
+    case size(CGFloat, UIFont.Weight)
+    
+    static func ==(lhs: FontSize, rhs: FontSize) -> Bool {
+        switch (lhs, rhs) {
+        case let (.font(a), .font(b)):
+            return a == b
+        case let (.size(sizeA, weightA), .size(sizeB, weightB)):
+            return sizeA == sizeB && weightA == weightB
+        default:
+            return false
+        }
+    }
+}
+
+
+
+
+

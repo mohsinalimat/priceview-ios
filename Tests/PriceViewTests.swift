@@ -10,7 +10,7 @@ import XCTest
 import FBSnapshotTestCase
 @testable import PriceView
 
-class PriceViewTests: FBSnapshotTestCase {
+final class PriceViewTests: FBSnapshotTestCase {
     
     private let testValues = [
         1,
