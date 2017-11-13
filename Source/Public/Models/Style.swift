@@ -10,27 +10,11 @@ import Foundation
 
 public struct Style {
     
-    // MARK: - Nested
-
-    enum SymbolPosition {
-        case beforeCurrency
-        case afterCurrency
-    }
-    
-    // MARK: - Internal
+    // MARK: - Properties
 
     let textStyles: TextStyles
     let options: Options
     let layout: Layout
-
-    var symbolPosition: SymbolPosition {
-        if options.locale.regionCode == "US" {
-            return .beforeCurrency
-        } else {
-            return .afterCurrency
-        }
-    }
-    
     
     // MARK: - Initializers
     

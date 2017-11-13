@@ -162,7 +162,7 @@ public final class UIPriceView: UIView {
         setUpVerticalConstraints(for: containerView, with: viewMargins, and: style.layout.verticalAlignment)
         setUpHorizontalConstraints(for: containerView, with: viewMargins, and: style.layout.horizontalAlignment)
         
-        let currencyBefore = style.symbolPosition == .beforeCurrency
+        let currencyBefore = SymbolPosition(with: style.options.locale) == .beforeCurrency            
         let currencyAfter = !currencyBefore
         
         integerLabel.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true

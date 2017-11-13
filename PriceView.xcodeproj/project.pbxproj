@@ -11,6 +11,8 @@
 		C8101A311FB74F74001EDFE7 /* TextStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8101A301FB74F74001EDFE7 /* TextStyles.swift */; };
 		C8101A331FB750D9001EDFE7 /* TextStyleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8101A321FB750D9001EDFE7 /* TextStyleType.swift */; };
 		C81123CD1FB9AD4500354C9A /* StyleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81123CB1FB9AD0800354C9A /* StyleTests.swift */; };
+		C81123CF1FB9EAD500354C9A /* SymbolPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81123CE1FB9EAD500354C9A /* SymbolPosition.swift */; };
+		C81123D21FB9F14000354C9A /* SymbolPositionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81123D01FB9F0F900354C9A /* SymbolPositionTests.swift */; };
 		C856147A1FB74EC100A8C110 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85614791FB74EC100A8C110 /* Layout.swift */; };
 		C856147C1FB74F2F00A8C110 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = C856147B1FB74F2F00A8C110 /* Options.swift */; };
 		C8730D7F1FB4B6940071AA99 /* FormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8730D7E1FB4B6940071AA99 /* FormatterTests.swift */; };
@@ -43,6 +45,8 @@
 		C8101A301FB74F74001EDFE7 /* TextStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyles.swift; sourceTree = "<group>"; };
 		C8101A321FB750D9001EDFE7 /* TextStyleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyleType.swift; sourceTree = "<group>"; };
 		C81123CB1FB9AD0800354C9A /* StyleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleTests.swift; sourceTree = "<group>"; };
+		C81123CE1FB9EAD500354C9A /* SymbolPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolPosition.swift; sourceTree = "<group>"; };
+		C81123D01FB9F0F900354C9A /* SymbolPositionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolPositionTests.swift; sourceTree = "<group>"; };
 		C81680721FB341F200C8FDEC /* Sample.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = Sample.playground; path = Example/Sample.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		C85614791FB74EC100A8C110 /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 		C856147B1FB74F2F00A8C110 /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
@@ -117,6 +121,7 @@
 			children = (
 				C88AECB41FB1BCBD004AEE39 /* Formatter.swift */,
 				C8101A301FB74F74001EDFE7 /* TextStyles.swift */,
+				C81123CE1FB9EAD500354C9A /* SymbolPosition.swift */,
 			);
 			path = Internal;
 			sourceTree = "<group>";
@@ -169,6 +174,7 @@
 				C88AECA01FB1BC38004AEE39 /* PriceViewTests.swift */,
 				C8730D7E1FB4B6940071AA99 /* FormatterTests.swift */,
 				C81123CB1FB9AD0800354C9A /* StyleTests.swift */,
+				C81123D01FB9F0F900354C9A /* SymbolPositionTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -390,6 +396,7 @@
 				C856147A1FB74EC100A8C110 /* Layout.swift in Sources */,
 				C8101A311FB74F74001EDFE7 /* TextStyles.swift in Sources */,
 				C88AECB51FB1BCBD004AEE39 /* Formatter.swift in Sources */,
+				C81123CF1FB9EAD500354C9A /* SymbolPosition.swift in Sources */,
 				C856147C1FB74F2F00A8C110 /* Options.swift in Sources */,
 				C8101A331FB750D9001EDFE7 /* TextStyleType.swift in Sources */,
 				C88AECAD1FB1BC4B004AEE39 /* PriceView.swift in Sources */,
@@ -402,6 +409,7 @@
 			files = (
 				C88AECA11FB1BC38004AEE39 /* PriceViewTests.swift in Sources */,
 				C8730D7F1FB4B6940071AA99 /* FormatterTests.swift in Sources */,
+				C81123D21FB9F14000354C9A /* SymbolPositionTests.swift in Sources */,
 				C81123CD1FB9AD4500354C9A /* StyleTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
