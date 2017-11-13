@@ -4,6 +4,8 @@
 
 An user-friendly UI view to display a price or an amount
 
+![demo](https://github.com/thomas-sivilay/priceview-ios/blob/master/Assets/demo.gif)
+
 ## Why?
 We are displaying prices everywhere in our apps and I agree with [@frankrausch](https://twitter.com/frankrausch) it’s hard for users to read. Then why not being able to easily have a component that render it for us, doing formatting, styling, layout with just couple properties? 
 
