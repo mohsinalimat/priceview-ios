@@ -56,6 +56,7 @@ public final class UIPriceView: UIView {
     // MARK: -
     
     private func setup() {
+        containerView.removeFromSuperview()
         addSubview(containerView)
         [integerLabel, decimalSeparatorLabel, decimalLabel, currencyLabel].forEach {
             $0.removeFromSuperview()
