@@ -10,6 +10,8 @@ import Foundation
 
 public final class UIPriceView: UIView {
     
+    // MARK: - Properties
+    
     public var price: Double = 0.0 {
         didSet {
             bind()
@@ -22,7 +24,8 @@ public final class UIPriceView: UIView {
         decimalSeparatorTextStyle: TextStyle(size: 10, color: .darkGray),
         currencyTextStyle: TextStyle(size: 12, color: .black) ) {
         didSet {
-            setup()
+            updateStyle()
+            bind()
         }
     }
     
@@ -32,9 +35,8 @@ public final class UIPriceView: UIView {
     private lazy var decimalSeparatorLabel = makeDecimalSeparatorLabel()
     private lazy var decimalLabel = makeDecimalLabel()
     
-    private var formatter: Formatter {
-        return Formatter(with: style)
-    }
+    private let builder = ConstraintsBuilder()
+    private var currentConstraints = [NSLayoutConstraint]()
     
     // MARK: - Initializers
     
@@ -53,21 +55,21 @@ public final class UIPriceView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: -
+    // MARK: - Instance methods
     
     private func setup() {
-        containerView.removeFromSuperview()
         addSubview(containerView)
         [integerLabel, decimalSeparatorLabel, decimalLabel, currencyLabel].forEach {
-            $0.removeFromSuperview()
             containerView.addSubview($0)
         }
         
         bind()
-        setupConstraints(with: style)
+        setupConstraints()
     }
     
     private func bind() {
+        let formatter = Formatter(with: style)
+        
         decimalSeparatorLabel.text = formatter.decimalSeparator
         currencyLabel.text = formatter.currencySymbol
         
@@ -76,123 +78,31 @@ public final class UIPriceView: UIView {
         
         //apply kerning
         integerLabel.attributedText = NSAttributedString(string: formattedInteger, attributes: [.kern: style.textStyles.integer.kern])
-        
         decimalLabel.attributedText = NSAttributedString(string: formattedDecimal, attributes: [.kern: style.textStyles.decimal.kern])
     }
     
-    // MARK: - Constraints
-    
-    private func setUpConstraints(between labelA: UILabel, and labelB: UILabel, with labelATextStyle: TextStyle) {
-        switch labelATextStyle.verticalAlignment {
-        case .baseline(let offset):
-            labelA.lastBaselineAnchor.constraint(equalTo: labelB.lastBaselineAnchor, constant: offset).isActive = true
-        case .bottom(let offset):
-            labelA.bottomAnchor.constraint(equalTo: labelB.bottomAnchor, constant: offset).isActive = true
-        case .top(let offset):
-            labelA.topAnchor.constraint(equalTo: labelB.topAnchor, constant: offset).isActive = true
-        case .middle(let offset):
-            labelA.centerYAnchor.constraint(equalTo: labelB.centerYAnchor, constant: offset).isActive = true
+    private func updateStyle() {
+        setupConstraints()
+        [(integerLabel, style.textStyles.integer),
+         (decimalSeparatorLabel, style.textStyles.decimalSeparator),
+         (decimalLabel, style.textStyles.decimal),
+         (currencyLabel, style.textStyles.currency)].forEach {
+            updateLabel($0.0, with: $0.1)
         }
     }
-
-    private func setUpVerticalConstraints(for view: UIView,
-                                          with layoutGuide: UILayoutGuide,
-                                          and alignment: Layout.VerticalAlignment) {
-        let top = view.topAnchor.constraint(equalTo: layoutGuide.topAnchor)
-        let bottom = view.bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor)
-        let centerY = view.centerYAnchor.constraint(equalTo: layoutGuide.centerYAnchor)
-
-        switch alignment {
-        case .top:
-            top.isActive = true
-            top.priority = .required
-            bottom.isActive = true
-            bottom.priority = .defaultLow
-        case .bottom:
-            top.isActive = true
-            top.priority = .defaultLow
-            bottom.isActive = true
-            bottom.priority = .defaultHigh
-        case .middle:
-            top.isActive = true
-            top.priority = .defaultLow
-            bottom.isActive = true
-            bottom.priority = .defaultLow
-            centerY.isActive = true
-            centerY.priority = .defaultHigh
-        }
-    }
-    
-    private func setUpHorizontalConstraints(for view: UIView,
-                                            with layoutGuide: UILayoutGuide,
-                                            and alignment: NSTextAlignment) {
-        let left = view.leftAnchor.constraint(equalTo: layoutGuide.leftAnchor)
-        let right = view.rightAnchor.constraint(equalTo: layoutGuide.rightAnchor)
-        let leading = view.leadingAnchor.constraint(equalTo: layoutGuide.leadingAnchor)
-        let trailing = view.trailingAnchor.constraint(equalTo: layoutGuide.trailingAnchor)
-        let centerX = view.centerXAnchor.constraint(equalTo: layoutGuide.centerXAnchor)
         
-        switch alignment {
-        case .natural:
-            leading.isActive = true
-            leading.priority = .defaultHigh
-            trailing.isActive = true
-            trailing.priority = .defaultLow
-        case .left:
-            left.isActive = true
-            left.priority = .defaultHigh
-            right.isActive = true
-            right.priority = .defaultLow
-        case .right:
-            left.isActive = true
-            left.priority = .defaultLow
-            right.isActive = true
-            right.priority = .defaultHigh
-        case .justified, .center:
-            trailing.isActive = true
-            trailing.priority = .defaultLow
-            leading.isActive = true
-            leading.priority = .defaultLow
-            centerX.isActive = true
-            centerX.priority = .defaultHigh
-        }
-    }
-    
-    private func setupConstraints(with style: Style) {
-        [containerView, integerLabel, decimalSeparatorLabel, decimalLabel, currencyLabel].forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.removeConstraints($0.constraints)
-        }
+    private func setupConstraints() {
+        NSLayoutConstraint.deactivate(currentConstraints)
+                
+        currentConstraints = builder.buildConstraints(style: style,
+                                                      containerView: containerView,
+                                                      integerLabel: integerLabel,
+                                                      decimalLabel: decimalLabel,
+                                                      decimalSeparatorLabel: decimalSeparatorLabel,
+                                                      currencyLabel: currencyLabel,
+                                                      viewMargins: layoutMarginsGuide)
         
-        let viewMargins = layoutMarginsGuide
-        
-        setUpVerticalConstraints(for: containerView, with: viewMargins, and: style.layout.verticalAlignment)
-        setUpHorizontalConstraints(for: containerView, with: viewMargins, and: style.layout.horizontalAlignment)
-        
-        let currencyBefore = SymbolPosition(with: style.options.locale) == .beforeCurrency            
-        let currencyAfter = !currencyBefore
-        
-        integerLabel.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
-        integerLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
-        
-        // before
-        currencyLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = currencyBefore
-        currencyLabel.trailingAnchor.constraint(equalTo: integerLabel.leadingAnchor, constant: -style.layout.currencySpacing).isActive = currencyBefore
-        decimalLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = currencyBefore
-        
-        //after
-        currencyLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = currencyAfter
-        currencyLabel.leadingAnchor.constraint(equalTo: decimalLabel.trailingAnchor, constant: style.layout.currencySpacing).isActive = currencyAfter
-        integerLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = currencyAfter
-        
-        decimalSeparatorLabel.leadingAnchor.constraint(equalTo: integerLabel.trailingAnchor, constant: style.layout.decimalSeparatorSpacing.leading).isActive = true
-        
-        decimalLabel.leadingAnchor.constraint(equalTo: decimalSeparatorLabel.trailingAnchor, constant: style.layout.decimalSeparatorSpacing.trailing).isActive = true
-        
-        // V
-        setUpConstraints(between: currencyLabel, and: integerLabel, with: style.textStyles.currency)
-        setUpConstraints(between: decimalSeparatorLabel, and: integerLabel, with: style.textStyles.decimalSeparator)
-        setUpConstraints(between: decimalLabel, and: integerLabel, with: style.textStyles.decimal)
+        NSLayoutConstraint.activate(currentConstraints)
     }
     
     // MARK: - UI
@@ -216,16 +126,19 @@ public final class UIPriceView: UIView {
     private func makeLabel(with style: TextStyle) -> UILabel {
         let label = UILabel()
         label.numberOfLines = 1
-        label.textColor = style.color
         label.minimumScaleFactor = 0.5
-
-        switch style.fontSize {
+        updateLabel(label, with: style)
+        
+        return label
+    }
+    
+    private func updateLabel(_ label: UILabel, with textStyle: TextStyle) {
+        label.textColor = textStyle.color
+        switch textStyle.fontSize {
         case .font(let font):
             label.font = font
         case let .size(size, weight):
             label.font = UIFont.monospacedDigitSystemFont(ofSize: size, weight: weight)
         }
-        
-        return label
     }
 }
