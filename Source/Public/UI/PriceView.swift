@@ -16,11 +16,15 @@ public final class UIPriceView: UIView {
         }
     }
     
-    var style = Style(
+    public var style = Style(
         integerTextStyle: TextStyle(size: 20, color: .black, kern: 1.2),
         decimalTextStyle: TextStyle(size: 10, color: .darkGray),
         decimalSeparatorTextStyle: TextStyle(size: 10, color: .darkGray),
-        currencyTextStyle: TextStyle(size: 12, color: .black) )
+        currencyTextStyle: TextStyle(size: 12, color: .black) ) {
+        didSet {
+            setup()
+        }
+    }
     
     private let containerView = UIView()
     private lazy var currencyLabel = makeCurrencyLabel()
@@ -54,6 +58,7 @@ public final class UIPriceView: UIView {
     private func setup() {
         addSubview(containerView)
         [integerLabel, decimalSeparatorLabel, decimalLabel, currencyLabel].forEach {
+            $0.removeFromSuperview()
             containerView.addSubview($0)
         }
         
@@ -155,6 +160,7 @@ public final class UIPriceView: UIView {
     private func setupConstraints(with style: Style) {
         [containerView, integerLabel, decimalSeparatorLabel, decimalLabel, currencyLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.removeConstraints($0.constraints)
         }
         
         let viewMargins = layoutMarginsGuide
