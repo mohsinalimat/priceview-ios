@@ -10,34 +10,70 @@ import UIKit
 
 struct ConstraintsBuilder {
     
-    func buildConstraints(style: Style, containerView: UIView, integerLabel: UILabel, decimalLabel: UILabel, decimalSeparatorLabel: UILabel, currencyLabel: UILabel, viewMargins: UILayoutGuide) -> [NSLayoutConstraint] {
-        [containerView, integerLabel, decimalSeparatorLabel, decimalLabel, currencyLabel].forEach {
+    func buildConstraints(style: Style, integerLabel: UILabel, decimalLabel: UILabel, decimalSeparatorLabel: UILabel, currencyLabel: UILabel, viewMargins: UILayoutGuide) -> [NSLayoutConstraint] {
+        [integerLabel, decimalSeparatorLabel, decimalLabel, currencyLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
         let currencyBefore = SymbolPosition(with: style.options.locale) == .beforeCurrency
         var constraints = [NSLayoutConstraint]()
         
-        constraints += xConstraints(for: containerView, with: viewMargins, and: style.layout.horizontalAlignment)
-        constraints += yConstraints(for: containerView, with: viewMargins, and: style.layout.verticalAlignment)
+        constraints = yConstraints(for: integerLabel, with: viewMargins, and: style.layout.verticalAlignment)
         
-        constraints += [integerLabel.topAnchor.constraint(equalTo: containerView.topAnchor), integerLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)]
-        
-        constraints += [decimalLabel.leadingAnchor.constraint(equalTo: decimalSeparatorLabel.trailingAnchor, constant: style.layout.decimalSeparatorSpacing.trailing)]
-        constraints += [decimalSeparatorLabel.leadingAnchor.constraint(equalTo: integerLabel.trailingAnchor, constant: style.layout.decimalSeparatorSpacing.leading)]
+        constraints.append(decimalLabel.leadingAnchor.constraint(equalTo: decimalSeparatorLabel.trailingAnchor, constant: style.layout.decimalSeparatorSpacing.trailing))
+        constraints.append(decimalSeparatorLabel.leadingAnchor.constraint(equalTo: integerLabel.trailingAnchor, constant: style.layout.decimalSeparatorSpacing.leading))
         
         if currencyBefore {
-            constraints += [currencyLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor), currencyLabel.trailingAnchor.constraint(equalTo: integerLabel.leadingAnchor, constant: -style.layout.currencySpacing)]
-            constraints.append(decimalLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor))
+            let c2 = currencyLabel.trailingAnchor.constraint(equalTo: integerLabel.leadingAnchor, constant: -style.layout.currencySpacing)
+            
+            let c1 = currencyLabel.leadingAnchor.constraint(equalTo: viewMargins.leadingAnchor)
+            let c3 = decimalLabel.trailingAnchor.constraint(equalTo: viewMargins.trailingAnchor)
+            
+            constraints.append(c2)
+            
+            switch style.layout.horizontalAlignment {
+            case .left:
+                constraints.append(c1)
+            case .right:
+                constraints.append(c3)
+            default:
+                constraints.append(c1)
+                constraints.append(c3)
+            }
         } else {
-            constraints += [currencyLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-                            currencyLabel.leadingAnchor.constraint(equalTo: decimalLabel.trailingAnchor, constant: style.layout.currencySpacing)]
-            constraints.append(integerLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor))
+            let c1 = currencyLabel.trailingAnchor.constraint(equalTo: viewMargins.trailingAnchor)
+            let c2 = currencyLabel.leadingAnchor.constraint(equalTo: decimalLabel.trailingAnchor, constant: style.layout.currencySpacing)
+            let c3 = integerLabel.leadingAnchor.constraint(equalTo: viewMargins.leadingAnchor)
+            
+            constraints.append(c2)
+            
+            switch style.layout.horizontalAlignment {
+            case .left:
+                constraints.append(c3)
+            case .right:
+                constraints.append(c1)
+            default:
+                constraints.append(c1)
+                constraints.append(c3)
+            }
         }
         
         constraints.append(yConstraint(between: currencyLabel, and: integerLabel, with: style.textStyles.currency))
         constraints.append(yConstraint(between: decimalSeparatorLabel, and: integerLabel, with: style.textStyles.decimalSeparator))
         constraints.append(yConstraint(between: decimalLabel, and: integerLabel, with: style.textStyles.decimal))
+        
+        let toto1 = currencyLabel.topAnchor.constraint(equalTo: viewMargins.topAnchor)
+        toto1.priority = .defaultHigh
+        let toto2 = currencyLabel.bottomAnchor.constraint(equalTo: viewMargins.bottomAnchor)
+        toto2.priority = .defaultHigh
+        
+        currencyLabel.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 100), for: .vertical)
+        
+        currencyLabel.minimumScaleFactor = 0.2
+        currencyLabel.adjustsFontSizeToFitWidth = true
+        
+        constraints.append(toto1)
+        constraints.append(toto2)
         
         return constraints
     }
@@ -68,17 +104,17 @@ struct ConstraintsBuilder {
         
         switch alignment {
         case .top:
-            top.priority = .defaultHigh
+            top.priority = .required
             bottom.priority = .defaultLow
             return [top, bottom]
         case .bottom:
             top.priority = .defaultLow
-            bottom.priority = .defaultHigh
+            bottom.priority = .required
             return [top, bottom]
         case .middle:
             top.priority = .defaultLow
             bottom.priority = .defaultLow
-            centerY.priority = .defaultHigh
+            centerY.priority = .required
             return [top, bottom, centerY]
         }
     }
@@ -94,22 +130,24 @@ struct ConstraintsBuilder {
         
         switch alignment {
         case .natural:
-            leading.priority = .defaultHigh
+            leading.priority = .required
             trailing.priority = .defaultLow
             return [leading, trailing]
         case .left:
-            left.priority = .defaultHigh
+            left.priority = .required
             right.priority = .defaultLow
             return [left, right]
         case .right:
             left.priority = .defaultLow
-            right.priority = .defaultHigh
+            right.priority = .required
             return [left, right]
         case .justified, .center:
             trailing.priority = .defaultLow
             leading.priority = .defaultLow
-            centerX.priority = .defaultHigh
+            centerX.priority = .required
             return [trailing, leading, centerX]
         }
     }
 }
+
+
