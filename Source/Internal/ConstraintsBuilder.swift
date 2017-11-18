@@ -61,9 +61,6 @@ struct ConstraintsBuilder {
         constraints.append(yConstraint(between: currencyLabel, and: integerLabel, with: style.textStyles.currency))
         constraints.append(yConstraint(between: decimalSeparatorLabel, and: integerLabel, with: style.textStyles.decimalSeparator))
         constraints.append(yConstraint(between: decimalLabel, and: integerLabel, with: style.textStyles.decimal))
-                
-        constraints.append(toto1)
-        constraints.append(toto2)
         
         return constraints
     }
