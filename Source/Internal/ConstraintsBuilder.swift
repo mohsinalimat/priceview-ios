@@ -61,17 +61,7 @@ struct ConstraintsBuilder {
         constraints.append(yConstraint(between: currencyLabel, and: integerLabel, with: style.textStyles.currency))
         constraints.append(yConstraint(between: decimalSeparatorLabel, and: integerLabel, with: style.textStyles.decimalSeparator))
         constraints.append(yConstraint(between: decimalLabel, and: integerLabel, with: style.textStyles.decimal))
-        
-        let toto1 = currencyLabel.topAnchor.constraint(equalTo: viewMargins.topAnchor)
-        toto1.priority = .defaultHigh
-        let toto2 = currencyLabel.bottomAnchor.constraint(equalTo: viewMargins.bottomAnchor)
-        toto2.priority = .defaultHigh
-        
-        currencyLabel.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 100), for: .vertical)
-        
-        currencyLabel.minimumScaleFactor = 0.2
-        currencyLabel.adjustsFontSizeToFitWidth = true
-        
+                
         constraints.append(toto1)
         constraints.append(toto2)
         
