@@ -65,12 +65,6 @@ public final class UIPriceView: UIView {
         
         bind()
         setupConstraints()
-        
-//        self.layer.borderColor = UIColor.black.cgColor
-//        self.layer.borderWidth = 1
-//
-//        self.containerView.layer.borderColor = UIColor.red.cgColor
-//        self.containerView.layer.borderWidth = 1
     }
     
     private func bind() {
