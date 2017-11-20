@@ -10,129 +10,134 @@ import UIKit
 
 struct ConstraintsBuilder {
     
-    func buildConstraints(style: Style, integerLabel: UILabel, decimalLabel: UILabel, decimalSeparatorLabel: UILabel, currencyLabel: UILabel, viewMargins: UILayoutGuide) -> [NSLayoutConstraint] {
-        [integerLabel, decimalSeparatorLabel, decimalLabel, currencyLabel].forEach {
+    func buildConstraints(style: Style,
+                          containerView: UIView,
+                          integerLabel: UILabel,
+                          decimalLabel: UILabel,
+                          decimalSeparatorLabel: UILabel,
+                          currencyLabel: UILabel,
+                          viewMargins: UILayoutGuide) -> [NSLayoutConstraint] {
+        [containerView, integerLabel, decimalSeparatorLabel, decimalLabel, currencyLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-        
-        let currencyBefore = SymbolPosition(with: style.options.locale) == .beforeCurrency
         var constraints = [NSLayoutConstraint]()
+    
+        // Container constraints
+        constraints = constraints + buildConstraints(for: containerView, style: style, viewMargins: viewMargins)
         
-        constraints = yConstraints(for: integerLabel, with: viewMargins, and: style.layout.verticalAlignment)
-        
-        constraints.append(decimalLabel.leadingAnchor.constraint(equalTo: decimalSeparatorLabel.trailingAnchor, constant: style.layout.decimalSeparatorSpacing.trailing))
-        constraints.append(decimalSeparatorLabel.leadingAnchor.constraint(equalTo: integerLabel.trailingAnchor, constant: style.layout.decimalSeparatorSpacing.leading))
-        
-        if currencyBefore {
-            let c2 = currencyLabel.trailingAnchor.constraint(equalTo: integerLabel.leadingAnchor, constant: -style.layout.currencySpacing)
-            
-            let c1 = currencyLabel.leadingAnchor.constraint(equalTo: viewMargins.leadingAnchor)
-            let c3 = decimalLabel.trailingAnchor.constraint(equalTo: viewMargins.trailingAnchor)
-            
-            constraints.append(c2)
-            
-            switch style.layout.horizontalAlignment {
-            case .left:
-                constraints.append(c1)
-            case .right:
-                constraints.append(c3)
-            default:
-                constraints.append(c1)
-                constraints.append(c3)
-            }
-        } else {
-            let c1 = currencyLabel.trailingAnchor.constraint(equalTo: viewMargins.trailingAnchor)
-            let c2 = currencyLabel.leadingAnchor.constraint(equalTo: decimalLabel.trailingAnchor, constant: style.layout.currencySpacing)
-            let c3 = integerLabel.leadingAnchor.constraint(equalTo: viewMargins.leadingAnchor)
-            
-            constraints.append(c2)
-            
-            switch style.layout.horizontalAlignment {
-            case .left:
-                constraints.append(c3)
-            case .right:
-                constraints.append(c1)
-            default:
-                constraints.append(c1)
-                constraints.append(c3)
-            }
+        // Integer Y constraints
+        switch style.layout.verticalAlignment {
+        case .top:
+            constraints.append(integerLabel.topAnchor.constraint(equalTo: containerView.topAnchor))
+        case .bottom:
+            constraints.append(integerLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor))
+        case .middle:
+            constraints.append(integerLabel.topAnchor.constraint(equalTo: containerView.topAnchor))
+            constraints.append(integerLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor))
         }
         
-        constraints.append(yConstraint(between: currencyLabel, and: integerLabel, with: style.textStyles.currency))
-        constraints.append(yConstraint(between: decimalSeparatorLabel, and: integerLabel, with: style.textStyles.decimalSeparator))
-        constraints.append(yConstraint(between: decimalLabel, and: integerLabel, with: style.textStyles.decimal))
+        // Labels Y constraints
+        [(currencyLabel, style.textStyles.currency),
+         (decimalLabel, style.textStyles.decimal),
+         (decimalSeparatorLabel, style.textStyles.decimalSeparator)].forEach { (label, textStyle) in
+            constraints.append(buildXConstraint(for: label, textStyle: textStyle, to: integerLabel))
+        }
+        
+        // X constraints
+        constraints.append(integerLabel.trailingAnchor.constraint(equalTo: decimalSeparatorLabel.leadingAnchor, constant: -style.layout.decimalSeparatorSpacing.leading))
+        constraints.append(decimalSeparatorLabel.trailingAnchor.constraint(equalTo: decimalLabel.leadingAnchor, constant: -style.layout.decimalSeparatorSpacing.trailing))
+        
+        var left: NSLayoutConstraint?
+        var right: NSLayoutConstraint?
+        
+        switch (SymbolPosition(with: style.options.locale)) {
+        case .afterCurrency:
+            constraints.append(currencyLabel.leadingAnchor.constraint(equalTo: decimalLabel.trailingAnchor, constant: -style.layout.currencySpacing))
+            left = integerLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor)
+            right = currencyLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
+        case .beforeCurrency:
+            constraints.append(currencyLabel.trailingAnchor.constraint(equalTo: integerLabel.leadingAnchor, constant: -style.layout.currencySpacing))
+            left = currencyLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor)
+            right = decimalLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
+        }
+        
+        switch style.layout.horizontalAlignment {
+        case .left, .natural:
+            constraints.append(left!)
+        case .right:
+            constraints.append(right!)
+        case .center, .justified:
+            constraints.append(left!)
+            constraints.append(right!)
+        }
         
         return constraints
     }
     
     // MARK: - Private
     
-    private func yConstraint(between labelA: UILabel,
-                             and labelB: UILabel,
-                             with labelATextStyle: TextStyle) -> NSLayoutConstraint {
-        switch labelATextStyle.verticalAlignment {
-        case .baseline(let offset):
-            return labelA.lastBaselineAnchor.constraint(equalTo: labelB.lastBaselineAnchor, constant: offset)
-        case .bottom(let offset):
-            return labelA.bottomAnchor.constraint(equalTo: labelB.bottomAnchor, constant: offset)
-        case .top(let offset):
-            return labelA.topAnchor.constraint(equalTo: labelB.topAnchor, constant: offset)
-        case .middle(let offset):
-            return labelA.centerYAnchor.constraint(equalTo: labelB.centerYAnchor, constant: offset)
+    private func buildConstraints(for container: UIView,
+                                  style: Style,
+                                  viewMargins: UILayoutGuide) -> [NSLayoutConstraint] {
+        var constraints = [NSLayoutConstraint]()
+        
+        let left = container.leftAnchor.constraint(equalTo: viewMargins.leftAnchor)
+        let right = container.rightAnchor.constraint(equalTo: viewMargins.rightAnchor)
+        let centerX = container.centerXAnchor.constraint(equalTo: viewMargins.centerXAnchor)
+        
+        switch style.layout.horizontalAlignment {
+        case .left, .natural:
+            right.priority = .defaultLow
+        case .right:
+            left.priority = .defaultLow
+        case .center, .justified:
+            left.priority = .defaultLow
+            right.priority = .defaultLow
+            constraints.append(centerX)
         }
+        
+        constraints.append(left)
+        constraints.append(right)
+        
+        constraints = constraints + buildYConstraints(for: container, style: style, viewMargins: viewMargins)
+        
+        return constraints
     }
     
-    private func yConstraints(for view: UIView,
-                              with layoutGuide: UILayoutGuide,
-                              and alignment: Layout.VerticalAlignment) -> [NSLayoutConstraint] {
-        let top = view.topAnchor.constraint(equalTo: layoutGuide.topAnchor)
-        let bottom = view.bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor)
-        let centerY = view.centerYAnchor.constraint(equalTo: layoutGuide.centerYAnchor)
+    private func buildYConstraints(for view: UIView, style: Style, viewMargins: UILayoutGuide) -> [NSLayoutConstraint] {
+        var constraints = [NSLayoutConstraint]()
         
-        switch alignment {
+        let top = view.topAnchor.constraint(equalTo: viewMargins.topAnchor)
+        let bottom = view.bottomAnchor.constraint(equalTo: viewMargins.bottomAnchor)
+        let centerY = view.centerYAnchor.constraint(equalTo: viewMargins.centerYAnchor)
+        
+        switch style.layout.verticalAlignment {
         case .top:
-            top.priority = .required
             bottom.priority = .defaultLow
-            return [top, bottom]
         case .bottom:
             top.priority = .defaultLow
-            bottom.priority = .required
-            return [top, bottom]
         case .middle:
             top.priority = .defaultLow
             bottom.priority = .defaultLow
-            centerY.priority = .required
-            return [top, bottom, centerY]
+            constraints.append(centerY)
         }
+        
+        constraints.append(top)
+        constraints.append(bottom)
+
+        return constraints
     }
     
-    private func xConstraints(for view: UIView,
-                              with layoutGuide: UILayoutGuide,
-                              and alignment: NSTextAlignment) -> [NSLayoutConstraint] {
-        let left = view.leftAnchor.constraint(equalTo: layoutGuide.leftAnchor)
-        let right = view.rightAnchor.constraint(equalTo: layoutGuide.rightAnchor)
-        let leading = view.leadingAnchor.constraint(equalTo: layoutGuide.leadingAnchor)
-        let trailing = view.trailingAnchor.constraint(equalTo: layoutGuide.trailingAnchor)
-        let centerX = view.centerXAnchor.constraint(equalTo: layoutGuide.centerXAnchor)
-        
-        switch alignment {
-        case .natural:
-            leading.priority = .required
-            trailing.priority = .defaultLow
-            return [leading, trailing]
-        case .left:
-            left.priority = .required
-            right.priority = .defaultLow
-            return [left, right]
-        case .right:
-            left.priority = .defaultLow
-            right.priority = .required
-            return [left, right]
-        case .justified, .center:
-            trailing.priority = .defaultLow
-            leading.priority = .defaultLow
-            centerX.priority = .required
-            return [trailing, leading, centerX]
+    private func buildXConstraint(for labelA: UILabel, textStyle: TextStyle, to integerLabel: UILabel) -> NSLayoutConstraint {
+        switch textStyle.verticalAlignment {
+        case .baseline(let x):
+            return labelA.lastBaselineAnchor.constraint(equalTo: integerLabel.lastBaselineAnchor, constant: x)
+        case .bottom(let x):
+            return labelA.bottomAnchor.constraint(equalTo: integerLabel.bottomAnchor, constant: x)
+        case .middle(let x):
+            return labelA.centerYAnchor.constraint(equalTo: integerLabel.centerYAnchor, constant: x)
+        case .top(let x):
+            return labelA.topAnchor.constraint(equalTo: integerLabel.topAnchor, constant: x)
         }
     }
 }

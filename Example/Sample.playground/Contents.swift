@@ -15,15 +15,21 @@ final class MyViewController : UIViewController {
         let separatorTextStyle = TextStyle(size: 10, weight: .regular, color: .darkGray, verticalAlignment: .top(4))
         let locale = Locale(identifier: "en_GB")
         
-        let style = Style(integerTextStyle: integerTextStyle,
+        var style = Style(integerTextStyle: integerTextStyle,
                                    decimalTextStyle: decimalTextStyle,
                                    decimalSeparatorTextStyle: separatorTextStyle,
                                    currencyTextStyle: currencyTextStyle,
                                    decimalSeparatorSpacing: (1,0),
-                                   currencySpacing: 2,
+                                   currencySpacing: 12,
                                    verticalAlignment: .middle,
                                    textAlignment: .right,
                                     locale: locale)
+        style = Style(
+            defaultTextStyle: TextStyle(size: 14, color: .darkGray, verticalAlignment: .middle(0)),
+            layout: Layout(currencySpacing: 16),
+            textStyles: .integer(TextStyle(size: 20, color: .black, verticalAlignment: .middle(0)))
+        )
+        
         let priceView1 = UIPriceView(style: style)
 
         let style2 = Style(integerTextStyle: integerTextStyle,
@@ -81,7 +87,7 @@ final class MyViewController : UIViewController {
         priceView3.leadingAnchor.constraint(equalTo: label3.trailingAnchor, constant: 20).isActive = true
         priceView3.trailingAnchor.constraint(equalTo: margin.trailingAnchor).isActive = true
 
-        label1.text = "🇺🇸"
+        label1.text = "🇺🇸 iphone x with 256 go"
         label2.text = "🇫🇷"
         label3.text = "🇯🇵"
         priceView1.price = 1149.00

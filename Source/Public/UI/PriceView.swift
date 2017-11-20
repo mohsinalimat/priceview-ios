@@ -29,6 +29,7 @@ public final class UIPriceView: UIView {
         }
     }
     
+    private let containerView = UIView()
     private lazy var currencyLabel = makeCurrencyLabel()
     private lazy var integerLabel = makeIntegerLabel()
     private lazy var decimalSeparatorLabel = makeDecimalSeparatorLabel()
@@ -57,12 +58,19 @@ public final class UIPriceView: UIView {
     // MARK: - Instance methods
     
     private func setup() {
+        addSubview(containerView)
         [integerLabel, decimalSeparatorLabel, decimalLabel, currencyLabel].forEach {
-            addSubview($0)
+            containerView.addSubview($0)
         }
         
         bind()
         setupConstraints()
+        
+//        self.layer.borderColor = UIColor.black.cgColor
+//        self.layer.borderWidth = 1
+//
+//        self.containerView.layer.borderColor = UIColor.red.cgColor
+//        self.containerView.layer.borderWidth = 1
     }
     
     private func bind() {
@@ -93,6 +101,7 @@ public final class UIPriceView: UIView {
         NSLayoutConstraint.deactivate(currentConstraints)
                 
         currentConstraints = builder.buildConstraints(style: style,
+                                                      containerView: containerView,
                                                       integerLabel: integerLabel,
                                                       decimalLabel: decimalLabel,
                                                       decimalSeparatorLabel: decimalSeparatorLabel,
