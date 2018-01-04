@@ -5,6 +5,10 @@ import PlaygroundSupport
 import PriceView
 
 final class MyViewController : UIViewController {
+    let priceView1 = UIPriceView()
+    let priceView2 = UIPriceView()
+    let priceView3 = UIPriceView()
+    
     override func loadView() {
         let view = UIView()
         view.backgroundColor = .white
@@ -15,49 +19,21 @@ final class MyViewController : UIViewController {
         let separatorTextStyle = TextStyle(size: 10, weight: .regular, color: .darkGray, verticalAlignment: .top(4))
         let locale = Locale(identifier: "en_GB")
         
-        var style = Style(integerTextStyle: integerTextStyle,
-                                   decimalTextStyle: decimalTextStyle,
-                                   decimalSeparatorTextStyle: separatorTextStyle,
-                                   currencyTextStyle: currencyTextStyle,
-                                   decimalSeparatorSpacing: (1,0),
-                                   currencySpacing: 12,
-                                   verticalAlignment: .middle,
-                                   textAlignment: .right,
-                                    locale: locale)
-        style = Style(
+        var style = Style(
             defaultTextStyle: TextStyle(size: 14, color: .darkGray, verticalAlignment: .middle(0)),
-            layout: Layout(currencySpacing: 16),
+            layout: Layout(horizontalAlignment: .left, currencySpacing: 20),
             textStyles: .integer(TextStyle(size: 20, color: .black, verticalAlignment: .middle(0)))
         )
-        
-        let priceView1 = UIPriceView(style: style)
 
-        let style2 = Style(integerTextStyle: integerTextStyle,
-                          decimalTextStyle: decimalTextStyle,
-                          decimalSeparatorTextStyle: separatorTextStyle,
-                          currencyTextStyle: currencyTextStyle,
-                          decimalSeparatorSpacing: (3,0),
-                          currencySpacing: 2,
-                          verticalAlignment: .middle,
-                          textAlignment: .right,
-                          locale: Locale(identifier: "fr_FR"))
-        let priceView2 = UIPriceView(style: style2)
+        priceView1.style = style
+        priceView2.style = style
+        priceView3.style = style
         
-        let style3 = Style(integerTextStyle: integerTextStyle,
-                          decimalTextStyle: decimalTextStyle,
-                          decimalSeparatorTextStyle: separatorTextStyle,
-                          currencyTextStyle: currencyTextStyle,
-                          decimalSeparatorSpacing: (1,0),
-                          currencySpacing: 2,
-                          verticalAlignment: .middle,
-                          textAlignment: .right,
-                          locale: Locale(identifier: "en_US"))
-        let priceView3 = UIPriceView(style: style3)
-
         let label1 = UILabel()
         let label2 = UILabel()
         let label3 = UILabel()
 
+        
         [priceView1, priceView2, priceView3, label1, label2, label3].forEach { view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -87,14 +63,36 @@ final class MyViewController : UIViewController {
         priceView3.leadingAnchor.constraint(equalTo: label3.trailingAnchor, constant: 20).isActive = true
         priceView3.trailingAnchor.constraint(equalTo: margin.trailingAnchor).isActive = true
 
-        label1.text = "🇺🇸 iphone x with 256 go"
+        label1.text = "🇺🇸"
         label2.text = "🇫🇷"
         label3.text = "🇯🇵"
         priceView1.price = 1149.00
         priceView2.price = 1329.00
         priceView3.price = 129800
         
+        let button = UIButton()
+        button.setTitle("Tap", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        button.backgroundColor = .lightGray
+        view.addSubview(button)
+        
+        button.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.bottomAnchor.constraint(equalTo: margin.bottomAnchor).isActive = true
+        button.leadingAnchor.constraint(equalTo: margin.leadingAnchor).isActive = true
+        button.trailingAnchor.constraint(equalTo: margin.trailingAnchor).isActive = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+
         self.view = view
+    }
+    
+    
+    
+    @objc func didTapButton() {
+        print("TAPPED")
+        priceView1.locale = Locale(identifier: "fr_FR")
+//        priceView1.style = Style(defaultTextStyle: TextStyle(size: 14, color: .darkGray, verticalAlignment: .middle(0)), layout: Layout(), options: Options(locale: Locale(identifier: "en_GB")))
     }
 }
 

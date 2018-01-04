@@ -12,9 +12,9 @@ public struct Style {
     
     // MARK: - Properties
 
-    let textStyles: TextStyles
-    let options: Options
-    let layout: Layout
+    var textStyles: TextStyles
+    var options: Options
+    var layout: Layout
     
     // MARK: - Initializers
     

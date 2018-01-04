@@ -44,7 +44,7 @@ struct ConstraintsBuilder {
         
         switch (SymbolPosition(with: style.options.locale)) {
         case .afterCurrency:
-            constraints.append(currencyLabel.leadingAnchor.constraint(equalTo: decimalLabel.trailingAnchor, constant: -style.layout.currencySpacing))
+            constraints.append(currencyLabel.leadingAnchor.constraint(equalTo: decimalLabel.trailingAnchor, constant: style.layout.currencySpacing))
             left = constraint(view: integerLabel, to: containerView, on: \UIView.leadingAnchor)
             right = constraint(view: currencyLabel, to: containerView, on: \UIView.trailingAnchor)
         case .beforeCurrency:

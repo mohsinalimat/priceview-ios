@@ -9,8 +9,8 @@
 import Foundation
 
 public struct Options {
-    let locale: Locale
-    let fractionDigits: Int
+    var locale: Locale
+    var fractionDigits: Int
     
     public init(locale: Locale = .current, fractionDigits: Int = 2) {
         self.locale = locale

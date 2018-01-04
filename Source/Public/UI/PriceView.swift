@@ -29,6 +29,14 @@ public final class UIPriceView: UIView {
         }
     }
     
+    public var locale: Locale {
+        didSet {
+            style.options.locale = locale
+            setupConstraints()
+            bind()
+        }
+    }
+    
     private let containerView = UIView()
     private lazy var currencyLabel = makeCurrencyLabel()
     private lazy var integerLabel = makeIntegerLabel()
@@ -41,12 +49,14 @@ public final class UIPriceView: UIView {
     // MARK: - Initializers
     
     override public init(frame: CGRect) {
+        self.locale = Locale.current
         super.init(frame: frame)
         setup()
     }
     
     public init(style: Style) {
         self.style = style
+        self.locale = style.options.locale
         super.init(frame: .zero)
         setup()
     }
