@@ -20,7 +20,7 @@
 		C88AEC9C1FB1BC38004AEE39 /* PriceView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C88AEC921FB1BC38004AEE39 /* PriceView.framework */; };
 		C88AECA11FB1BC38004AEE39 /* PriceViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88AECA01FB1BC38004AEE39 /* PriceViewTests.swift */; };
 		C88AECA31FB1BC38004AEE39 /* PriceView.h in Headers */ = {isa = PBXBuildFile; fileRef = C88AEC951FB1BC38004AEE39 /* PriceView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C88AECAD1FB1BC4B004AEE39 /* PriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88AECAC1FB1BC4B004AEE39 /* PriceView.swift */; };
+		C88AECAD1FB1BC4B004AEE39 /* UIPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88AECAC1FB1BC4B004AEE39 /* UIPriceView.swift */; };
 		C88AECAF1FB1BC5E004AEE39 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88AECAE1FB1BC5E004AEE39 /* Style.swift */; };
 		C88AECB51FB1BCBD004AEE39 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88AECB41FB1BCBD004AEE39 /* Formatter.swift */; };
 		C88AECB71FB1BCE7004AEE39 /* TextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88AECB61FB1BCE7004AEE39 /* TextStyle.swift */; };
@@ -59,7 +59,7 @@
 		C88AEC9B1FB1BC38004AEE39 /* PriceViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PriceViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C88AECA01FB1BC38004AEE39 /* PriceViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceViewTests.swift; sourceTree = "<group>"; };
 		C88AECA21FB1BC38004AEE39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C88AECAC1FB1BC4B004AEE39 /* PriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceView.swift; sourceTree = "<group>"; };
+		C88AECAC1FB1BC4B004AEE39 /* UIPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPriceView.swift; sourceTree = "<group>"; };
 		C88AECAE1FB1BC5E004AEE39 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		C88AECB41FB1BCBD004AEE39 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		C88AECB61FB1BCE7004AEE39 /* TextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyle.swift; sourceTree = "<group>"; };
@@ -113,7 +113,7 @@
 		C8101A351FB751AA001EDFE7 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				C88AECAC1FB1BC4B004AEE39 /* PriceView.swift */,
+				C88AECAC1FB1BC4B004AEE39 /* UIPriceView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -403,7 +403,7 @@
 				C856147C1FB74F2F00A8C110 /* Options.swift in Sources */,
 				C8101A331FB750D9001EDFE7 /* TextStyleType.swift in Sources */,
 				C804E2711FBF4A3F006BCE98 /* ConstraintsBuilder.swift in Sources */,
-				C88AECAD1FB1BC4B004AEE39 /* PriceView.swift in Sources */,
+				C88AECAD1FB1BC4B004AEE39 /* UIPriceView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

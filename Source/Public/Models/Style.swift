@@ -56,14 +56,13 @@ public struct Style {
                 currencySpacing: CGFloat = 0,
                 fractionDigits: Int = 2,
                 verticalAlignment: Layout.VerticalAlignment = .middle,
-                textAlignment: NSTextAlignment = .center,
-                locale: Locale = NSLocale.current
+                textAlignment: NSTextAlignment = .center
     ) {
         self.textStyles = TextStyles(integer: integerTextStyle,
                                      decimal: decimalTextStyle,
                                      decimalSeparator: decimalSeparatorTextStyle,
                                      currency: currencyTextStyle)
         self.layout = Layout(verticalAlignment: verticalAlignment, horizontalAlignment: textAlignment, currencySpacing: currencySpacing, decimalSeparatorSpacing: (leading: decimalSeparatorSpacing.leading, trailing: decimalSeparatorSpacing.trailing))
-        self.options = Options(locale: locale, fractionDigits: fractionDigits)
+        self.options = Options(fractionDigits: fractionDigits)
     }
 }

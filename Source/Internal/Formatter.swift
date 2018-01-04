@@ -11,23 +11,25 @@ import Foundation
 final class Formatter {
     
     private let style: Style
+    private let locale: Locale
     
-    init(with style: Style) {
+    init(with style: Style, locale: Locale) {
         self.style = style
+        self.locale = locale
     }
     
     var currencySymbol: String {
-        return style.options.locale.currencySymbol ?? ""
+        return locale.currencySymbol ?? ""
     }
     
     var decimalSeparator: String {
-        return style.options.locale.decimalSeparator ?? ""
+        return locale.decimalSeparator ?? ""
     }
     
     func formattedInteger(price: Double) -> String {
         let formatter = NumberFormatter()
-        formatter.locale = style.options.locale
-        formatter.groupingSeparator = style.options.locale.groupingSeparator
+        formatter.locale = locale
+        formatter.groupingSeparator = locale.groupingSeparator
         if style.options.fractionDigits < 2 {
             formatter.minimumFractionDigits = style.options.fractionDigits
         } else {
@@ -42,7 +44,7 @@ final class Formatter {
     
     func formattedDecimal(price: Double) -> String {
         let formatter = NumberFormatter()
-        formatter.locale = style.options.locale
+        formatter.locale = locale
         formatter.minimumFractionDigits = style.options.fractionDigits
         let formattedPrice = formatter.string(from: NSNumber(value: price)) ?? "\(price)"
         

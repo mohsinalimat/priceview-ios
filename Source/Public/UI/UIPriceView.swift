@@ -31,7 +31,6 @@ public final class UIPriceView: UIView {
     
     public var locale: Locale {
         didSet {
-            style.options.locale = locale
             setupConstraints()
             bind()
         }
@@ -54,9 +53,9 @@ public final class UIPriceView: UIView {
         setup()
     }
     
-    public init(style: Style) {
+    public init(style: Style, locale: Locale = Locale.current) {
         self.style = style
-        self.locale = style.options.locale
+        self.locale = locale
         super.init(frame: .zero)
         setup()
     }
@@ -78,7 +77,7 @@ public final class UIPriceView: UIView {
     }
     
     private func bind() {
-        let formatter = Formatter(with: style)
+        let formatter = Formatter(with: style, locale: locale)
         
         decimalSeparatorLabel.text = formatter.decimalSeparator
         currencyLabel.text = formatter.currencySymbol
@@ -105,6 +104,7 @@ public final class UIPriceView: UIView {
         NSLayoutConstraint.deactivate(currentConstraints)
                 
         currentConstraints = builder.buildConstraints(style: style,
+                                                      locale: locale,
                                                       containerView: containerView,
                                                       integerLabel: integerLabel,
                                                       decimalLabel: decimalLabel,

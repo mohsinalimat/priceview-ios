@@ -9,11 +9,9 @@
 import Foundation
 
 public struct Options {
-    var locale: Locale
     var fractionDigits: Int
     
-    public init(locale: Locale = .current, fractionDigits: Int = 2) {
-        self.locale = locale
+    public init(fractionDigits: Int = 2) {
         self.fractionDigits = fractionDigits
     }
 }

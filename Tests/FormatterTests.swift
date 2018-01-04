@@ -123,8 +123,8 @@ final class FormatterTests: XCTestCase {
               file: StaticString = #file,
               line: UInt = #line) {
         let locale = Locale(identifier: localeIdentifier)
-        let style = makeStyle(with: locale, fractionDigits: fractionDigits)
-        let formatter = Formatter(with: style)
+        let style = makeStyle(fractionDigits: fractionDigits)
+        let formatter = Formatter(with: style, locale: locale)
         let formattedInt = formatter.formattedInteger(price: price)
         let formattedDecimal = formatter.formattedDecimal(price: price)
 
@@ -132,12 +132,12 @@ final class FormatterTests: XCTestCase {
         XCTAssertEqual(formattedDecimal, expectedDecimalPart, "decimal part", file: file, line: line)
     }
     
-    private func makeStyle(with locale: Locale, fractionDigits: Int? = nil) -> Style {
+    private func makeStyle(fractionDigits: Int? = nil) -> Style {
         let aTextStyle = TextStyle(size: 12, color: .black)
         if let fractionDigits = fractionDigits {
-            return Style(defaultTextStyle: aTextStyle, options: Options(locale: locale, fractionDigits: fractionDigits))
+            return Style(defaultTextStyle: aTextStyle, options: Options(fractionDigits: fractionDigits))
         } else {
-            return Style(defaultTextStyle: aTextStyle, options: Options(locale: locale))
+            return Style(defaultTextStyle: aTextStyle, options: Options())
         }
     }
 }

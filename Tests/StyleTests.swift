@@ -20,8 +20,7 @@ final class StyleTests: XCTestCase {
                         currencySpacing: 2,
                         fractionDigits: 1,
                         verticalAlignment: Layout.VerticalAlignment.bottom,
-                        textAlignment: .natural,
-                        locale: Locale(identifier: "fr_FR"))
+                        textAlignment: .natural)
 
         XCTAssertEqual(sut.textStyles.integer.fontSize, .size(12, .black))
         XCTAssertEqual(sut.textStyles.integer.color, .blue)
@@ -49,7 +48,6 @@ final class StyleTests: XCTestCase {
         XCTAssertEqual(sut.layout.horizontalAlignment, .natural)
         XCTAssertEqual(sut.layout.verticalAlignment, .bottom)
         XCTAssertEqual(sut.options.fractionDigits, 1)
-        XCTAssertEqual(sut.options.locale, Locale(identifier: "fr_FR"))
     }
     
     func testFlatInitDefaultValues() {
@@ -64,13 +62,12 @@ final class StyleTests: XCTestCase {
         XCTAssertEqual(sut.layout.horizontalAlignment, .center)
         XCTAssertEqual(sut.layout.verticalAlignment, .middle)
         XCTAssertEqual(sut.options.fractionDigits, 2)
-        XCTAssertEqual(sut.options.locale, Locale.current)
     }
     
     func testVariadicInitUseCustomDefaultWhenMissing() {
         let sut = Style(defaultTextStyle: TextStyle(size: 12, weight: .black, color: .blue, kern: 1.1, verticalAlignment: .baseline(5)),
                         layout: Layout(verticalAlignment: .top, horizontalAlignment: .left, currencySpacing: 2, decimalSeparatorSpacing: (leading: -1, trailing: 3)),
-                        options: Options.init(locale: Locale(identifier: "en_CA"), fractionDigits: 3), textStyles: TextStyleType.currency(TextStyle(size: 18, color: .red)))
+                        options: Options(fractionDigits: 3), textStyles: TextStyleType.currency(TextStyle(size: 18, color: .red)))
         
         XCTAssertEqual(sut.textStyles.integer.fontSize, .size(12, .black))
         XCTAssertEqual(sut.textStyles.integer.color, .blue)
@@ -98,7 +95,6 @@ final class StyleTests: XCTestCase {
         XCTAssertEqual(sut.layout.horizontalAlignment, .left)
         XCTAssertEqual(sut.layout.verticalAlignment, .top)
         XCTAssertEqual(sut.options.fractionDigits, 3)
-        XCTAssertEqual(sut.options.locale, Locale(identifier: "en_CA"))
     }
     
     func testVariadicInitDefaultStyle() {
@@ -130,7 +126,6 @@ final class StyleTests: XCTestCase {
         XCTAssertEqual(sut.layout.horizontalAlignment, .center)
         XCTAssertEqual(sut.layout.verticalAlignment, .middle)
         XCTAssertEqual(sut.options.fractionDigits, 2)
-        XCTAssertEqual(sut.options.locale, Locale.current)
     }
     
     func testVariadicInitAllSetStyle() {

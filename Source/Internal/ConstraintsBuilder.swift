@@ -11,6 +11,7 @@ import UIKit
 struct ConstraintsBuilder {
     
     func buildConstraints(style: Style,
+                          locale: Locale,
                           containerView: UIView,
                           integerLabel: UILabel,
                           decimalLabel: UILabel,
@@ -42,7 +43,7 @@ struct ConstraintsBuilder {
         let left: NSLayoutConstraint
         let right: NSLayoutConstraint
         
-        switch (SymbolPosition(with: style.options.locale)) {
+        switch (SymbolPosition(with: locale)) {
         case .afterCurrency:
             constraints.append(currencyLabel.leadingAnchor.constraint(equalTo: decimalLabel.trailingAnchor, constant: style.layout.currencySpacing))
             left = constraint(view: integerLabel, to: containerView, on: \UIView.leadingAnchor)
