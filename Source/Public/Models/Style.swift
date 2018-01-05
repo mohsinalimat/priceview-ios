@@ -13,7 +13,7 @@ public struct Style {
     // MARK: - Properties
 
     var textStyles: TextStyles
-    var options: Options
+    var fractionDigits: Int
     var layout: Layout
     
     // MARK: - Initializers
@@ -21,12 +21,12 @@ public struct Style {
     public init(
         defaultTextStyle: TextStyle = TextStyle(size: 12, weight: .semibold, color: .black),
         layout: Layout = Layout(),
-        options: Options = Options(),
+        fractionDigits: Int = 2,
         textStyles: TextStyleType...
     ) {
         self.textStyles = Style.makeTextStyles(defaultStyle: defaultTextStyle, textStyles: textStyles)
         self.layout = layout
-        self.options = options
+        self.fractionDigits = fractionDigits
     }
     
     private static func makeTextStyles(defaultStyle: TextStyle, textStyles: [TextStyleType]) -> TextStyles {
@@ -63,6 +63,6 @@ public struct Style {
                                      decimalSeparator: decimalSeparatorTextStyle,
                                      currency: currencyTextStyle)
         self.layout = Layout(verticalAlignment: verticalAlignment, horizontalAlignment: textAlignment, currencySpacing: currencySpacing, decimalSeparatorSpacing: (leading: decimalSeparatorSpacing.leading, trailing: decimalSeparatorSpacing.trailing))
-        self.options = Options(fractionDigits: fractionDigits)
+        self.fractionDigits = fractionDigits
     }
 }

@@ -135,9 +135,9 @@ final class FormatterTests: XCTestCase {
     private func makeStyle(fractionDigits: Int? = nil) -> Style {
         let aTextStyle = TextStyle(size: 12, color: .black)
         if let fractionDigits = fractionDigits {
-            return Style(defaultTextStyle: aTextStyle, options: Options(fractionDigits: fractionDigits))
+            return Style(defaultTextStyle: aTextStyle, fractionDigits: fractionDigits)
         } else {
-            return Style(defaultTextStyle: aTextStyle, options: Options())
+            return Style(defaultTextStyle: aTextStyle)
         }
     }
 }

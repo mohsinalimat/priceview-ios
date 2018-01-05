@@ -77,8 +77,3 @@ enum FontSize: Equatable {
         }
     }
 }
-
-
-
-
-
