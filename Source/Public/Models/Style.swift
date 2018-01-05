@@ -44,7 +44,8 @@ public struct Style {
     
     // MARK: - Initializers
     
-    public init(defaultTextStyle: TextStyle = TextStyle(font: UIFont.preferredFont(forTextStyle: .body), color: .black, kern: 0.0, verticalAlignment: .baseline(0)), elements: StyleElement...) {
+    public init(defaultTextStyle: TextStyle = TextStyle(font: UIFont.preferredFont(forTextStyle: .body), color: .black, kern: 0.0, verticalAlignment: .baseline(0)),
+                elements: StyleElement...) {
         self.integer = defaultTextStyle
         self.currency = defaultTextStyle
         self.decimal = defaultTextStyle

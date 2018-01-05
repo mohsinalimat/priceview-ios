@@ -40,9 +40,9 @@ public struct TextStyle {
     
     public init(size: CGFloat,
                 weight: UIFont.Weight = .semibold,
-         color: UIColor,
-         kern: CGFloat = 0.0,
-         verticalAlignment: TextVerticalAlignment = .baseline(0)
+                color: UIColor,
+                kern: CGFloat = 0.0,
+                verticalAlignment: TextVerticalAlignment = .baseline(0)
     ) {
         self.fontSize = .size(size, weight)
         self.color = color
@@ -54,7 +54,7 @@ public struct TextStyle {
                 color: UIColor,
                 kern: CGFloat = 0.0,
                 verticalAlignment: TextVerticalAlignment = .baseline(0)
-        ) {
+    ) {
         self.fontSize = .font(font)
         self.color = color
         self.kern = kern
