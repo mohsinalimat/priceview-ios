@@ -30,31 +30,31 @@ struct ConstraintsBuilder {
         constraints = constraints + buildYConstraints(for: integerLabel, style: style, to: containerView)
         
         // Labels Y constraints
-        [(currencyLabel, style.textStyles.currency),
-         (decimalLabel, style.textStyles.decimal),
-         (decimalSeparatorLabel, style.textStyles.decimalSeparator)].forEach { (label, textStyle) in
+        [(currencyLabel, style.currency),
+         (decimalLabel, style.decimal),
+         (decimalSeparatorLabel, style.decimalSeparator)].forEach { (label, textStyle) in
             constraints.append(buildYConstraint(for: label, textStyle: textStyle, to: integerLabel))
         }
         
         // X constraints
-        constraints.append(integerLabel.trailingAnchor.constraint(equalTo: decimalSeparatorLabel.leadingAnchor, constant: -style.layout.decimalSeparatorSpacing.leading))
-        constraints.append(decimalSeparatorLabel.trailingAnchor.constraint(equalTo: decimalLabel.leadingAnchor, constant: -style.layout.decimalSeparatorSpacing.trailing))
+        constraints.append(integerLabel.trailingAnchor.constraint(equalTo: decimalSeparatorLabel.leadingAnchor, constant: -style.decimalSeparatorSpacing.leading))
+        constraints.append(decimalSeparatorLabel.trailingAnchor.constraint(equalTo: decimalLabel.leadingAnchor, constant: -style.decimalSeparatorSpacing.trailing))
         
         let left: NSLayoutConstraint
         let right: NSLayoutConstraint
         
         switch (SymbolPosition(with: locale)) {
         case .afterCurrency:
-            constraints.append(currencyLabel.leadingAnchor.constraint(equalTo: decimalLabel.trailingAnchor, constant: style.layout.currencySpacing))
+            constraints.append(currencyLabel.leadingAnchor.constraint(equalTo: decimalLabel.trailingAnchor, constant: style.currencySpacing))
             left = constraint(view: integerLabel, to: containerView, on: \UIView.leadingAnchor)
             right = constraint(view: currencyLabel, to: containerView, on: \UIView.trailingAnchor)
         case .beforeCurrency:
-            constraints.append(currencyLabel.trailingAnchor.constraint(equalTo: integerLabel.leadingAnchor, constant: -style.layout.currencySpacing))
+            constraints.append(currencyLabel.trailingAnchor.constraint(equalTo: integerLabel.leadingAnchor, constant: -style.currencySpacing))
             left = constraint(view: currencyLabel, to: containerView, on: \UIView.leadingAnchor)
             right = constraint(view: decimalLabel, to: containerView, on: \UIView.trailingAnchor)
         }
         
-        switch style.layout.horizontalAlignment {
+        switch style.horizontalAlignment {
         case .left, .natural:
             constraints.append(left)
         case .right:
@@ -78,7 +78,7 @@ struct ConstraintsBuilder {
         let right = container.rightAnchor.constraint(equalTo: viewMargins.rightAnchor)
         let centerX = container.centerXAnchor.constraint(equalTo: viewMargins.centerXAnchor)
         
-        switch style.layout.horizontalAlignment {
+        switch style.horizontalAlignment {
         case .left, .natural:
             right.priority = .defaultLow
         case .right:
@@ -108,7 +108,7 @@ struct ConstraintsBuilder {
         let bottom = view.bottomAnchor.constraint(equalTo: viewMargins.bottomAnchor)
         let centerY = view.centerYAnchor.constraint(equalTo: viewMargins.centerYAnchor)
         
-        switch style.layout.verticalAlignment {
+        switch style.verticalAlignment {
         case .top:
             bottom.priority = .defaultLow
         case .bottom:
@@ -141,7 +141,7 @@ struct ConstraintsBuilder {
     private func buildYConstraints(for label: UILabel, style: Style, to containerView: UIView) -> [NSLayoutConstraint] {
         var constraints = [NSLayoutConstraint]()
         
-        switch style.layout.verticalAlignment {
+        switch style.verticalAlignment {
         case .top:
             constraints.append(constraint(view: label, to: containerView, on: \UIView.topAnchor))
         case .bottom:

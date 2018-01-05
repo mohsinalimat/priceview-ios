@@ -8,61 +8,68 @@
 
 import Foundation
 
+public enum StyleElement {
+    case verticalAlignment(Style.VerticalAlignment)
+    case horizontalAlignment(NSTextAlignment)
+    case currencySpacing(CGFloat)
+    case decimalSeparatorSpacing(leading: CGFloat, trailing: CGFloat)
+    case fractionDigits(Int)
+    case integer(TextStyle)
+    case decimal(TextStyle)
+    case decimalSeparator(TextStyle)
+    case currency(TextStyle)
+}
+
 public struct Style {
     
+    public enum VerticalAlignment {
+        case top
+        case bottom
+        case middle
+    }
+    
     // MARK: - Properties
-
-    var textStyles: TextStyles
-    var fractionDigits: Int
-    var layout: Layout
+    
+    var integer: TextStyle
+    var decimal: TextStyle
+    var decimalSeparator: TextStyle
+    var currency: TextStyle
+    
+    var fractionDigits: Int = 2
+    
+    var verticalAlignment: VerticalAlignment = .middle
+    var horizontalAlignment: NSTextAlignment = .center
+    var currencySpacing: CGFloat = 0
+    var decimalSeparatorSpacing: (leading: CGFloat, trailing: CGFloat) = (leading: 0, trailing: 0)
     
     // MARK: - Initializers
     
-    public init(
-        defaultTextStyle: TextStyle = TextStyle(size: 12, weight: .semibold, color: .black),
-        layout: Layout = Layout(),
-        fractionDigits: Int = 2,
-        textStyles: TextStyleType...
-    ) {
-        self.textStyles = Style.makeTextStyles(defaultStyle: defaultTextStyle, textStyles: textStyles)
-        self.layout = layout
-        self.fractionDigits = fractionDigits
-    }
-    
-    private static func makeTextStyles(defaultStyle: TextStyle, textStyles: [TextStyleType]) -> TextStyles {
-        var tmp = TextStyles(defaultTextStyle: defaultStyle)
-        
-        for textStyle in textStyles {
-            switch textStyle {
-            case .currency(let style):
-                tmp.currency = style
-            case .decimal(let style):
-                tmp.decimal = style
-            case .decimalSeparator(let style):
-                tmp.decimalSeparator = style
-            case .integer(let style):
-                tmp.integer = style
+    public init(defaultTextStyle: TextStyle = TextStyle(font: UIFont.preferredFont(forTextStyle: .body), color: .black, kern: 0.0, verticalAlignment: .baseline(0)), elements: StyleElement...) {
+        self.integer = defaultTextStyle
+        self.currency = defaultTextStyle
+        self.decimal = defaultTextStyle
+        self.decimalSeparator = defaultTextStyle
+        for element in elements {
+            switch element {
+            case .verticalAlignment(let value):
+                self.verticalAlignment = value
+            case .horizontalAlignment(let value):
+                self.horizontalAlignment = value
+            case .currencySpacing(let value):
+                self.currencySpacing = value
+            case .decimalSeparatorSpacing(leading: let leading, trailing: let trailing):
+                self.decimalSeparatorSpacing = (leading: leading, trailing: trailing)
+            case .fractionDigits(let value):
+                self.fractionDigits = value
+            case .integer(let value):
+                self.integer = value
+            case .decimal(let value):
+                self.decimal = value
+            case .decimalSeparator(let value):
+                self.decimalSeparator = value
+            case .currency(let value):
+                self.currency = value
             }
         }
-        
-        return tmp
-    }
-    
-    public init(integerTextStyle: TextStyle,
-                decimalTextStyle: TextStyle,
-                decimalSeparatorTextStyle: TextStyle,
-                currencyTextStyle: TextStyle,
-                decimalSeparatorSpacing: (leading: CGFloat, trailing: CGFloat) = (0, 0),
-                currencySpacing: CGFloat = 0,
-                fractionDigits: Int = 2,
-                verticalAlignment: Layout.VerticalAlignment = .middle,
-                textAlignment: NSTextAlignment = .center
-    ) {
-        self.textStyles = TextStyles(integer: integerTextStyle,
-                                     decimal: decimalTextStyle,
-                                     decimalSeparator: decimalSeparatorTextStyle,
-                                     currency: currencyTextStyle)
-        self.layout = Layout(verticalAlignment: verticalAlignment, horizontalAlignment: textAlignment, currencySpacing: currencySpacing, decimalSeparatorSpacing: (leading: decimalSeparatorSpacing.leading, trailing: decimalSeparatorSpacing.trailing))
-        self.fractionDigits = fractionDigits
     }
 }

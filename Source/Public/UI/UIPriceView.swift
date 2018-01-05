@@ -18,11 +18,7 @@ public final class UIPriceView: UIView {
         }
     }
     
-    public var style = Style(
-        integerTextStyle: TextStyle(size: 20, color: .black, kern: 1.2),
-        decimalTextStyle: TextStyle(size: 10, color: .darkGray),
-        decimalSeparatorTextStyle: TextStyle(size: 10, color: .darkGray),
-        currencyTextStyle: TextStyle(size: 12, color: .black) ) {
+    public var style = Style() {
         didSet {
             updateStyle()
             bind()
@@ -86,16 +82,16 @@ public final class UIPriceView: UIView {
         let formattedDecimal = formatter.formattedDecimal(price: price)
         
         //apply kerning
-        integerLabel.attributedText = NSAttributedString(string: formattedInteger, attributes: [.kern: style.textStyles.integer.kern])
-        decimalLabel.attributedText = NSAttributedString(string: formattedDecimal, attributes: [.kern: style.textStyles.decimal.kern])
+        integerLabel.attributedText = NSAttributedString(string: formattedInteger, attributes: [.kern: style.integer.kern])
+        decimalLabel.attributedText = NSAttributedString(string: formattedDecimal, attributes: [.kern: style.decimal.kern])
     }
     
     private func updateStyle() {
         setupConstraints()
-        [(integerLabel, style.textStyles.integer),
-         (decimalSeparatorLabel, style.textStyles.decimalSeparator),
-         (decimalLabel, style.textStyles.decimal),
-         (currencyLabel, style.textStyles.currency)].forEach {
+        [(integerLabel, style.integer),
+         (decimalSeparatorLabel, style.decimalSeparator),
+         (decimalLabel, style.decimal),
+         (currencyLabel, style.currency)].forEach {
             updateLabel($0.0, with: $0.1)
         }
     }
@@ -118,19 +114,19 @@ public final class UIPriceView: UIView {
     // MARK: - UI
     
     private func makeIntegerLabel() -> UILabel {
-        return makeLabel(with: style.textStyles.integer)
+        return makeLabel(with: style.integer)
     }
     
     private func makeDecimalLabel() -> UILabel {
-        return makeLabel(with: style.textStyles.decimal)
+        return makeLabel(with: style.decimal)
     }
     
     private func makeDecimalSeparatorLabel() -> UILabel {
-        return makeLabel(with: style.textStyles.decimalSeparator)
+        return makeLabel(with: style.decimalSeparator)
     }
     
     private func makeCurrencyLabel() -> UILabel {
-        return makeLabel(with: style.textStyles.currency)
+        return makeLabel(with: style.currency)
     }
     
     private func makeLabel(with style: TextStyle) -> UILabel {

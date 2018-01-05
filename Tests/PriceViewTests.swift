@@ -45,56 +45,24 @@ final class PriceViewTests: FBSnapshotTestCase {
     }
     
     func testFoolishAlignment() {
-        let style = Style(
-            integerTextStyle:
-            TextStyle(size: 32,
-                      color: .black,
-                      kern: 1.3,
-                      verticalAlignment: .bottom(0)),
-            decimalTextStyle:
-            TextStyle(size: 18,
-                      color: .lightGray,
-                      kern: 0,
-                      verticalAlignment: .top(0)),
-            decimalSeparatorTextStyle:
-            TextStyle(size: 18,
-                      color: .darkGray,
-                      kern: 0,
-                      verticalAlignment: .middle(0)),
-            currencyTextStyle:
-            TextStyle(size: 20,
-                      color: .darkGray,
-                      kern: 0,
-                      verticalAlignment: .bottom(0))
+        let style = Style(elements:
+            .integer(TextStyle(size: 32, color: .black, kern: 1.3, verticalAlignment: .bottom(0))),
+            .decimal(TextStyle(size: 18, color: .lightGray, kern: 0, verticalAlignment: .top(0))),
+            .decimalSeparator(TextStyle(size: 18, color: .darkGray, kern: 0, verticalAlignment: .middle(0))),
+            .currency( TextStyle(size: 20, color: .darkGray, kern: 0, verticalAlignment: .bottom(0)))
         )
-        
+            
         for value in testValues {
             verifySnap(with: value, style: style)
         }
     }
     
     func testDecimalAndSeparatorTopAlignment() {
-        let style = Style(
-            integerTextStyle:
-            TextStyle(size: 32,
-                      color: .black,
-                      kern: 1.3,
-                      verticalAlignment: .bottom(0)),
-            decimalTextStyle:
-            TextStyle(size: 18,
-                      color: .lightGray,
-                      kern: 0,
-                      verticalAlignment: .top(0)),
-            decimalSeparatorTextStyle:
-            TextStyle(size: 18,
-                      color: .darkGray,
-                      kern: 0,
-                      verticalAlignment: .top(0)),
-            currencyTextStyle:
-            TextStyle(size: 20,
-                      color: .darkGray,
-                      kern: 0,
-                      verticalAlignment: .bottom(0))
+        let style = Style(elements:
+            .integer(TextStyle(size: 32, color: .black, kern: 1.3, verticalAlignment: .bottom(0))),
+            .decimal(TextStyle(size: 18, color: .lightGray, kern: 0, verticalAlignment: .top(0))),
+            .decimalSeparator(TextStyle(size: 18, color: .darkGray, kern: 0, verticalAlignment: .top(0))),
+            .currency( TextStyle(size: 20, color: .darkGray, kern: 0, verticalAlignment: .bottom(0)))
         )
         
         for value in testValues {
@@ -103,27 +71,11 @@ final class PriceViewTests: FBSnapshotTestCase {
     }
     
     func testDecimalAndSeparatorTopAlignmentWithOffset() {
-        let style = Style(
-            integerTextStyle:
-            TextStyle(size: 24,
-                      color: .black,
-                      kern: 1.3,
-                      verticalAlignment: .bottom(0)),
-            decimalTextStyle:
-            TextStyle(size: 18,
-                      color: .lightGray,
-                      kern: 0,
-                      verticalAlignment: .top(3)),
-            decimalSeparatorTextStyle:
-            TextStyle(size: 18,
-                      color: .darkGray,
-                      kern: 0,
-                      verticalAlignment: .top(3)),
-            currencyTextStyle:
-            TextStyle(size: 20,
-                      color: .darkGray,
-                      kern: 0,
-                      verticalAlignment: .bottom(0))
+        let style = Style(elements:
+            .integer(TextStyle(size: 24, color: .black, kern: 1.3, verticalAlignment: .bottom(0))),
+            .decimal(TextStyle(size: 18, color: .lightGray, kern: 0, verticalAlignment: .top(3))),
+            .decimalSeparator(TextStyle(size: 18, color: .darkGray, kern: 0, verticalAlignment: .top(3))),
+            .currency( TextStyle(size: 20, color: .darkGray, kern: 0, verticalAlignment: .bottom(0)))
         )
         
         for value in testValues {
@@ -132,9 +84,8 @@ final class PriceViewTests: FBSnapshotTestCase {
     }
     
     func testMiddleAlignment() {
-        let style = Style(
-            defaultTextStyle: TextStyle(size: 16, color: .gray, kern: 1.1, verticalAlignment: .middle(0)),
-            textStyles: .integer(TextStyle(size: 28, color: .black, kern: 1.3, verticalAlignment: .bottom(0)))
+        let style = Style(defaultTextStyle: TextStyle(size: 16, color: .gray, kern: 1.1, verticalAlignment: .middle(0)),
+                          elements: .integer(TextStyle(size: 28, color: .black, kern: 1.3, verticalAlignment: .bottom(0)))
         )
         
         for value in testValues {
@@ -143,20 +94,18 @@ final class PriceViewTests: FBSnapshotTestCase {
     }
     
     func testBottomAlignment() {
-        let style = Style(
-            defaultTextStyle: TextStyle(size: 15, color: .gray, verticalAlignment: .bottom(0)),
-            textStyles: .integer(TextStyle(size: 20, color: .black, verticalAlignment: .bottom(0)))
+        let style = Style(defaultTextStyle: TextStyle(size: 15, color: .gray, verticalAlignment: .bottom(0)),
+                          elements: .integer(TextStyle(size: 20, color: .black, verticalAlignment: .bottom(0)))
         )
-        
+
         for value in testValues {
             verifySnap(with: value, style: style)
         }
     }
     
     func testBaselineAlignment() {
-        let style = Style(
-            defaultTextStyle: TextStyle(size: 13, color: .darkGray, verticalAlignment: .baseline(0)),
-            textStyles: .integer(TextStyle(size: 20, color: .black, verticalAlignment: .baseline(0)))
+        let style = Style(defaultTextStyle: TextStyle(size: 13, color: .darkGray, verticalAlignment: .baseline(0)),
+                          elements: .integer(TextStyle(size: 20, color: .black, verticalAlignment: .baseline(0)))
         )
 
         for value in testValues {
@@ -165,10 +114,9 @@ final class PriceViewTests: FBSnapshotTestCase {
     }
     
     func testSeparatorSpacing() {
-        let style = Style(
-            defaultTextStyle: TextStyle(size: 14, color: .darkGray, verticalAlignment: .baseline(0)),
-            layout: Layout(decimalSeparatorSpacing: (leading: 12, trailing: 3)),
-            textStyles: .integer(TextStyle(size: 20, color: .black, verticalAlignment: .baseline(0)))
+        let style = Style(defaultTextStyle: TextStyle(size: 14, color: .darkGray, verticalAlignment: .baseline(0)),
+                          elements: .integer(TextStyle(size: 20, color: .black, verticalAlignment: .baseline(0))),
+                        .decimalSeparatorSpacing(leading: 12, trailing: 3)
         )
 
         for value in testValues {
@@ -177,79 +125,77 @@ final class PriceViewTests: FBSnapshotTestCase {
     }
     
     func testSeparatorNegativeSpacing() {
-        let style = Style(
-            defaultTextStyle: TextStyle(size: 14, color: .darkGray, verticalAlignment: .baseline(0)),
-            layout: Layout(decimalSeparatorSpacing: (leading: 2, trailing: -1)),
-            textStyles: .integer(TextStyle(size: 20, color: .black, verticalAlignment: .baseline(0)))
+        let style = Style(defaultTextStyle: TextStyle(size: 14, color: .darkGray, verticalAlignment: .baseline(0)),
+                          elements: .integer(TextStyle(size: 20, color: .black, verticalAlignment: .baseline(0))),
+                          .decimalSeparatorSpacing(leading: 2, trailing: -1)
         )
+
         for value in testValues {
             verifySnap(with: value, style: style, center: false)
         }
     }
     
     func testCurrencySpacing() {
-        let style = Style(
-            defaultTextStyle: TextStyle(size: 14, color: .darkGray, verticalAlignment: .middle(0)),
-            layout: Layout(currencySpacing: 6),
-            textStyles: .integer(TextStyle(size: 20, color: .black, verticalAlignment: .middle(0)))
+        let style = Style(defaultTextStyle: TextStyle(size: 14, color: .darkGray, verticalAlignment: .middle(0)),
+                          elements: .integer(TextStyle(size: 20, color: .black, verticalAlignment: .middle(0))),
+                          .currencySpacing(6)
         )
+
         for value in testValues {
             verifySnap(with: value, style: style, center: false)
         }
     }
     
     func testPriceTopAlignment() {
-        let style = Style(
-            defaultTextStyle: TextStyle(size: 14, color: .darkGray, verticalAlignment: .top(0)),
-            layout: Layout(verticalAlignment: .top, currencySpacing: 3),
-            textStyles: .integer(TextStyle(size: 20, color: .black, verticalAlignment: .top(0)))
+        let style = Style(defaultTextStyle: TextStyle(size: 14, color: .darkGray, verticalAlignment: .top(0)),
+                          elements: .integer(TextStyle(size: 20, color: .black, verticalAlignment: .top(0))),
+                          .currencySpacing(3), .verticalAlignment(.top)
         )
+
         for value in testValues {
             verifySnap(with: value, style: style, center: false)
         }
     }
     
     func testPriceBottomLeftAlignment() {
-        let style = Style(
-            defaultTextStyle: TextStyle(size: 14, color: .darkGray, verticalAlignment: .middle(0)),
-            layout: Layout(verticalAlignment: .bottom, horizontalAlignment: .left, currencySpacing: 3),
-            textStyles:
-            .integer(TextStyle(size: 20, color: .black, verticalAlignment: .top(0)))
+        let style = Style(defaultTextStyle: TextStyle(size: 14, color: .darkGray, verticalAlignment: .middle(0)),
+                          elements: .integer(TextStyle(size: 20, color: .black, verticalAlignment: .top(0))),
+                          .currencySpacing(3), .verticalAlignment(.bottom), .horizontalAlignment(.left)
         )
+
         for value in testValues {
             verifySnap(with: value, style: style, center: false)
         }
     }
     
     func testPriceMiddleRightAlignment() {
-        let style = Style(
-            defaultTextStyle: TextStyle(size: 14, color: .darkGray, verticalAlignment: .baseline(0)),
-            layout: Layout(verticalAlignment: .middle, horizontalAlignment: .right, currencySpacing: 3),
-            textStyles:
-                .integer(TextStyle(size: 20, color: .black, verticalAlignment: .top(0)))
+        let style = Style(defaultTextStyle: TextStyle(size: 14, color: .darkGray, verticalAlignment: .baseline(0)),
+                          elements: .integer(TextStyle(size: 20, color: .black, verticalAlignment: .top(0))),
+                          .currencySpacing(3), .verticalAlignment(.middle), .horizontalAlignment(.right)
         )
+
         for value in testValues {
             verifySnap(with: value, style: style, center: false)
         }
     }
 
     func testPriceMiddleAlignment() {
-        let style = Style(
-            defaultTextStyle: TextStyle(size: 14, color: .darkGray, verticalAlignment: .baseline(0)),
-            layout: Layout(verticalAlignment: .middle, currencySpacing: 3),
-            textStyles: .integer(TextStyle(size: 20, color: .black))
+        let style = Style(defaultTextStyle: TextStyle(size: 14, color: .darkGray, verticalAlignment: .baseline(0)),
+                          elements: .integer(TextStyle(size: 20, color: .black)),
+                          .currencySpacing(3), .verticalAlignment(.middle)
         )
+
         for value in testValues {
             verifySnap(with: value, style: style, center: false)
         }
     }
 
     func testPriceTopRightAlignment() {
-        let style = Style(
-            defaultTextStyle: TextStyle(size: 14, color: .darkGray, verticalAlignment: .baseline(0)),
-            layout: Layout(verticalAlignment: .top, horizontalAlignment: .right, currencySpacing: 3),
-            textStyles: .integer(TextStyle(size: 20, color: .black))
+        let style = Style(defaultTextStyle: TextStyle(size: 14, color: .darkGray, verticalAlignment: .baseline(0)),
+                          elements: .integer(TextStyle(size: 20, color: .black)),
+                          .currencySpacing(3), .verticalAlignment(.top), .horizontalAlignment(.right)
         )
+        
         for value in testValues {
             verifySnap(with: value, style: style, center: false)
         }
